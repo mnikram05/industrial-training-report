@@ -1,0 +1,69 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "binary_operator_spaces": {
+            "operators": {
+                "=>": "align_single_space_minimal",
+                "=": "align_single_space_minimal"
+            }
+        },
+        "braces": {
+            "allow_single_line_closure": true
+        },
+        "spaces_inside_parentheses": {
+            "space": "single"
+        },
+        "no_spaces_around_offset": {
+            "positions": [
+                "inside",
+                "outside"
+            ]
+        },
+        "ordered_imports": {
+            "sort_algorithm": "length"
+        },
+        "array_syntax": {
+            "syntax": "short"
+        },
+        "concat_space": {
+            "spacing": "one"
+        },
+        "constant_case": {
+            "case": "lower"
+        },
+        "no_whitespace_before_comma_in_array": {
+            "after_heredoc": true
+        },
+        "no_useless_concat_operator": {
+            "juggle_simple_strings": true
+        },
+        "global_namespace_import": {
+            "import_functions": true
+        },
+        "new_with_braces": {
+            "anonymous_class": false,
+            "named_class": false
+        },
+        "no_unneeded_braces": {
+            "namespaces": true
+        },
+        "no_multiline_whitespace_around_double_arrow": true,
+        "object_operator_without_whitespace": true,
+        "no_whitespace_in_blank_line": true,
+        "combine_consecutive_unsets": true,
+        "combine_consecutive_issets": true,
+        "ternary_operator_spaces": true,
+        "simplified_null_return": true,
+        "declare_strict_types": true,
+        "lowercase_keywords": true,
+        "no_useless_return": true,
+        "array_indentation": true,
+        "no_unused_imports": true,
+        "trim_array_spaces": true,
+        "no_empty_comment": true,
+        "clean_namespace": true,
+        "no_useless_else": true,
+        "phpdoc_indent": true,
+        "elseif": true
+    }
+}

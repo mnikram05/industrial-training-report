@@ -1,0 +1,31 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-fOu3NQev.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/fonts/geist-mono.woff2": {
+    "file": "assets/geist-mono-DQK1EhV1.woff2",
+    "src": "resources/fonts/geist-mono.woff2"
+  },
+  "resources/fonts/outfit.woff2": {
+    "file": "assets/outfit-DKci6EPJ.woff2",
+    "src": "resources/fonts/outfit.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CHNIgYXn.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/charts.jsx": {
+    "file": "assets/charts-CGEUCVcV.js",
+    "name": "charts",
+    "src": "resources/js/charts.jsx",
+    "isEntry": true
+  }
+}

@@ -1,0 +1,3 @@
+<span {{ $attributes->merge(['class' => 'text-muted-foreground flex size-9 items-center justify-center']) }}>
+    ...
+</span>
