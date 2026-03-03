@@ -11,6 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Lab404\Impersonate\Models\Impersonate;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Scout\Attributes\SearchUsingPrefix;
 use App\Modules\Role\Constants\RoleNameConstants;
@@ -27,7 +28,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, HasRoles, HasUuids, Impersonate, Notifiable, Searchable;
+    use HasFactory, HasRoles, HasUuids, Impersonate, Notifiable, Searchable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -35,8 +36,18 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var list<string>
      */
     protected $fillable = [
+        'type_user_id',
         'name',
+        'nric',
+        'staff_number',
+        'phone',
+        'department_id',
+        'grade_position_id',
+        'position',
+        'state_id',
+        'district_id',
         'email',
+        'status_id',
     ];
 
     /**

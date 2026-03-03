@@ -56,6 +56,30 @@
                     </x-sidebar-submenu-link>
                 @endcan
 
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::STATES_VIEW)
+                    <x-sidebar-submenu-link :href="route('reference.states.index')" :active="request()->routeIs('reference.states.*')">
+                        <span>{{ __('States') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
+
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::PARLIAMENTS_VIEW)
+                    <x-sidebar-submenu-link :href="route('reference.parliaments.index')" :active="request()->routeIs('reference.parliaments.*')">
+                        <span>{{ __('Parliaments') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
+
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::DUNS_VIEW)
+                    <x-sidebar-submenu-link :href="route('reference.duns.index')" :active="request()->routeIs('reference.duns.*')">
+                        <span>{{ __('DUNs') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
+
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::DISTRICTS_VIEW)
+                    <x-sidebar-submenu-link :href="route('reference.districts.index')" :active="request()->routeIs('reference.districts.*')">
+                        <span>{{ __('Districts') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
+
                 @can(\App\Modules\Role\Constants\RolePermissionConstants::USERS_VIEW)
                     <x-sidebar-submenu-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                         <span>{{ __('Users') }}</span>

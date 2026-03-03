@@ -9,6 +9,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use App\Modules\User\Models\User;
 use Spatie\Permission\Models\Role;
+use Modules\Reference\Models\State;
 use Illuminate\Support\Facades\Cache;
 use App\Modules\Article\Models\Article;
 use App\Support\Activity\ActivityEvent;
@@ -100,6 +101,30 @@ class AdminDashboardService
         );
 
         return $categories;
+    }
+
+    /**
+     * @return list<array{id: int, name: string}>
+     */
+    public function getState(): array
+    {
+        /** @var list<array{id: int, name: string}> $states */
+        $states = $this->rememberValue(
+            'admin-dashboard:states',
+            [120, 600],
+            fn (): array => State::query()
+                ->where( 'status', true )
+                ->ordered()
+                ->get( ['id', 'name'] )
+                ->map( fn ( State $state ): array => [
+                    'id'   => $state->id,
+                    'name' => $state->name,
+                ] )
+                ->values()
+                ->all(),
+        );
+
+        return $states;
     }
 
     /**

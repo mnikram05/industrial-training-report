@@ -48,6 +48,38 @@ final class RolePermissionConstants
 
     public const STATUSES_DELETE = 'statuses.delete';
 
+    public const STATES_VIEW = 'states.view';
+
+    public const STATES_CREATE = 'states.create';
+
+    public const STATES_EDIT = 'states.edit';
+
+    public const STATES_DELETE = 'states.delete';
+
+    public const PARLIAMENTS_VIEW = 'parliaments.view';
+
+    public const PARLIAMENTS_CREATE = 'parliaments.create';
+
+    public const PARLIAMENTS_EDIT = 'parliaments.edit';
+
+    public const PARLIAMENTS_DELETE = 'parliaments.delete';
+
+    public const DUNS_VIEW = 'duns.view';
+
+    public const DUNS_CREATE = 'duns.create';
+
+    public const DUNS_EDIT = 'duns.edit';
+
+    public const DUNS_DELETE = 'duns.delete';
+
+    public const DISTRICTS_VIEW = 'districts.view';
+
+    public const DISTRICTS_CREATE = 'districts.create';
+
+    public const DISTRICTS_EDIT = 'districts.edit';
+
+    public const DISTRICTS_DELETE = 'districts.delete';
+
     public const ACTIVITY_LOGS_VIEW = 'activity-logs.view';
 
     public const ADMIN_DASHBOARD_VIEW = 'admin-dashboard.view';
@@ -79,6 +111,22 @@ final class RolePermissionConstants
             self::STATUSES_CREATE,
             self::STATUSES_EDIT,
             self::STATUSES_DELETE,
+            self::STATES_VIEW,
+            self::STATES_CREATE,
+            self::STATES_EDIT,
+            self::STATES_DELETE,
+            self::PARLIAMENTS_VIEW,
+            self::PARLIAMENTS_CREATE,
+            self::PARLIAMENTS_EDIT,
+            self::PARLIAMENTS_DELETE,
+            self::DUNS_VIEW,
+            self::DUNS_CREATE,
+            self::DUNS_EDIT,
+            self::DUNS_DELETE,
+            self::DISTRICTS_VIEW,
+            self::DISTRICTS_CREATE,
+            self::DISTRICTS_EDIT,
+            self::DISTRICTS_DELETE,
             self::ACTIVITY_LOGS_VIEW,
             self::ADMIN_DASHBOARD_VIEW,
         ];
