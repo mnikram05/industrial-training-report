@@ -21,6 +21,10 @@ Route::middleware( ['web', 'auth'] )->prefix( 'reference' )->name( 'reference.' 
     Route::patch( 'states/{state}/toggle-status', [StateController::class, 'toggleStatus'] )
         ->name( 'states.toggle-status' );
 
+    // Update sort order
+    Route::patch( 'states/{state}/update-sort', [StateController::class, 'updateSort'] )
+        ->name( 'states.update-sort' );
+
     // Standard resource routes
     Route::resource( 'states', StateController::class );
 

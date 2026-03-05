@@ -29,7 +29,7 @@ class StateController extends Controller
             return $this->stateDataTable->ajax();
         }
 
-        return view( 'modules.states.index', [
+        return view( 'reference::states.index', [
             'dataTable' => $this->stateDataTable,
         ] );
     }
@@ -39,7 +39,9 @@ class StateController extends Controller
      */
     public function create(): View
     {
-        return view( 'modules::reference.states.create' );
+        $sortOptions = $this->buildSortOptions();
+
+        return view( 'reference::states.create', compact( 'sortOptions' ) );
     }
 
     /**
@@ -62,7 +64,7 @@ class StateController extends Controller
      */
     public function show( State $state ): View
     {
-        return view( 'modules.states.show', compact( 'state' ) );
+        return view( 'reference::states.show', compact( 'state' ) );
     }
 
     /**
@@ -70,7 +72,9 @@ class StateController extends Controller
      */
     public function edit( State $state ): View
     {
-        return view( 'modules.states.edit', compact( 'state' ) );
+        $sortOptions = $this->buildSortOptions( $state->id );
+
+        return view( 'reference::states.edit', compact( 'state', 'sortOptions' ) );
     }
 
     /**
@@ -84,7 +88,7 @@ class StateController extends Controller
         $state->update( $data );
 
         return redirect()
-            ->route( 'reference.states.edit', $state )
+            ->route( 'reference.states.index' )
             ->with( 'status', 'state-updated' );
     }
 
@@ -141,5 +145,85 @@ class StateController extends Controller
         return redirect()
             ->back()
             ->with( 'status', 'state-updated' );
+    }
+
+    /**
+     * Update sort order of a state.
+     */
+    public function updateSort( Request $request, State $state ): JsonResponse
+    {
+        $direction = $request->input( 'direction' );
+
+        if ( ! in_array( $direction, ['up', 'down'], true ) ) {
+            return response()->json( ['success' => false, 'message' => 'Invalid direction'], 400 );
+        }
+
+        $currentSort = $state->sort;
+
+        if ( $direction === 'up' ) {
+            $swapState = State::query()
+                ->where( 'sort', '<', $currentSort )
+                ->orderBy( 'sort', 'desc' )
+                ->first();
+        } else {
+            $swapState = State::query()
+                ->where( 'sort', '>', $currentSort )
+                ->orderBy( 'sort', 'asc' )
+                ->first();
+        }
+
+        if ( ! $swapState ) {
+            return response()->json( ['success' => false, 'message' => 'Cannot move further'], 400 );
+        }
+
+        $swapSort = $swapState->sort;
+        $state->update( ['sort' => $swapSort, 'updated_by' => auth()->id()] );
+        $swapState->update( ['sort' => $currentSort, 'updated_by' => auth()->id()] );
+
+        return response()->json( ['success' => true] );
+    }
+
+    /**
+     * Build sort position options for dropdown.
+     */
+    private function buildSortOptions( ?int $excludeId = null ): array
+    {
+        $states = State::query()
+            ->whereNull( 'deleted_at' )
+            ->when( $excludeId, fn ( $q ) => $q->where( 'id', '!=', $excludeId ) )
+            ->orderBy( 'sort', 'asc' )
+            ->get( ['id', 'name', 'sort'] );
+
+        $options  = [];
+        $position = 1;
+
+        // First position option
+        $options[$position] = __( '1st - First' );
+        $position++;
+
+        // After each existing state
+        foreach ( $states as $state ) {
+            $options[$position] = __( ':position - After :name', [
+                'position' => $this->ordinal( $position ),
+                'name'     => $state->name,
+            ] );
+            $position++;
+        }
+
+        return $options;
+    }
+
+    /**
+     * Convert number to ordinal (1st, 2nd, 3rd, etc.).
+     */
+    private function ordinal( int $number ): string
+    {
+        $suffix = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+
+        if ( ( $number % 100 ) >= 11 && ( $number % 100 ) <= 13 ) {
+            return $number . 'th';
+        }
+
+        return $number . $suffix[$number % 10];
     }
 }

@@ -18,35 +18,40 @@ class StateDataTable extends BaseModuleDataTable
     public function query(): Builder
     {
         return State::query()
-            ->with(['createdBy', 'updatedBy'])
-            ->ordered('sort', 'asc' );
+            ->with( ['createdBy', 'updatedBy'] )
+            ->ordered( 'sort', 'asc' );
     }
 
     public function ajax(): JsonResponse
     {
         return DataTables::eloquent( $this->query() )
             ->addIndexColumn()
-            ->addColumn( 'status_label', static fn ( State $state ): string => view( 'modules.states.partials.datatables_status', [
+            ->addColumn( 'sort_action', static fn ( State $state ): string => view( 'reference::states.partials.datatables_sort_action', [
                 'state' => $state,
             ] )->render() )
-            ->addColumn( 'action', static fn ( State $state ): string => view( 'modules.states.partials.datatables_actions', [
+            ->addColumn( 'status_label', static fn ( State $state ): string => view( 'reference::states.partials.datatables_status', [
                 'state' => $state,
             ] )->render() )
-            ->editColumn('status', function ($q) {
-                return $q->status ? 'Active' : 'Inactive';  
-            })
-            ->editColumn('created_at', function ($q) {
-                $date = $q->created_at ? $q->created_at->format('d/m/Y H:i:s') : '';
+            ->addColumn( 'action', static fn ( State $state ): string => view( 'reference::states.partials.datatables_actions', [
+                'state' => $state,
+            ] )->render() )
+            ->editColumn( 'status', function ( $q ) {
+                return $q->status ? 'Active' : 'Inactive';
+            } )
+            ->editColumn( 'created_at', function ( $q ) {
+                $date = $q->created_at ? $q->created_at->format( 'd/m/Y H:i:s' ) : '';
                 $user = $q->created_by ? $q->createdBy->name : '';
-                return $date . ($user ? ' by ' . $user : '');
-            })
-            ->editColumn('updated_at', function ($q) {
-                $date = $q->updated_at ? $q->updated_at->format('d/m/Y H:i:s') : '';
-                $user = $q->updated_by ? $q->updatedBy->name : '';
-                return $date . ($user ? ' by ' . $user : '');
-            })
 
-            ->rawColumns( ['status_label', 'action'] )
+                return $date . ( $user ? ' by ' . $user : '' );
+            } )
+            ->editColumn( 'updated_at', function ( $q ) {
+                $date = $q->updated_at ? $q->updated_at->format( 'd/m/Y H:i:s' ) : '';
+                $user = $q->updated_by ? $q->updatedBy->name : '';
+
+                return $date . ( $user ? ' by ' . $user : '' );
+            } )
+
+            ->rawColumns( ['sort_action', 'status_label', 'action'] )
             ->toJson();
     }
 
@@ -66,12 +71,13 @@ class StateDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __('/modules/reference/state.fields.sort'), 'class' => 'px-4 py-3 text-left font-medium w-20'],
-            ['label' => __( '/modules/reference/state.fields.name'), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( '/modules/reference/state.fields.fullname'), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( '/modules/reference/state.fields.status'), 'class' => 'px-4 py-3 text-left font-medium w-24'],
-            ['label' => __( '/modules/reference/state.fields.created'), 'class' => 'px-4 py-3 text-left font-medium w-32'],
-            ['label' => __( '/modules/reference/state.fields.updated'), 'class' => 'px-4 py-3 text-left font-medium w-32'],
+            ['label' => __( '/modules/reference/state.fields.sort' ), 'class' => 'px-4 py-3 text-left font-medium w-20'],
+            ['label' => __( '/modules/reference/state.fields.sort_action' ), 'class' => 'px-4 py-3 text-center font-medium w-24'],
+            ['label' => __( '/modules/reference/state.fields.name' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( '/modules/reference/state.fields.fullname' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( '/modules/reference/state.fields.status' ), 'class' => 'px-4 py-3 text-left font-medium w-24'],
+            ['label' => __( '/modules/reference/state.fields.created' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
+            ['label' => __( '/modules/reference/state.fields.updated' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
             ['label' => __( 'crud.action' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
@@ -82,7 +88,9 @@ class StateDataTable extends BaseModuleDataTable
     public function columns(): array
     {
         return [
-            ['data' => 'sort', 'name' => 'sort', 'searchable' => false, 'orderable' => true, 'className' => 'w-14 text-left'],
+            // ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'searchable' => false, 'orderable' => true, 'className' => 'w-14 text-left'],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'searchable' => false, 'orderable' => false, 'className' => 'w-14 text-left'],
+            ['data' => 'sort_action', 'name' => 'sort', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
             ['data' => 'name', 'name' => 'name'],
             ['data' => 'fullname', 'name' => 'fullname'],
             ['data' => 'status', 'name' => 'status'],

@@ -1,65 +1,49 @@
 {{-- Shared form fields for Create / Edit --}}
 
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label for="name" class="form-label">{{ __('modules/reference/state.fields.name') }} <span class="text-danger">*</span></label>
-        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
-               value="{{ old('name', $state->name ?? '') }}" required maxlength="100">
-        @error('name')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+<div class="space-y-4 pb-6">
+    <div class="grid gap-4 sm:grid-cols-3">
+        <x-field for="state_name" :error="$errors->first('name')" class="gap-1.5">
+            <x-slot:labelText>{{ __('modules/reference/state.fields.name') }} <span class="text-destructive">*</span></x-slot:labelText>
+            <x-input id="state_name" name="name" type="text" class="w-full" placeholder="{{ __('modules/reference/state.fields.name') }}"
+                :value="old('name', $state->name ?? '')" maxlength="100" />
+        </x-field>
+
+        <x-field for="state_fullname" :error="$errors->first('fullname')" class="gap-1.5 sm:col-span-2">
+            <x-slot:labelText>{{ __('modules/reference/state.fields.fullname') }} <span class="text-destructive">*</span></x-slot:labelText>
+            <x-input id="state_fullname" name="fullname" type="text" class="w-full" placeholder="{{ __('modules/reference/state.fields.fullname') }}"
+                :value="old('fullname', $state->fullname ?? '')" maxlength="255" />
+        </x-field>
     </div>
 
-    <div class="col-md-8">
-        <label for="fullname" class="form-label">@lang('modules/reference/state.fields.fullname')</label>
-        <input type="text" name="fullname" id="fullname" class="form-control @error('fullname') is-invalid @enderror"
-               value="{{ old('fullname', $state->fullname ?? '') }}" maxlength="255">
-        @error('fullname')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-</div>
+    <div class="grid gap-4 sm:grid-cols-3">
+        {{-- <x-field for="state_ddsa_code" :error="$errors->first('ddsa_code')" class="gap-1.5">
+            <x-slot:labelText>{{ __('modules/reference/state.fields.ddsa_code') }}</x-slot:labelText>
+            <x-input id="state_ddsa_code" name="ddsa_code" type="text" class="w-full" placeholder="{{ __('modules/reference/state.fields.ddsa_code') }}"
+                :value="old('ddsa_code', $state->ddsa_code ?? '')" maxlength="10" />
+        </x-field> --}}
 
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label for="ddsa_code" class="form-label">DDSA Code</label>
-        <input type="text" name="ddsa_code" id="ddsa_code" class="form-control @error('ddsa_code') is-invalid @enderror"
-               value="{{ old('ddsa_code', $state->ddsa_code ?? '') }}" maxlength="10">
-        @error('ddsa_code')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
+        {{-- @isset($state)
+        <x-field for="state_iso_code" :error="$errors->first('iso_code')" class="gap-1.5">
+            <x-slot:labelText>{{ __('modules/reference/state.fields.iso_code') }}</x-slot:labelText>
+            <x-input id="state_iso_code" name="iso_code" type="text" class="w-full" placeholder="{{ __('modules/reference/state.fields.iso_code') }}"
+                :value="old('iso_code', $state->iso_code ?? '')" maxlength="10" />
+        </x-field>
+        @endisset --}}
 
-    @isset($state)
-    <div class="col-md-4">
-        <label for="iso_code" class="form-label">ISO Code</label>
-        <input type="text" name="iso_code" id="iso_code" class="form-control @error('iso_code') is-invalid @enderror"
-               value="{{ old('iso_code', $state->iso_code ?? '') }}" maxlength="10">
-        @error('iso_code')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+        <x-field for="state_sort" :error="$errors->first('sort')" class="gap-1.5">
+            <x-slot:labelText>{{ __('modules/reference/state.fields.sort') }} <span class="text-destructive">*</span></x-slot:labelText>
+            <x-select id="state_sort" name="sort" class="w-full"
+                :options="$sortOptions"
+                :value="old('sort', $state->sort ?? 1)" />
+        </x-field>
     </div>
 
-    <div class="col-md-4">
-        <label for="sort" class="form-label">Sort Order</label>
-        <input type="number" name="sort" id="sort" class="form-control @error('sort') is-invalid @enderror"
-               value="{{ old('sort', $state->sort ?? 0) }}" min="0">
-        @error('sort')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-    @endisset
-</div>
-
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
-        <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
-            <option value="1" {{ old('status', $state->status ?? 1) == 1 ? 'selected' : '' }}>Active</option>
-            <option value="0" {{ old('status', $state->status ?? 1) == 0 ? 'selected' : '' }}>Inactive</option>
-        </select>
-        @error('status')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+    <div class="grid gap-4 sm:grid-cols-3">
+        <x-field for="state_status" :error="$errors->first('status')" class="gap-1.5">
+            <x-slot:labelText>{{ __('Status') }} <span class="text-destructive">*</span></x-slot:labelText>
+            <x-select id="state_status" name="status" class="w-full"
+                :options="['1' => __('Active'), '0' => __('Inactive')]"
+                :value="old('status', $state->status ?? 1)" />
+        </x-field>
     </div>
 </div>

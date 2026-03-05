@@ -713,5 +713,6 @@
     "Image Alt Text (English)": "Image Alt Text (English)",
     "Image Alt Text (Malay)": "Image Alt Text (Malay)",
     "Footer Text (English)": "Footer Text (English)",
-    "Footer Text (Malay)": "Footer Text (Malay)"
+    "Footer Text (Malay)": "Footer Text (Malay)",
+    "The :attribute field contains potentially dangerous content.": "The :attribute field contains potentially dangerous content."
 }

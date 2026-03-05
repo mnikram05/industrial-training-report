@@ -1,31 +1,19 @@
 <x-app-layout>
-<div class="container-fluid">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">Edit State: {{ $state->name }}</h1>
-        <a href="{{ route('reference.states.index') }}" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left"></i> Back to List
-        </a>
-    </div>
+    <x-card module>
+        <x-card-header flush>
+            <x-card-title>{{ __('Edit State') }}: {{ $state->name }}</x-card-title>
+        </x-card-header>
 
-    <div class="card">
-        <div class="card-body">
-            <form method="POST" action="{{ route('reference.states.update', $state) }}">
-                @csrf
-                @method('PUT')
+        <x-card-content flush>
+            {{ html()->form('PUT', route('reference.states.update', $state))->id('edit-state-form')->open() }}
+            @include('reference::states._form')
+            {{ html()->form()->close() }}
 
-                @include('reference::states._form')
-
-                <hr>
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-check-lg"></i> Update
-                    </button>
-                    <a href="{{ route('reference.states.index') }}" class="btn btn-outline-secondary">Cancel</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-</div>
+            <x-button-group plain end>
+                <x-button as="a" variant="outline" href="{{ route('reference.states.index') }}">{{ __('Cancel') }}</x-button>
+                <x-button type="submit" form="edit-state-form">{{ __('Update') }}</x-button>
+            </x-button-group>
+        </x-card-content>
+    </x-card>
 </x-app-layout>

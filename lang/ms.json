@@ -713,5 +713,6 @@
     "Image Alt Text (English)": "Teks Alt Imej (Inggeris)",
     "Image Alt Text (Malay)": "Teks Alt Imej (Melayu)",
     "Footer Text (English)": "Teks Pengaki (Inggeris)",
-    "Footer Text (Malay)": "Teks Pengaki (Melayu)"
+    "Footer Text (Malay)": "Teks Pengaki (Melayu)",
+    "The :attribute field contains potentially dangerous content.": "Medan :attribute mengandungi kandungan yang berpotensi berbahaya."
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Reference\Http\Requests;
 
+use App\Rules\NoScript;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreStateRequest extends FormRequest
@@ -17,10 +18,10 @@ class StoreStateRequest extends FormRequest
     {
         return [
             'ddsa_code' => ['nullable', 'string', 'max:10', 'unique:zz_states,ddsa_code'],
-            'name'      => ['required', 'string', 'max:100'],
-            'fullname'  => ['nullable', 'string', 'max:255'],
+            'name'      => ['required', 'string', 'max:100', new NoScript],
+            'fullname'  => ['required', 'string', 'max:255', new NoScript],
             'iso_code'  => ['nullable', 'string', 'max:10', 'unique:zz_states,iso_code'],
-            'sort'      => ['nullable', 'integer', 'min:0'],
+            'sort'      => ['required', 'integer', 'min:0'],
             'status'    => ['required', 'boolean'],
         ];
     }
