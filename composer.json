@@ -42,7 +42,10 @@
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\Reference\\": "Modules/Reference/app/",
             "Modules\\Reference\\Database\\Factories\\": "Modules/Reference/database/factories/",
-            "Modules\\Reference\\Database\\Seeders\\": "Modules/Reference/database/seeders/"
+            "Modules\\Reference\\Database\\Seeders\\": "Modules/Reference/database/seeders/",
+            "Modules\\PortalAdministration\\": "Modules/PortalAdministration/app/",
+            "Modules\\PortalAdministration\\Database\\Factories\\": "Modules/PortalAdministration/database/factories/",
+            "Modules\\PortalAdministration\\Database\\Seeders\\": "Modules/PortalAdministration/database/seeders/"
         }
     },
     "autoload-dev": {

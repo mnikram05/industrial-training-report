@@ -26,7 +26,8 @@ class UpdateParliamentRequest extends FormRequest
             'ddsa_code' => ['nullable', 'string', 'max:20', Rule::unique( 'zz_parliaments', 'ddsa_code' )->ignore( $parliamentId )],
             'new_code'  => ['nullable', 'string', 'max:20'],
             'name'      => ['required', 'string', 'max:255'],
-            'sort'      => ['nullable', 'integer', 'min:0'],
+            'sort'      => ['required', 'integer', 'min:1'],
+            'status'    => ['required', 'boolean'],
         ];
     }
 
@@ -36,11 +37,11 @@ class UpdateParliamentRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'state_id'  => __( 'State' ),
-            'ddsa_code' => __( 'DDSA Code' ),
-            'new_code'  => __( 'New Code' ),
-            'name'      => __( 'Parliament Name' ),
-            'sort'      => __( 'Sort Order' ),
+            'state_id'  => __( 'modules/reference/parliament.fields.state' ),
+            'ddsa_code' => __( 'modules/reference/parliament.fields.ddsa_code' ),
+            'new_code'  => __( 'modules/reference/parliament.fields.new_code' ),
+            'name'      => __( 'modules/reference/parliament.fields.name' ),
+            'sort'      => __( 'modules/reference/parliament.fields.sort' ),
         ];
     }
 }

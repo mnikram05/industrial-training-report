@@ -18,6 +18,7 @@ use App\Modules\Role\Constants\RoleNameConstants;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Modules\Role\Constants\RolePermissionConstants;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -72,6 +73,21 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Persist a password for this user.
      */
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'created_by' );
+    }
+
+    public function updatedBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'updated_by' );
+    }
+
+    public function deletedBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'deleted_by' );
+    }
+
     public function storePassword( string $password ): void
     {
         $passwordRecord = $this->passwordRecord()->updateOrCreate(

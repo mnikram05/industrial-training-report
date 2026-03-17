@@ -30,7 +30,7 @@ class DistrictController extends Controller
             return $this->districtDataTable->ajax();
         }
 
-        return view( 'modules.districts.index', [
+        return view( 'reference::districts.index', [
             'dataTable' => $this->districtDataTable,
         ] );
     }
@@ -40,8 +40,9 @@ class DistrictController extends Controller
      */
     public function create(): View
     {
-        return view( 'modules.districts.create', [
+        return view( 'reference::districts.create', [
             'stateOptions' => $this->getStateOptions(),
+            'sortOptions'  => $this->buildSortOptions(),
         ] );
     }
 
@@ -53,10 +54,15 @@ class DistrictController extends Controller
         $data               = $request->validated();
         $data['created_by'] = auth()->id();
 
+        // Shift existing districts down to make room
+        District::query()
+            ->where( 'sort', '>=', $data['sort'] )
+            ->increment( 'sort' );
+
         $district = District::create( $data );
 
         return redirect()
-            ->route( 'reference.districts.edit', $district )
+            ->route( 'reference.districts.index' )
             ->with( 'status', 'district-created' );
     }
 
@@ -67,7 +73,7 @@ class DistrictController extends Controller
     {
         $district->load( 'state' );
 
-        return view( 'modules.districts.show', compact( 'district' ) );
+        return view( 'reference::districts.show', compact( 'district' ) );
     }
 
     /**
@@ -75,9 +81,10 @@ class DistrictController extends Controller
      */
     public function edit( District $district ): View
     {
-        return view( 'modules.districts.edit', [
+        return view( 'reference::districts.edit', [
             'district'     => $district,
             'stateOptions' => $this->getStateOptions(),
+            'sortOptions'  => $this->buildSortOptions( $district->id ),
         ] );
     }
 
@@ -89,10 +96,31 @@ class DistrictController extends Controller
         $data               = $request->validated();
         $data['updated_by'] = auth()->id();
 
+        $oldSort = $district->sort;
+        $newSort = (int) $data['sort'];
+
+        if ( $oldSort !== $newSort ) {
+            if ( $newSort < $oldSort ) {
+                // Moving up: shift others down
+                District::query()
+                    ->where( 'id', '!=', $district->id )
+                    ->where( 'sort', '>=', $newSort )
+                    ->where( 'sort', '<', $oldSort )
+                    ->increment( 'sort' );
+            } else {
+                // Moving down: shift others up
+                District::query()
+                    ->where( 'id', '!=', $district->id )
+                    ->where( 'sort', '>', $oldSort )
+                    ->where( 'sort', '<=', $newSort )
+                    ->decrement( 'sort' );
+            }
+        }
+
         $district->update( $data );
 
         return redirect()
-            ->route( 'reference.districts.edit', $district )
+            ->route( 'reference.districts.index' )
             ->with( 'status', 'district-updated' );
     }
 
@@ -137,6 +165,42 @@ class DistrictController extends Controller
     }
 
     /**
+     * Update sort order of a district.
+     */
+    public function updateSort( Request $request, District $district ): JsonResponse
+    {
+        $direction = $request->input( 'direction' );
+
+        if ( ! in_array( $direction, ['up', 'down'], true ) ) {
+            return response()->json( ['success' => false, 'message' => 'Invalid direction'], 400 );
+        }
+
+        $currentSort = $district->sort;
+
+        if ( $direction === 'up' ) {
+            $swapDistrict = District::query()
+                ->where( 'sort', '<', $currentSort )
+                ->orderBy( 'sort', 'desc' )
+                ->first();
+        } else {
+            $swapDistrict = District::query()
+                ->where( 'sort', '>', $currentSort )
+                ->orderBy( 'sort', 'asc' )
+                ->first();
+        }
+
+        if ( ! $swapDistrict ) {
+            return response()->json( ['success' => false, 'message' => 'Cannot move further'], 400 );
+        }
+
+        $swapSort = $swapDistrict->sort;
+        $district->update( ['sort' => $swapSort, 'updated_by' => auth()->id()] );
+        $swapDistrict->update( ['sort' => $currentSort, 'updated_by' => auth()->id()] );
+
+        return response()->json( ['success' => true] );
+    }
+
+    /**
      * @return array<string, string>
      */
     private function getStateOptions(): array
@@ -145,5 +209,49 @@ class DistrictController extends Controller
             ->ordered()
             ->pluck( 'name', 'id' )
             ->all();
+    }
+
+    /**
+     * Build sort position options for dropdown.
+     */
+    private function buildSortOptions( ?int $excludeId = null ): array
+    {
+        $districts = District::query()
+            ->whereNull( 'deleted_at' )
+            ->when( $excludeId, fn ( $q ) => $q->where( 'id', '!=', $excludeId ) )
+            ->orderBy( 'sort', 'asc' )
+            ->get( ['id', 'name', 'sort'] );
+
+        $options  = [];
+        $position = 1;
+
+        // First position option
+        $options[$position] = __( 'modules/reference/district.sort_options.first' );
+        $position++;
+
+        // After each existing district
+        foreach ( $districts as $district ) {
+            $options[$position] = __( 'modules/reference/district.sort_options.after', [
+                'position' => $this->ordinal( $position ),
+                'name'     => $district->name,
+            ] );
+            $position++;
+        }
+
+        return $options;
+    }
+
+    /**
+     * Convert number to ordinal (1st, 2nd, 3rd, etc.).
+     */
+    private function ordinal( int $number ): string
+    {
+        $suffix = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+
+        if ( ( $number % 100 ) >= 11 && ( $number % 100 ) <= 13 ) {
+            return $number . 'th';
+        }
+
+        return $number . $suffix[$number % 10];
     }
 }

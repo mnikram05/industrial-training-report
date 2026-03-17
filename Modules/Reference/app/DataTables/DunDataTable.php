@@ -18,8 +18,7 @@ class DunDataTable extends BaseModuleDataTable
     public function query(): Builder
     {
         return Dun::query()
-            ->with( 'parliament' )
-            ->select( ['id', 'parliament_id', 'ddsa_code', 'new_code', 'name', 'sort'] )
+            ->with( ['parliament', 'createdBy', 'updatedBy'] )
             ->ordered();
     }
 
@@ -27,14 +26,33 @@ class DunDataTable extends BaseModuleDataTable
     {
         return DataTables::eloquent( $this->query() )
             ->addIndexColumn()
-            ->addColumn( 'parliament_name', static fn ( Dun $dun ): string => $dun->parliament?->name ?? '—' )
-            ->addColumn( 'action', static fn ( Dun $dun ): string => view( 'modules.duns.partials.datatables_actions', [
+            ->addColumn( 'sort_action', static fn ( Dun $dun ): string => view( 'reference::duns.partials.datatables_sort_action', [
                 'dun' => $dun,
             ] )->render() )
-            ->filterColumn( 'parliament_name', static function ( Builder $query, string $keyword ): void {
-                $query->whereHas( 'parliament', fn ( Builder $q ) => $q->where( 'name', 'like', "%{$keyword}%" ) );
+            ->addColumn( 'status_label', static fn ( Dun $dun ): string => view( 'reference::duns.partials.datatables_status', [
+                'dun' => $dun,
+            ] )->render() )
+            ->addColumn( 'parliament_name', static fn ( Dun $dun ): string => $dun->parliament?->name ?? '' )
+            ->addColumn( 'action', static fn ( Dun $dun ): string => view( 'reference::duns.partials.datatables_actions', [
+                'dun' => $dun,
+            ] )->render() )
+            ->editColumn( 'status', function ( $q ) {
+                return $q->status ? 'Active' : 'Inactive';
             } )
-            ->rawColumns( ['action'] )
+            ->editColumn( 'created_at', function ( $q ) {
+                $date = $q->created_at ? $q->created_at->format( 'd/m/Y H:i:s' ) : '';
+                $user = $q->created_by ? $q->createdBy->name : '';
+
+                return $date . ( $user ? ' by ' . $user : '' );
+            } )
+            ->editColumn( 'updated_at', function ( $q ) {
+                $date = $q->updated_at ? $q->updated_at->format( 'd/m/Y H:i:s' ) : '';
+                $user = $q->updated_by ? $q->updatedBy->name : '';
+
+                return $date . ( $user ? ' by ' . $user : '' );
+            } )
+
+            ->rawColumns( ['sort_action', 'status_label', 'action'] )
             ->toJson();
     }
 
@@ -54,13 +72,14 @@ class DunDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( 'No.' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
-            ['label' => __( 'DDSA Code' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'New Code' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Name' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Parliament' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Sort' ), 'class' => 'px-4 py-3 text-left font-medium w-20'],
-            ['label' => __( 'Actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
+            ['label' => __( 'modules/reference/dun.fields.sort' ), 'class' => 'px-4 py-3 text-left font-medium w-20'],
+            ['label' => __( 'modules/reference/dun.fields.sort_action' ), 'class' => 'px-4 py-3 text-center font-medium w-24'],
+            ['label' => __( 'modules/reference/dun.fields.name' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/dun.fields.parliament' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/dun.fields.status' ), 'class' => 'px-4 py-3 text-left font-medium w-24'],
+            ['label' => __( 'modules/reference/dun.fields.created' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
+            ['label' => __( 'modules/reference/dun.fields.updated' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
+            ['label' => __( 'crud.action' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
 
@@ -71,17 +90,18 @@ class DunDataTable extends BaseModuleDataTable
     {
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'searchable' => false, 'orderable' => false, 'className' => 'w-14 text-left'],
-            ['data' => 'ddsa_code', 'name' => 'ddsa_code'],
-            ['data' => 'new_code', 'name' => 'new_code'],
+            ['data' => 'sort_action', 'name' => 'sort', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
             ['data' => 'name', 'name' => 'name'],
             ['data' => 'parliament_name', 'name' => 'parliament_name'],
-            ['data' => 'sort', 'name' => 'sort'],
+            ['data' => 'status', 'name' => 'status'],
+            ['data' => 'created_at', 'name' => 'created_at'],
+            ['data' => 'updated_at', 'name' => 'updated_at'],
             ['data' => 'action', 'name' => 'action', 'searchable' => false, 'orderable' => false, 'className' => 'text-right whitespace-nowrap'],
         ];
     }
 
     public function filterPlaceholder(): string
     {
-        return __( 'Filter DUNs...' );
+        return __( 'modules/reference/dun.filter' );
     }
 }

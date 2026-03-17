@@ -30,7 +30,7 @@ class ParliamentController extends Controller
             return $this->parliamentDataTable->ajax();
         }
 
-        return view( 'modules.parliaments.index', [
+        return view( 'reference::parliaments.index', [
             'dataTable' => $this->parliamentDataTable,
         ] );
     }
@@ -40,8 +40,9 @@ class ParliamentController extends Controller
      */
     public function create(): View
     {
-        return view( 'modules.parliaments.create', [
+        return view( 'reference::parliaments.create', [
             'stateOptions' => $this->getStateOptions(),
+            'sortOptions'  => $this->buildSortOptions(),
         ] );
     }
 
@@ -53,10 +54,15 @@ class ParliamentController extends Controller
         $data               = $request->validated();
         $data['created_by'] = auth()->id();
 
+        // Shift existing parliaments down to make room
+        Parliament::query()
+            ->where( 'sort', '>=', $data['sort'] )
+            ->increment( 'sort' );
+
         $parliament = Parliament::create( $data );
 
         return redirect()
-            ->route( 'reference.parliaments.edit', $parliament )
+            ->route( 'reference.parliaments.index' )
             ->with( 'status', 'parliament-created' );
     }
 
@@ -67,7 +73,7 @@ class ParliamentController extends Controller
     {
         $parliament->load( 'state' );
 
-        return view( 'modules.parliaments.show', compact( 'parliament' ) );
+        return view( 'reference::parliaments.show', compact( 'parliament' ) );
     }
 
     /**
@@ -75,9 +81,10 @@ class ParliamentController extends Controller
      */
     public function edit( Parliament $parliament ): View
     {
-        return view( 'modules.parliaments.edit', [
+        return view( 'reference::parliaments.edit', [
             'parliament'   => $parliament,
             'stateOptions' => $this->getStateOptions(),
+            'sortOptions'  => $this->buildSortOptions( $parliament->id ),
         ] );
     }
 
@@ -89,10 +96,31 @@ class ParliamentController extends Controller
         $data               = $request->validated();
         $data['updated_by'] = auth()->id();
 
+        $oldSort = $parliament->sort;
+        $newSort = (int) $data['sort'];
+
+        if ( $oldSort !== $newSort ) {
+            if ( $newSort < $oldSort ) {
+                // Moving up: shift others down
+                Parliament::query()
+                    ->where( 'id', '!=', $parliament->id )
+                    ->where( 'sort', '>=', $newSort )
+                    ->where( 'sort', '<', $oldSort )
+                    ->increment( 'sort' );
+            } else {
+                // Moving down: shift others up
+                Parliament::query()
+                    ->where( 'id', '!=', $parliament->id )
+                    ->where( 'sort', '>', $oldSort )
+                    ->where( 'sort', '<=', $newSort )
+                    ->decrement( 'sort' );
+            }
+        }
+
         $parliament->update( $data );
 
         return redirect()
-            ->route( 'reference.parliaments.edit', $parliament )
+            ->route( 'reference.parliaments.index' )
             ->with( 'status', 'parliament-updated' );
     }
 
@@ -145,5 +173,82 @@ class ParliamentController extends Controller
             ->ordered()
             ->pluck( 'name', 'id' )
             ->all();
+    }
+
+    public function updateSort( Request $request, Parliament $parliament ): JsonResponse
+    {
+        $direction = $request->input( 'direction' );
+
+        if ( ! in_array( $direction, ['up', 'down'], true ) ) {
+            return response()->json( ['success' => false, 'message' => 'Invalid direction'], 400 );
+        }
+
+        $currentSort = $parliament->sort;
+
+        if ( $direction === 'up' ) {
+            $swapParliament = Parliament::query()
+                ->where( 'sort', '<', $currentSort )
+                ->orderBy( 'sort', 'desc' )
+                ->first();
+        } else {
+            $swapParliament = Parliament::query()
+                ->where( 'sort', '>', $currentSort )
+                ->orderBy( 'sort', 'asc' )
+                ->first();
+        }
+
+        if ( ! $swapParliament ) {
+            return response()->json( ['success' => false, 'message' => 'Cannot move further'], 400 );
+        }
+
+        $swapSort = $swapParliament->sort;
+        $parliament->update( ['sort' => $swapSort, 'updated_by' => auth()->id()] );
+        $swapParliament->update( ['sort' => $currentSort, 'updated_by' => auth()->id()] );
+
+        return response()->json( ['success' => true] );
+    }
+
+    /**
+     * Build sort position options for dropdown.
+     */
+    private function buildSortOptions( ?int $excludeId = null ): array
+    {
+        $parliaments = Parliament::query()
+            ->whereNull( 'deleted_at' )
+            ->when( $excludeId, fn ( $q ) => $q->where( 'id', '!=', $excludeId ) )
+            ->orderBy( 'sort', 'asc' )
+            ->get( ['id', 'name', 'sort'] );
+
+        $options  = [];
+        $position = 1;
+
+        // First position option
+        $options[$position] = __( 'modules/reference/parliament.sort_options.first' );
+        $position++;
+
+        // After each existing parliament
+        foreach ( $parliaments as $parliament ) {
+            $options[$position] = __( 'modules/reference/parliament.sort_options.after', [
+                'position' => $this->ordinal( $position ),
+                'name'     => $parliament->name,
+            ] );
+            $position++;
+        }
+
+        return $options;
+    }
+
+    /**
+     * Convert number to ordinal (1st, 2nd, 3rd, etc.).
+     */
+    private function ordinal( int $number ): string
+    {
+        $suffix = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+
+        if ( ( $number % 100 ) >= 11 && ( $number % 100 ) <= 13 ) {
+            return $number . 'th';
+        }
+
+        return $number . $suffix[$number % 10];
     }
 }

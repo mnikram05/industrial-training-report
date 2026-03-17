@@ -36,11 +36,11 @@ class UpdateDunRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'parliament_id' => __( 'Parliament' ),
-            'ddsa_code'     => __( 'DDSA Code' ),
-            'new_code'      => __( 'New Code' ),
-            'name'          => __( 'DUN Name' ),
-            'sort'          => __( 'Sort Order' ),
+            'parliament_id' => __( 'modules/reference/dun.fields.parliament' ),
+            'ddsa_code'     => __( 'modules/reference/dun.fields.ddsa_code' ),
+            'new_code'      => __( 'modules/reference/dun.fields.new_code' ),
+            'name'          => __( 'modules/reference/dun.fields.name' ),
+            'sort'          => __( 'modules/reference/dun.fields.sort' ),
         ];
     }
 }

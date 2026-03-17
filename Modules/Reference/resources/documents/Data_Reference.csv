@@ -1,0 +1,10 @@
+﻿Status,Status,kosong,kosong
+Status,Status,Draf,Draft
+Status,Status,Menunggu Semakan,Awaiting Review
+Status,Status,Diluluskan,Approved
+Status,Status,Ditolak,Rejected
+Jenis Menu,Menu Type,kosong,kosong
+Jenis Menu,Menu Type,Atas,Top
+Jenis Menu,Menu Type,Bawah,Down
+Jenis Menu,Menu Type,Lain-lain,Others
+Status,Status,Tidak Diluluskan,Not Approved

@@ -36,11 +36,11 @@ class UpdateDistrictRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'state_id'  => __( 'State' ),
-            'ddsa_code' => __( 'DDSA Code' ),
-            'name'      => __( 'District Name' ),
-            'fullname'  => __( 'Full Name' ),
-            'sort'      => __( 'Sort Order' ),
+            'state_id'  => __( 'modules/reference/district.fields.state' ),
+            'ddsa_code' => __( 'modules/reference/district.fields.ddsa_code' ),
+            'name'      => __( 'modules/reference/district.fields.name' ),
+            'fullname'  => __( 'modules/reference/district.fields.fullname' ),
+            'sort'      => __( 'modules/reference/district.fields.sort' ),
         ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Reference\Models;
 
+use App\Modules\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,6 +29,7 @@ class Dun extends Model
         'ddsa_code',
         'name',
         'sort',
+        'status',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -36,7 +38,8 @@ class Dun extends Model
     protected function casts(): array
     {
         return [
-            'sort' => 'integer',
+            'sort'   => 'integer',
+            'status' => 'boolean',
         ];
     }
 
@@ -46,6 +49,21 @@ class Dun extends Model
     public function parliament(): BelongsTo
     {
         return $this->belongsTo( Parliament::class );
+    }
+
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'created_by' );
+    }
+
+    public function updatedBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'updated_by' );
+    }
+
+    public function deletedBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'deleted_by' );
     }
 
     /**

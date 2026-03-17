@@ -3,12 +3,20 @@
 declare(strict_types=1);
 
 return [
-    'model'  => 'State',
-    'index'  => 'State Detail',
-    'list'   => 'List of States',
-    'edit'   => 'Edit of State',
-    'delete' => 'Delete of State',
-    'create' => 'Add New State',
+    'model'        => 'State',
+    'plural'       => 'States',
+    'new'          => 'New State',
+    'index'        => 'State Detail',
+    'list'         => 'List of States',
+    'edit'         => 'Edit State',
+    'delete'       => 'Delete of State',
+    'create'       => 'Create State',
+    'subtitle'     => 'Manage reference states.',
+    'filter'       => 'Filter states...',
+    'sort_options' => [
+        'first' => '1st - First',
+        'after' => ':position - After :name',
+    ],
     'fields' => [
         'ddsa_code'   => 'DDSA Code',
         'name'        => 'Name',

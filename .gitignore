@@ -18,3 +18,4 @@ yarn-error.log
 /notes
 .github
 .DS_Store
+.claude/

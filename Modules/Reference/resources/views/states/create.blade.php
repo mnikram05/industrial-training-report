@@ -2,7 +2,7 @@
 
     <x-card module>
         <x-card-header flush>
-            <x-card-title>{{ __('Create State') }}</x-card-title>
+            <x-card-title>{{ __('modules/reference/state.create') }}</x-card-title>
         </x-card-header>
 
         <x-card-content flush>
@@ -11,8 +11,8 @@
             {{ html()->form()->close() }}
 
             <x-button-group plain end>
-                <x-button as="a" variant="outline" href="{{ route('reference.states.index') }}">{{ __('Cancel') }}</x-button>
-                <x-button type="submit" form="create-state-form">{{ __('Create State') }}</x-button>
+                <x-button as="a" variant="outline" href="{{ route('reference.states.index') }}">{{ __('crud.cancel') }}</x-button>
+                <x-button type="submit" form="create-state-form">{{ __('modules/reference/state.create') }}</x-button>
             </x-button-group>
         </x-card-content>
     </x-card>

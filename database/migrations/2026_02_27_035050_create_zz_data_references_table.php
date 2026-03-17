@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create( 'zz_data_references', function ( Blueprint $table ) {
             $table->bigIncrements( 'id' );
             $table->foreignId( 'parent_id' )->nullable()->constrained( 'zz_data_references' );
+
             $table->string( 'label_my' )->nullable();
             $table->string( 'label_en' )->nullable();
             $table->string( 'name' )->nullable();

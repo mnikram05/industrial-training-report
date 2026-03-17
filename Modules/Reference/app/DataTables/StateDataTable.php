@@ -71,13 +71,13 @@ class StateDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( '/modules/reference/state.fields.sort' ), 'class' => 'px-4 py-3 text-left font-medium w-20'],
-            ['label' => __( '/modules/reference/state.fields.sort_action' ), 'class' => 'px-4 py-3 text-center font-medium w-24'],
-            ['label' => __( '/modules/reference/state.fields.name' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( '/modules/reference/state.fields.fullname' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( '/modules/reference/state.fields.status' ), 'class' => 'px-4 py-3 text-left font-medium w-24'],
-            ['label' => __( '/modules/reference/state.fields.created' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
-            ['label' => __( '/modules/reference/state.fields.updated' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
+            ['label' => __( 'modules/reference/state.fields.sort' ), 'class' => 'px-4 py-3 text-left font-medium w-20'],
+            ['label' => __( 'modules/reference/state.fields.sort_action' ), 'class' => 'px-4 py-3 text-center font-medium w-24'],
+            ['label' => __( 'modules/reference/state.fields.name' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/state.fields.fullname' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/state.fields.status' ), 'class' => 'px-4 py-3 text-left font-medium w-24'],
+            ['label' => __( 'modules/reference/state.fields.created' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
+            ['label' => __( 'modules/reference/state.fields.updated' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
             ['label' => __( 'crud.action' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
@@ -102,6 +102,6 @@ class StateDataTable extends BaseModuleDataTable
 
     public function filterPlaceholder(): string
     {
-        return __( 'Filter states...' );
+        return __( 'modules/reference/state.filter' );
     }
 }

@@ -52,6 +52,11 @@ class StateController extends Controller
         $data               = $request->validated();
         $data['created_by'] = auth()->id();
 
+        // Shift existing states down to make room
+        State::query()
+            ->where( 'sort', '>=', $data['sort'] )
+            ->increment( 'sort' );
+
         $state = State::create( $data );
 
         return redirect()
@@ -84,6 +89,27 @@ class StateController extends Controller
     {
         $data               = $request->validated();
         $data['updated_by'] = auth()->id();
+
+        $oldSort = $state->sort;
+        $newSort = (int) $data['sort'];
+
+        if ( $oldSort !== $newSort ) {
+            if ( $newSort < $oldSort ) {
+                // Moving up: shift others down
+                State::query()
+                    ->where( 'id', '!=', $state->id )
+                    ->where( 'sort', '>=', $newSort )
+                    ->where( 'sort', '<', $oldSort )
+                    ->increment( 'sort' );
+            } else {
+                // Moving down: shift others up
+                State::query()
+                    ->where( 'id', '!=', $state->id )
+                    ->where( 'sort', '>', $oldSort )
+                    ->where( 'sort', '<=', $newSort )
+                    ->decrement( 'sort' );
+            }
+        }
 
         $state->update( $data );
 
@@ -198,12 +224,12 @@ class StateController extends Controller
         $position = 1;
 
         // First position option
-        $options[$position] = __( '1st - First' );
+        $options[$position] = __( 'modules/reference/state.sort_options.first' );
         $position++;
 
         // After each existing state
         foreach ( $states as $state ) {
-            $options[$position] = __( ':position - After :name', [
+            $options[$position] = __( 'modules/reference/state.sort_options.after', [
                 'position' => $this->ordinal( $position ),
                 'name'     => $state->name,
             ] );

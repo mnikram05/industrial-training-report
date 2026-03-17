@@ -25,6 +25,15 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'users.*',
                 'roles.*',
                 'activity-logs.*',
+                'reference.menus.*',
+            ) );
+
+            $view->with( 'referencesOpen', request()->routeIs(
+                'reference.states.*',
+                'reference.parliaments.*',
+                'reference.duns.*',
+                'reference.districts.*',
+                'reference.data-references.*',
             ) );
         } );
 

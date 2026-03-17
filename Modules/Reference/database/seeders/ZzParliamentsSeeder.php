@@ -267,13 +267,17 @@ class ZzParliamentsSeeder extends Seeder
 
         ];
 
-        foreach ( $data as $datum ) {
-            Parliament::firstOrCreate( [
-                'ddsa_code' => $datum['id'],
-                'state_id'  => $datum['state_id'],
-            ], [
-                'name' => $datum['name'],
-            ] );
+        foreach ( $data as $sort => $datum ) {
+            Parliament::updateOrCreate(
+                [
+                    'ddsa_code' => $datum['id'],
+                    'state_id'  => $datum['state_id'],
+                ],
+                [
+                    'name' => $datum['name'],
+                    'sort' => $sort + 1,
+                ],
+            );
         }
     }
 }

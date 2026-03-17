@@ -1,0 +1,11 @@
+{
+    "name": "PortalAdministration",
+    "alias": "portaladministration",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PortalAdministration\\Providers\\PortalAdministrationServiceProvider"
+    ],
+    "files": []
+}

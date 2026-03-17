@@ -14,6 +14,7 @@ return [
     'create'               => 'Add',
     'created_at'           => 'Created At',
     'created_by'           => 'Created By',
+    'delete'               => 'Delete',
     'deleted_at'           => 'Deleted At',
     'detail'               => 'Detail',
     'denied'               => 'This action is not allowed.',
@@ -46,4 +47,8 @@ return [
     'keyword'              => 'Keyword',
     'required'             => 'is required',
     'close'                => 'Close',
+    'active'               => 'Active',
+    'inactive'             => 'Inactive',
+    'move_up'              => 'Move Up',
+    'move_down'            => 'Move Down',
 ];

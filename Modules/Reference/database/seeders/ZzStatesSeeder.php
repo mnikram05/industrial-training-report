@@ -154,8 +154,10 @@ class ZzStatesSeeder extends Seeder
         ];
 
         foreach ( $data as $datum ) {
-            // dd($datum);
-            State::firstOrCreate( $datum );
+            State::updateOrCreate(
+                ['name' => $datum['name']],
+                $datum,
+            );
         }
     }
 }

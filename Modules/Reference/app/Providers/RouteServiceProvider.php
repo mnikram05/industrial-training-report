@@ -22,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the routes for the application.
+     * Define the routes for the application.   
      */
     public function map(): void
     {

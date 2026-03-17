@@ -28,7 +28,7 @@ class AdminDashboardController extends Controller
             'userRoleDistributionData'   => $this->adminDashboardService->getUserRoleDistribution(),
             'activityByCategoryData'     => $this->adminDashboardService->getActivityByCategory(),
             'latestActivityItems'        => $this->adminDashboardService->getLatestActivityItems(),
-            'states'                     => $this->adminDashboardService->getState(),
+            'state'                      => $this->adminDashboardService->getState(),
         ] );
     }
 }

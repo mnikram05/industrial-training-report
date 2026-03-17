@@ -1,4 +1,4 @@
-<div class="space-y-4 pb-2" x-data="{ cmsOpen: @js($cmsOpen) }">
+<div class="space-y-4 pb-2" x-data="{ cmsOpen: @js($cmsOpen), referencesOpen: @js($referencesOpen) }">
     <x-sidebar-group>
         <x-sidebar-group-label x-show="!$store.layout.sidebarCollapsed">{{ __('Platform') }}</x-sidebar-group-label>
 
@@ -56,6 +56,52 @@
                     </x-sidebar-submenu-link>
                 @endcan
 
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::USERS_VIEW)
+                    <x-sidebar-submenu-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                        <span>{{ __('Users') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
+
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::ROLES_VIEW)
+                    <x-sidebar-submenu-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
+                        <span>{{ __('Roles') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
+
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::ACTIVITY_LOGS_VIEW)
+                    <x-sidebar-submenu-link :href="route('activity-logs.index')" :active="request()->routeIs('activity-logs.*')">
+                        <span>{{ __('Activity Logs') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
+
+                <x-sidebar-submenu-link :href="route('reference.menus.index')" :active="request()->routeIs('reference.menus.*')">
+                    <span>{{ __('Menus') }}</span>
+                </x-sidebar-submenu-link>
+            </x-sidebar-submenu>
+        </div>
+    </x-sidebar-group>
+
+    <x-sidebar-group>
+        <x-sidebar-group-label x-show="!$store.layout.sidebarCollapsed">{{ __('References') }}</x-sidebar-group-label>
+
+        <button type="button" @click="referencesOpen = !referencesOpen"
+            x-bind:class="$store.layout.sidebarCollapsed ? 'justify-center px-0' : ''"
+            class="group flex h-8 w-full items-center gap-2 rounded-md px-2 text-left text-[13px] font-medium text-foreground/90 transition-colors hover:bg-accent hover:text-foreground">
+            <svg class="size-4 shrink-0 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+            </svg>
+            <span class="flex-1" x-show="!$store.layout.sidebarCollapsed">{{ __('References') }}</span>
+            <svg x-show="!$store.layout.sidebarCollapsed"
+                class="size-4 text-muted-foreground transition-transform duration-200" :class="{ 'rotate-90': referencesOpen }"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6" />
+            </svg>
+        </button>
+
+        <div x-cloak x-show="referencesOpen && !$store.layout.sidebarCollapsed" x-transition.opacity.duration.150ms>
+            <x-sidebar-submenu>
                 @can(\App\Modules\Role\Constants\RolePermissionConstants::STATES_VIEW)
                     <x-sidebar-submenu-link :href="route('reference.states.index')" :active="request()->routeIs('reference.states.*')">
                         <span>{{ __('States') }}</span>
@@ -80,23 +126,9 @@
                     </x-sidebar-submenu-link>
                 @endcan
 
-                @can(\App\Modules\Role\Constants\RolePermissionConstants::USERS_VIEW)
-                    <x-sidebar-submenu-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                        <span>{{ __('Users') }}</span>
-                    </x-sidebar-submenu-link>
-                @endcan
-
-                @can(\App\Modules\Role\Constants\RolePermissionConstants::ROLES_VIEW)
-                    <x-sidebar-submenu-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
-                        <span>{{ __('Roles') }}</span>
-                    </x-sidebar-submenu-link>
-                @endcan
-
-                @can(\App\Modules\Role\Constants\RolePermissionConstants::ACTIVITY_LOGS_VIEW)
-                    <x-sidebar-submenu-link :href="route('activity-logs.index')" :active="request()->routeIs('activity-logs.*')">
-                        <span>{{ __('Activity Logs') }}</span>
-                    </x-sidebar-submenu-link>
-                @endcan
+                <x-sidebar-submenu-link :href="route('reference.data-references.index')" :active="request()->routeIs('reference.data-references.*')">
+                    <span>{{ __('Data References') }}</span>
+                </x-sidebar-submenu-link>
             </x-sidebar-submenu>
         </div>
     </x-sidebar-group>
