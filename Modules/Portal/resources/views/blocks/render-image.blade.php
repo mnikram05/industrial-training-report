@@ -1,7 +1,7 @@
 @php $d = $block['data']; @endphp
 <section class="py-8">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="transition-all duration-300 hover:-translate-y-[5px]"
+        <div class="group transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
              style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03)">
             @if (!empty($d['image_path']))
                 <img src="{{ Storage::disk('public')->url($d['image_path']) }}"

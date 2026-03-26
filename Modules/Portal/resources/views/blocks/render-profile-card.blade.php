@@ -6,7 +6,7 @@
 
             {{-- Left Column: Profile Card --}}
             <div class="lg:col-span-2">
-                <div class="rounded-2xl border border-gray-100/50 p-5 text-center shadow-lg" style="background-color: var(--portal-card-bg)">
+                <div class="rounded-2xl border border-gray-100/50 p-5 text-center shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
                     {{-- Profile Photo --}}
                     <div class="relative mx-auto mb-2 size-20">
                         @if (!empty($d['photo_path']))
@@ -40,7 +40,7 @@
 
                 {{-- Internship Period Card --}}
                 @if (!empty($d['tempoh_li']))
-                    <div class="mt-4 rounded-2xl border border-gray-100/50 p-6 shadow-lg" style="background-color: var(--portal-card-bg)">
+                    <div class="mt-4 rounded-2xl border border-gray-100/50 p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
                         <p class="text-xs font-bold uppercase tracking-wide" style="color: var(--portal-text)">
                             {{ $l === 'ms' ? 'Tempoh LI' : 'Internship Period' }}
                         </p>
@@ -53,9 +53,9 @@
             <div class="space-y-6 lg:col-span-3">
 
                 {{-- Maklumat Akademik Card --}}
-                <div class="rounded-2xl border border-gray-100/50 p-6 shadow-lg" style="background-color: var(--portal-card-bg)">
+                <div class="group rounded-2xl border border-gray-100/50 p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
                     <div class="mb-5 flex items-center gap-3">
-                        <div class="flex size-10 items-center justify-center rounded-xl bg-blue-50 text-blue-500">
+                        <div class="flex size-10 items-center justify-center rounded-xl bg-blue-50 text-blue-500 transition-transform duration-300 group-hover:scale-110">
                             <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a23.54 23.54 0 0 0-2.688 11.354 23.54 23.54 0 0 1 7.17-2.583M4.26 10.147A23.46 23.46 0 0 1 12 8.243a23.46 23.46 0 0 1 7.74 1.904m0 0 .502 1.646a48.357 48.357 0 0 1 3.508 1.05M19.74 10.147a23.54 23.54 0 0 1 2.688 11.354M14.25 2.75a2.25 2.25 0 0 0-4.5 0v.5h4.5v-.5Z" />
                             </svg>
@@ -82,9 +82,9 @@
                 </div>
 
                 {{-- Biodata Card --}}
-                <div class="rounded-2xl border border-gray-100/50 p-6 shadow-lg" style="background-color: var(--portal-card-bg)">
+                <div class="group rounded-2xl border border-gray-100/50 p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
                     <div class="mb-5 flex items-center gap-3">
-                        <div class="flex size-10 items-center justify-center rounded-xl bg-pink-50 text-pink-500">
+                        <div class="flex size-10 items-center justify-center rounded-xl bg-pink-50 text-pink-500 transition-transform duration-300 group-hover:scale-110">
                             <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
                             </svg>

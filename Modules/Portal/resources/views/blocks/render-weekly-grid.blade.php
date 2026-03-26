@@ -21,7 +21,7 @@
                     @else
                         <div
                     @endif
-                        class="week-card group rounded-xl border-2 p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl"
+                        class="week-card group rounded-xl border-2 p-4 text-center transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-2xl"
                         style="border-color: color-mix(in srgb, var(--portal-accent) 30%, transparent)"
                         onmouseenter="this.style.backgroundColor='var(--portal-accent)';this.style.borderColor='var(--portal-accent)';this.querySelector('.week-title').style.color='#fff';var d=this.querySelector('.week-date');if(d)d.style.color='rgba(255,255,255,0.8)'"
                         onmouseleave="this.style.backgroundColor='';this.style.borderColor='color-mix(in srgb, var(--portal-accent) 30%, transparent)';this.querySelector('.week-title').style.color='var(--portal-accent)';var d=this.querySelector('.week-date');if(d)d.style.color='color-mix(in srgb, var(--portal-accent) 70%, transparent)'"
@@ -63,7 +63,7 @@
 
                 {{-- Daily Log Table --}}
                 @if (!empty($item['days']))
-                    <div class="overflow-hidden rounded-2xl border border-gray-100/50 shadow-lg" style="background-color: var(--portal-card-bg)">
+                    <div class="overflow-hidden rounded-2xl border border-gray-100/50 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
                         <div class="flex items-center gap-3 px-6 py-4">
                             <span class="text-xl">📅</span>
                             <h3 class="text-lg font-black" style="color: var(--portal-text)">
@@ -105,7 +105,7 @@
 
                 {{-- Reflection --}}
                 @if (!empty($item['reflection_' . $l]))
-                    <div class="mt-6 rounded-2xl border border-gray-100/50 p-6 shadow-lg" style="background-color: var(--portal-card-bg)">
+                    <div class="mt-6 rounded-2xl border border-gray-100/50 p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
                         <div class="mb-4 flex items-center gap-3">
                             <span class="text-xl">💭</span>
                             <h3 class="text-lg font-black" style="color: var(--portal-text)">

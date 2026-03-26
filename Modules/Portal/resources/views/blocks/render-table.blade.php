@@ -2,7 +2,7 @@
 @if (count($rows))
     <section class="py-8">
         <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <div style="background-color: #ffffff; border-radius: 15px; overflow: hidden; border: 1px solid #dee2e6; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03)">
+            <div class="transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: #ffffff; border-radius: 15px; overflow: hidden; border: 1px solid #dee2e6; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03)">
                 @if (!empty($d['heading_' . $l]))
                     <div style="background-color: #1a1a2e; padding: 16px 24px">
                         <h3 class="text-center text-lg font-bold text-white">{{ $d['heading_' . $l] }}</h3>

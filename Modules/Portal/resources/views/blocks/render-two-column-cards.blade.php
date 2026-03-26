@@ -14,11 +14,11 @@
             @endif
             <div class="grid gap-6 sm:grid-cols-2">
                 @foreach ($cards as $card)
-                    <div class="transition-all duration-300 hover:-translate-y-[5px]"
+                    <div class="group transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
                          style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 30px 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03)">
                         <div class="text-center">
                             @if (!empty($card['icon']))
-                                <div class="mb-3 text-4xl">{{ $card['icon'] }}</div>
+                                <div class="mb-3 text-4xl transition-transform duration-300 group-hover:scale-110">{{ $card['icon'] }}</div>
                             @endif
                             <h3 class="text-lg font-bold" style="color: #000000">{{ $card['title_' . $l] ?? '' }}</h3>
                             <div class="mx-auto mt-2" style="width: 50px; height: 3px; background-color: var(--portal-accent); border-radius: 2px"></div>

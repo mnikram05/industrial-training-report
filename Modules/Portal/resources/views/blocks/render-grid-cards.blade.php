@@ -14,10 +14,10 @@
             @endif
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-{{ min(count($items), 4) }}">
                 @foreach ($items as $item)
-                    <div class="flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-[5px]"
+                    <div class="group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
                          style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 24px 16px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03)">
                         @if (!empty($item['icon']))
-                            <div class="mb-3 text-3xl">{{ $item['icon'] }}</div>
+                            <div class="mb-3 text-3xl transition-transform duration-300 group-hover:scale-110">{{ $item['icon'] }}</div>
                         @endif
                         <h3 class="mb-2 text-sm font-bold" style="color: #000000">{{ $item['title_' . $l] ?? '' }}</h3>
                         @if (!empty($item['desc_' . $l]))
