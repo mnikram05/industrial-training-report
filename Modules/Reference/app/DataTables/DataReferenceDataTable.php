@@ -18,7 +18,8 @@ class DataReferenceDataTable extends BaseModuleDataTable
     public function query(): Builder
     {
         return DataReference::query()
-            ->with( ['parent', 'createdBy', 'updatedBy'] )
+            ->whereNull( 'parent_id' )
+            ->withCount( 'children' )
             ->ordered();
     }
 
@@ -26,33 +27,13 @@ class DataReferenceDataTable extends BaseModuleDataTable
     {
         return DataTables::eloquent( $this->query() )
             ->addIndexColumn()
-            ->addColumn( 'sort_action', static fn ( DataReference $dataReference ): string => view( 'reference::data-references.partials.datatables_sort_action', [
+            ->addColumn( 'status_toggle', static fn ( DataReference $dataReference ): string => view( 'reference::data-references.partials.datatables_status_toggle', [
                 'dataReference' => $dataReference,
             ] )->render() )
-            ->addColumn( 'status_label', static fn ( DataReference $dataReference ): string => view( 'reference::data-references.partials.datatables_status', [
-                'dataReference' => $dataReference,
-            ] )->render() )
-            ->addColumn( 'parent_name', static fn ( DataReference $dataReference ): string => $dataReference->parent?->name ?? '' )
             ->addColumn( 'action', static fn ( DataReference $dataReference ): string => view( 'reference::data-references.partials.datatables_actions', [
                 'dataReference' => $dataReference,
             ] )->render() )
-            ->editColumn( 'status', function ( $q ) {
-                return $q->status ? 'Active' : 'Inactive';
-            } )
-            ->editColumn( 'created_at', function ( $q ) {
-                $date = $q->created_at ? $q->created_at->format( 'd/m/Y H:i:s' ) : '';
-                $user = $q->created_by ? $q->createdBy->name : '';
-
-                return $date . ( $user ? ' by ' . $user : '' );
-            } )
-            ->editColumn( 'updated_at', function ( $q ) {
-                $date = $q->updated_at ? $q->updated_at->format( 'd/m/Y H:i:s' ) : '';
-                $user = $q->updated_by ? $q->updatedBy->name : '';
-
-                return $date . ( $user ? ' by ' . $user : '' );
-            } )
-
-            ->rawColumns( ['sort_action', 'status_label', 'action'] )
+            ->rawColumns( ['status_toggle', 'action'] )
             ->toJson();
     }
 
@@ -72,13 +53,11 @@ class DataReferenceDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( 'modules/reference/data-reference.fields.sort' ), 'class' => 'px-4 py-3 text-left font-medium w-20'],
-            ['label' => __( 'modules/reference/data-reference.fields.sort_action' ), 'class' => 'px-4 py-3 text-center font-medium w-24'],
-            ['label' => __( 'modules/reference/data-reference.fields.name' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'modules/reference/data-reference.fields.parent' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'modules/reference/data-reference.fields.status' ), 'class' => 'px-4 py-3 text-left font-medium w-24'],
-            ['label' => __( 'modules/reference/data-reference.fields.created' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
-            ['label' => __( 'modules/reference/data-reference.fields.updated' ), 'class' => 'px-4 py-3 text-left font-medium w-32'],
+            ['label' => '#', 'class' => 'px-4 py-3 text-left font-medium w-14'],
+            ['label' => __( 'modules/reference/data-reference.fields.label_my' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/data-reference.fields.label_en' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/data-reference.fields.description' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/data-reference.fields.status' ), 'class' => 'px-4 py-3 text-center font-medium w-28'],
             ['label' => __( 'crud.action' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
@@ -90,12 +69,10 @@ class DataReferenceDataTable extends BaseModuleDataTable
     {
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'searchable' => false, 'orderable' => false, 'className' => 'w-14 text-left'],
-            ['data' => 'sort_action', 'name' => 'sort', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
-            ['data' => 'name', 'name' => 'name'],
-            ['data' => 'parent_name', 'name' => 'parent_name'],
-            ['data' => 'status', 'name' => 'status'],
-            ['data' => 'created_at', 'name' => 'created_at'],
-            ['data' => 'updated_at', 'name' => 'updated_at'],
+            ['data' => 'label_my', 'name' => 'label_my'],
+            ['data' => 'label_en', 'name' => 'label_en'],
+            ['data' => 'description', 'name' => 'description'],
+            ['data' => 'status_toggle', 'name' => 'status', 'searchable' => false, 'orderable' => false, 'className' => 'text-center'],
             ['data' => 'action', 'name' => 'action', 'searchable' => false, 'orderable' => false, 'className' => 'text-right whitespace-nowrap'],
         ];
     }

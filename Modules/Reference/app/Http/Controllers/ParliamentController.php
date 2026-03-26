@@ -26,12 +26,19 @@ class ParliamentController extends Controller
      */
     public function index( Request $request ): JsonResponse|View
     {
+        $stateId = $request->integer( 'state_id' ) ?: null;
+
+        $this->parliamentDataTable->setStateId( $stateId );
+
         if ( $request->ajax() ) {
             return $this->parliamentDataTable->ajax();
         }
 
+        $state = $stateId ? State::find( $stateId ) : null;
+
         return view( 'reference::parliaments.index', [
             'dataTable' => $this->parliamentDataTable,
+            'state'     => $state,
         ] );
     }
 
@@ -162,6 +169,28 @@ class ParliamentController extends Controller
         return redirect()
             ->route( 'reference.parliaments.index' )
             ->with( 'status', 'parliament-deleted' );
+    }
+
+    /**
+     * Toggle status of a parliament and cascade to DUNs.
+     */
+    public function toggleStatus( Parliament $parliament ): RedirectResponse
+    {
+        $newStatus = ! $parliament->status;
+
+        $parliament->update( [
+            'status'     => $newStatus,
+            'updated_by' => auth()->id(),
+        ] );
+
+        $parliament->duns()->update( [
+            'status'     => $newStatus,
+            'updated_by' => auth()->id(),
+        ] );
+
+        return redirect()
+            ->back()
+            ->with( 'status', 'parliament-updated' );
     }
 
     /**

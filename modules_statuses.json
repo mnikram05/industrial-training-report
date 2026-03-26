@@ -1,5 +1,6 @@
 {
     "Reference": true,
     "PortalAdministratio": true,
-    "PortalAdministration": true
+    "PortalAdministration": true,
+    "Portal": true
 }

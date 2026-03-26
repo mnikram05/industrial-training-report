@@ -11,11 +11,11 @@ use App\Modules\User\Models\User;
 use Spatie\Permission\Models\Role;
 use Modules\Reference\Models\State;
 use Illuminate\Support\Facades\Cache;
-use App\Modules\Article\Models\Article;
 use App\Support\Activity\ActivityEvent;
 use Spatie\Activitylog\Models\Activity;
 use Illuminate\Database\Query\JoinClause;
-use App\Modules\Article\Enums\ArticleStatusEnum;
+use Modules\PortalAdministration\Models\Article;
+use Modules\PortalAdministration\Enums\ArticleStatusEnum;
 
 class AdminDashboardService
 {

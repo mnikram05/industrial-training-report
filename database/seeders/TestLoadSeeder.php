@@ -13,12 +13,12 @@ use Illuminate\Support\Collection;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Modules\User\Models\Password;
-use App\Modules\Article\Models\Article;
 use App\Modules\Landing\Models\Landing;
 use Spatie\Activitylog\Models\Activity;
-use App\Modules\Article\Enums\ArticleStatusEnum;
 use App\Modules\Landing\Enums\LandingStatusEnum;
+use Modules\PortalAdministration\Models\Article;
 use App\Modules\Role\Constants\RoleNameConstants;
+use Modules\PortalAdministration\Enums\ArticleStatusEnum;
 
 class TestLoadSeeder extends Seeder
 {

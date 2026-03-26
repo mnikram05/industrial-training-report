@@ -10,8 +10,8 @@ use Illuminate\Database\Seeder;
 use App\Support\Status\StatusType;
 use App\Support\Status\StatusCatalog;
 use App\Support\Transfer\DataTransferStatus;
-use App\Modules\Article\Enums\ArticleStatusEnum;
 use App\Modules\Landing\Enums\LandingStatusEnum;
+use Modules\PortalAdministration\Enums\ArticleStatusEnum;
 
 class StatusSeeder extends Seeder
 {

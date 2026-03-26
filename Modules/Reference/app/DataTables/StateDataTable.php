@@ -93,7 +93,7 @@ class StateDataTable extends BaseModuleDataTable
             ['data' => 'sort_action', 'name' => 'sort', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
             ['data' => 'name', 'name' => 'name'],
             ['data' => 'fullname', 'name' => 'fullname'],
-            ['data' => 'status', 'name' => 'status'],
+            ['data' => 'status_label', 'name' => 'status', 'searchable' => false, 'orderable' => false],
             ['data' => 'created_at', 'name' => 'created_at'],
             ['data' => 'updated_at', 'name' => 'updated_at'],
             ['data' => 'action', 'name' => 'action', 'searchable' => false, 'orderable' => false, 'className' => 'text-right whitespace-nowrap'],

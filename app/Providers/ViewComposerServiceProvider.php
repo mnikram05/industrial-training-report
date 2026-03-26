@@ -19,13 +19,18 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer( 'layouts.partials.menu', function ( BladeView $view ): void {
             $view->with( 'cmsOpen', request()->routeIs(
                 'admin.dashboard',
-                'articles.*',
                 'landings.*',
                 'statuses.*',
                 'users.*',
                 'roles.*',
                 'activity-logs.*',
-                'reference.menus.*',
+            ) );
+
+            $view->with( 'portalOpen', request()->routeIs(
+                'portal-administration.menus.*',
+                'articles.*',
+                'media.*',
+                'portal-settings.*',
             ) );
 
             $view->with( 'referencesOpen', request()->routeIs(
@@ -35,6 +40,9 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'reference.districts.*',
                 'reference.data-references.*',
             ) );
+
+            // Note: DUNs and Districts are accessed via States > Parliaments/Districts actions,
+            // but still trigger referencesOpen for sidebar highlight.
         } );
 
         View::composer( 'layouts.partials.navigation', function ( BladeView $view ): void {

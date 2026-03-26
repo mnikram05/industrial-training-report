@@ -12,6 +12,15 @@ use App\Support\DataTable\BaseModuleDataTable;
 
 class DistrictDataTable extends BaseModuleDataTable
 {
+    protected ?int $stateId = null;
+
+    public function setStateId( ?int $stateId ): static
+    {
+        $this->stateId = $stateId;
+
+        return $this;
+    }
+
     /**
      * @return Builder<District>
      */
@@ -19,6 +28,7 @@ class DistrictDataTable extends BaseModuleDataTable
     {
         return District::query()
             ->with( ['state', 'createdBy', 'updatedBy'] )
+            ->when( $this->stateId, fn ( Builder $q ) => $q->where( 'state_id', $this->stateId ) )
             ->ordered();
     }
 
@@ -66,6 +76,11 @@ class DistrictDataTable extends BaseModuleDataTable
         return 'reference.districts.index';
     }
 
+    public function ajaxUrl(): string
+    {
+        return route( $this->ajaxRouteName(), array_filter( ['state_id' => $this->stateId] ) );
+    }
+
     /**
      * @return list<array{label: string, class?: string}>
      */
@@ -93,7 +108,7 @@ class DistrictDataTable extends BaseModuleDataTable
             ['data' => 'sort_action', 'name' => 'sort', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
             ['data' => 'name', 'name' => 'name'],
             ['data' => 'state_name', 'name' => 'state_name'],
-            ['data' => 'status', 'name' => 'status'],
+            ['data' => 'status_label', 'name' => 'status', 'searchable' => false, 'orderable' => false],
             ['data' => 'created_at', 'name' => 'created_at'],
             ['data' => 'updated_at', 'name' => 'updated_at'],
             ['data' => 'action', 'name' => 'action', 'searchable' => false, 'orderable' => false, 'className' => 'text-right whitespace-nowrap'],

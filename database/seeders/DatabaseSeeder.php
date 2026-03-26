@@ -21,20 +21,27 @@ class DatabaseSeeder extends Seeder
         $this->call( RoleAndPermissionSeeder::class );
         $this->call( StatusSeeder::class );
         $this->call( LandingSeeder::class );
+        $this->call( \Modules\PortalAdministration\Database\Seeders\PortalAdministrationDatabaseSeeder::class );
 
-        User::factory()->create( [
-            'name'  => 'Admin User',
-            'email' => 'admin@example.com',
-        ] )->assignRole( RoleNameConstants::ADMIN );
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            ['name' => 'Admin User', 'email_verified_at' => now()],
+        );
+        $admin->storePassword( 'password' );
+        $admin->assignRole( RoleNameConstants::ADMIN );
 
-        User::factory()->create( [
-            'name'  => 'Editor User',
-            'email' => 'editor@example.com',
-        ] )->assignRole( RoleNameConstants::EDITOR );
+        $editor = User::firstOrCreate(
+            ['email' => 'editor@example.com'],
+            ['name' => 'Editor User', 'email_verified_at' => now()],
+        );
+        $editor->storePassword( 'password' );
+        $editor->assignRole( RoleNameConstants::EDITOR );
 
-        User::factory()->create( [
-            'name'  => 'Viewer User',
-            'email' => 'viewer@example.com',
-        ] )->assignRole( RoleNameConstants::VIEWER );
+        $viewer = User::firstOrCreate(
+            ['email' => 'viewer@example.com'],
+            ['name' => 'Viewer User', 'email_verified_at' => now()],
+        );
+        $viewer->storePassword( 'password' );
+        $viewer->assignRole( RoleNameConstants::VIEWER );
     }
 }

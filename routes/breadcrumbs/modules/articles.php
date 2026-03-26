@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Modules\Article\Models\Article;
 use App\Support\Breadcrumbs\Breadcrumbs;
 use App\Support\Breadcrumbs\BreadcrumbTrail;
+use Modules\PortalAdministration\Models\Article;
 
 Breadcrumbs::for( 'articles.index', function ( BreadcrumbTrail $trail ): void {
     $trail

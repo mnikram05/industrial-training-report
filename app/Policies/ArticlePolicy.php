@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Policies;
 
 use App\Modules\User\Models\User;
-use App\Modules\Article\Models\Article;
+use Modules\PortalAdministration\Models\Article;
 use App\Modules\Role\Constants\RolePermissionConstants;
 
 class ArticlePolicy

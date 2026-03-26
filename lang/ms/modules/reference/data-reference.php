@@ -3,17 +3,20 @@
 declare(strict_types=1);
 
 return [
-    'model'        => 'Rujukan Data',
-    'plural'       => 'Rujukan Data',
-    'new'          => 'Rujukan Data Baharu',
-    'index'        => 'Butiran Rujukan Data',
-    'list'         => 'Senarai Rujukan Data',
-    'edit'         => 'Edit Rujukan Data',
-    'delete'       => 'Padam Rujukan Data',
-    'create'       => 'Cipta Rujukan Data',
-    'subtitle'     => 'Urus rujukan data.',
-    'filter'       => 'Tapis rujukan data...',
-    'sort_options' => [
+    'model'             => 'Rujukan Data',
+    'plural'            => 'Rujukan Data',
+    'new'               => 'Rujukan Data Baharu',
+    'index'             => 'Butiran Rujukan Data',
+    'list'              => 'Senarai Rujukan Data',
+    'edit'              => 'Edit Rujukan Data',
+    'delete'            => 'Padam Rujukan Data',
+    'create'            => 'Cipta Rujukan Data',
+    'subtitle'          => 'Urus rujukan data.',
+    'children_list'     => 'Senarai Data Rujukan',
+    'children_subtitle' => 'Urus data rujukan anak.',
+    'create_child'      => 'Data Rujukan Baharu',
+    'filter'            => 'Tapis rujukan data...',
+    'sort_options'      => [
         'first' => '1 - Pertama',
         'after' => ':position - Selepas :name',
     ],
@@ -35,6 +38,7 @@ return [
         'updated_by'  => 'Dikemaskini Oleh',
         'deleted_at'  => 'Tarikh Dipadam',
         'deleted_by'  => 'Dipadam Oleh',
+        'description' => 'Penerangan',
         'sort_action' => 'Kemaskini Susunan',
     ],
 ];

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Modules\Reference\Models\DataReference;
 use Modules\Reference\DataTables\DataReferenceDataTable;
+use Modules\Reference\DataTables\ChildDataReferenceDataTable;
 use Modules\Reference\Http\Requests\StoreDataReferenceRequest;
 use Modules\Reference\Http\Requests\UpdateDataReferenceRequest;
 
@@ -18,6 +19,7 @@ class DataReferenceController extends Controller
 {
     public function __construct(
         protected DataReferenceDataTable $dataReferenceDataTable,
+        protected ChildDataReferenceDataTable $childDataReferenceDataTable,
     ) {}
 
     /**
@@ -39,10 +41,7 @@ class DataReferenceController extends Controller
      */
     public function create(): View
     {
-        return view( 'reference::data-references.create', [
-            'parentOptions' => $this->getParentOptions(),
-            'sortOptions'   => $this->buildSortOptions(),
-        ] );
+        return view( 'reference::data-references.create' );
     }
 
     /**
@@ -52,13 +51,9 @@ class DataReferenceController extends Controller
     {
         $data               = $request->validated();
         $data['created_by'] = auth()->id();
+        $data['status']     = 1;
 
-        // Shift existing data references down to make room
-        DataReference::query()
-            ->where( 'sort', '>=', $data['sort'] )
-            ->increment( 'sort' );
-
-        $dataReference = DataReference::create( $data );
+        DataReference::create( $data );
 
         return redirect()
             ->route( 'reference.data-references.index' )
@@ -82,8 +77,6 @@ class DataReferenceController extends Controller
     {
         return view( 'reference::data-references.edit', [
             'dataReference' => $dataReference,
-            'parentOptions' => $this->getParentOptions( $dataReference->id ),
-            'sortOptions'   => $this->buildSortOptions( $dataReference->id ),
         ] );
     }
 
@@ -94,25 +87,6 @@ class DataReferenceController extends Controller
     {
         $data               = $request->validated();
         $data['updated_by'] = auth()->id();
-
-        $oldSort = $dataReference->sort;
-        $newSort = (int) $data['sort'];
-
-        if ( $oldSort !== $newSort ) {
-            if ( $newSort < $oldSort ) {
-                DataReference::query()
-                    ->where( 'id', '!=', $dataReference->id )
-                    ->where( 'sort', '>=', $newSort )
-                    ->where( 'sort', '<', $oldSort )
-                    ->increment( 'sort' );
-            } else {
-                DataReference::query()
-                    ->where( 'id', '!=', $dataReference->id )
-                    ->where( 'sort', '>', $oldSort )
-                    ->where( 'sort', '<=', $newSort )
-                    ->decrement( 'sort' );
-            }
-        }
 
         $dataReference->update( $data );
 
@@ -159,6 +133,131 @@ class DataReferenceController extends Controller
         return redirect()
             ->route( 'reference.data-references.index' )
             ->with( 'status', 'data-reference-deleted' );
+    }
+
+    /**
+     * Toggle status of a data reference and cascade to children.
+     */
+    public function toggleStatus( DataReference $dataReference ): RedirectResponse
+    {
+        $newStatus = ! $dataReference->status;
+
+        $dataReference->update( [
+            'status'     => $newStatus,
+            'updated_by' => auth()->id(),
+        ] );
+
+        $dataReference->children()->update( [
+            'status'     => $newStatus,
+            'updated_by' => auth()->id(),
+        ] );
+
+        return redirect()
+            ->back()
+            ->with( 'status', 'data-reference-updated' );
+    }
+
+    /**
+     * Toggle status of a child data reference.
+     */
+    public function toggleChildStatus( DataReference $dataReference, DataReference $child ): RedirectResponse
+    {
+        $child->update( [
+            'status'     => ! $child->status,
+            'updated_by' => auth()->id(),
+        ] );
+
+        return redirect()
+            ->back()
+            ->with( 'status', 'data-reference-updated' );
+    }
+
+    /**
+     * Display children of a data reference.
+     */
+    public function children( Request $request, DataReference $dataReference ): JsonResponse|View
+    {
+        $this->childDataReferenceDataTable->setParentId( $dataReference->id );
+
+        if ( $request->ajax() ) {
+            return $this->childDataReferenceDataTable->ajax();
+        }
+
+        return view( 'reference::data-references.children', [
+            'dataReference' => $dataReference,
+            'dataTable'     => $this->childDataReferenceDataTable,
+        ] );
+    }
+
+    /**
+     * Show form for creating a child data reference.
+     */
+    public function createChild( DataReference $dataReference ): View
+    {
+        return view( 'reference::data-references.create-child', [
+            'dataReference' => $dataReference,
+            'sortOptions'   => $this->buildChildSortOptions( $dataReference->id ),
+        ] );
+    }
+
+    /**
+     * Store a child data reference.
+     */
+    public function storeChild( StoreDataReferenceRequest $request, DataReference $dataReference ): RedirectResponse
+    {
+        $data               = $request->validated();
+        $data['parent_id']  = $dataReference->id;
+        $data['created_by'] = auth()->id();
+        $data['status']     = 1;
+
+        DataReference::query()
+            ->where( 'parent_id', $dataReference->id )
+            ->where( 'sort', '>=', $data['sort'] )
+            ->increment( 'sort' );
+
+        DataReference::create( $data );
+
+        return redirect()
+            ->route( 'reference.data-references.children', $dataReference )
+            ->with( 'status', 'data-reference-created' );
+    }
+
+    /**
+     * Update sort order of a child data reference.
+     */
+    public function updateChildSort( Request $request, DataReference $dataReference, DataReference $child ): JsonResponse
+    {
+        $direction = $request->input( 'direction' );
+
+        if ( ! in_array( $direction, ['up', 'down'], true ) ) {
+            return response()->json( ['success' => false, 'message' => 'Invalid direction'], 400 );
+        }
+
+        $currentSort = $child->sort;
+
+        if ( $direction === 'up' ) {
+            $swap = DataReference::query()
+                ->where( 'parent_id', $dataReference->id )
+                ->where( 'sort', '<', $currentSort )
+                ->orderBy( 'sort', 'desc' )
+                ->first();
+        } else {
+            $swap = DataReference::query()
+                ->where( 'parent_id', $dataReference->id )
+                ->where( 'sort', '>', $currentSort )
+                ->orderBy( 'sort', 'asc' )
+                ->first();
+        }
+
+        if ( ! $swap ) {
+            return response()->json( ['success' => false, 'message' => 'Cannot move further'], 400 );
+        }
+
+        $swapSort = $swap->sort;
+        $child->update( ['sort' => $swapSort, 'updated_by' => auth()->id()] );
+        $swap->update( ['sort' => $currentSort, 'updated_by' => auth()->id()] );
+
+        return response()->json( ['success' => true] );
     }
 
     /**
@@ -230,6 +329,39 @@ class DataReferenceController extends Controller
             $options[$position] = __( 'modules/reference/data-reference.sort_options.after', [
                 'position' => $this->ordinal( $position ),
                 'name'     => $item->name,
+            ] );
+            $position++;
+        }
+
+        return $options;
+    }
+
+    /**
+     * Build sort position options for child dropdown.
+     *
+     * @return array<int, string>
+     */
+    private function buildChildSortOptions( int $parentId, ?int $excludeId = null ): array
+    {
+        $items = DataReference::query()
+            ->where( 'parent_id', $parentId )
+            ->whereNull( 'deleted_at' )
+            ->when( $excludeId, fn ( $q ) => $q->where( 'id', '!=', $excludeId ) )
+            ->orderBy( 'sort', 'asc' )
+            ->get( ['id', 'label_my', 'label_en', 'sort'] );
+
+        $options  = [];
+        $position = 1;
+
+        $options[$position] = __( 'modules/reference/data-reference.sort_options.first' );
+        $position++;
+
+        foreach ( $items as $item ) {
+            $label = $item->label_my ?? $item->label_en ?? '—';
+
+            $options[$position] = __( 'modules/reference/data-reference.sort_options.after', [
+                'position' => $this->ordinal( $position ),
+                'name'     => $label,
             ] );
             $position++;
         }

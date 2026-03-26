@@ -1,4 +1,8 @@
 <x-datatable-actions-menu>
+    <x-datatable-action-link :href="route('reference.duns.index', ['parliament_id' => $parliament->id])">
+        {{ __('modules/reference/dun.plural') }}
+    </x-datatable-action-link>
+
     <x-datatable-action-link :href="route('reference.parliaments.edit', $parliament)">
         {{ __('crud.edit') }}
     </x-datatable-action-link>

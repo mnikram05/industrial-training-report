@@ -26,12 +26,19 @@ class DunController extends Controller
      */
     public function index( Request $request ): JsonResponse|View
     {
+        $parliamentId = $request->integer( 'parliament_id' ) ?: null;
+
+        $this->dunDataTable->setParliamentId( $parliamentId );
+
         if ( $request->ajax() ) {
             return $this->dunDataTable->ajax();
         }
 
+        $parliament = $parliamentId ? Parliament::find( $parliamentId ) : null;
+
         return view( 'reference::duns.index', [
-            'dataTable' => $this->dunDataTable,
+            'dataTable'  => $this->dunDataTable,
+            'parliament' => $parliament,
         ] );
     }
 
@@ -162,6 +169,21 @@ class DunController extends Controller
         return redirect()
             ->route( 'reference.duns.index' )
             ->with( 'status', 'dun-deleted' );
+    }
+
+    /**
+     * Toggle status of a DUN.
+     */
+    public function toggleStatus( Dun $dun ): RedirectResponse
+    {
+        $dun->update( [
+            'status'     => ! $dun->status,
+            'updated_by' => auth()->id(),
+        ] );
+
+        return redirect()
+            ->back()
+            ->with( 'status', 'dun-updated' );
     }
 
     /**

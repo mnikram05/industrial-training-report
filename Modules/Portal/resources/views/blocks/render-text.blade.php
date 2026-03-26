@@ -1,0 +1,23 @@
+@php $d = $block['data']; @endphp
+<section class="py-8">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="transition-all duration-300 hover:-translate-y-[5px]"
+             style="background-color: #ffffff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03)">
+            @if (!empty($d['heading_' . $l]))
+                <div class="mb-4 flex items-center gap-3">
+                    @if (!empty($d['icon']))
+                        <div class="flex size-10 items-center justify-center rounded-xl" style="background-color: rgba(233, 69, 96, 0.1)">
+                            <span class="text-xl">{{ $d['icon'] }}</span>
+                        </div>
+                    @endif
+                    <h3 class="text-lg font-bold" style="color: #000000">{{ $d['heading_' . $l] }}</h3>
+                </div>
+            @endif
+            @if (!empty($d['text_' . $l]))
+                <div class="text-sm leading-relaxed" style="color: #000000">
+                    {!! nl2br(e($d['text_' . $l])) !!}
+                </div>
+            @endif
+        </div>
+    </div>
+</section>

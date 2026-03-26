@@ -1,0 +1,54 @@
+<div class="space-y-4">
+    <div class="grid gap-4 sm:grid-cols-3">
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.icon_emoji') }}</x-slot:labelText>
+            <select x-model="block.data.icon" class="h-9 w-40 rounded-md border border-input bg-background px-3 text-sm">
+                <option value="">--</option>
+                @foreach (['👤' => 'Person','🏢' => 'Building','📅' => 'Calendar','🎓' => 'Graduation','📄' => 'Document','📋' => 'Clipboard','📈' => 'Chart','⭐' => 'Star','🏆' => 'Trophy','🚀' => 'Rocket','💡' => 'Idea','👥' => 'Group','👁️' => 'Eye','⚙️' => 'Gear','📱' => 'Mobile','🖥️' => 'Desktop','🚩' => 'Flag','⬆️' => 'Up','📌' => 'Pin','🔗' => 'Link','✅' => 'Check','❤️' => 'Heart','📝' => 'Note','🔍' => 'Search'] as $emoji => $label)
+                    <option value="{{ $emoji }}">{{ $emoji }} {{ $label }}</option>
+                @endforeach
+            </select></x-field>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
+            <x-input type="text" x-model="block.data.heading_ms" /></x-field>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
+            <x-input type="text" x-model="block.data.heading_en" /></x-field>
+    </div>
+
+    <div class="flex items-center justify-end">
+        <button type="button" @click="block.data.days.push({ day_ms: '', day_en: '', activities_ms: [''], activities_en: [''] })"
+            class="inline-flex items-center gap-1.5 rounded-md border border-input bg-background px-3 py-1.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
+            <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            {{ __('modules/portal/setting.actions.add') }}
+        </button>
+    </div>
+
+    <template x-for="(day, di) in block.data.days" :key="di">
+        <div class="rounded-md border p-3 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-muted-foreground" x-text="day.day_ms || ('{{ __('modules/portal/setting.actions.item_label') }} ' + (di + 1))"></span>
+                <button type="button" @click="block.data.days.splice(di, 1)" class="text-destructive hover:text-destructive/80"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.day_my') }}</x-slot:labelText>
+                    <x-input type="text" x-model="day.day_ms" placeholder="Isnin" /></x-field>
+                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.day_en') }}</x-slot:labelText>
+                    <x-input type="text" x-model="day.day_en" placeholder="Monday" /></x-field>
+            </div>
+            <div class="rounded border bg-gray-50/50 p-3 space-y-2">
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-semibold text-muted-foreground">{{ __('modules/portal/setting.fields.activities') }}</p>
+                    <button type="button" @click="day.activities_ms.push(''); day.activities_en.push('')" class="text-xs text-foreground/70 hover:text-foreground">+ {{ __('modules/portal/setting.actions.add') }}</button>
+                </div>
+                <template x-for="(act, ai) in day.activities_ms" :key="ai">
+                    <div class="flex items-start gap-2">
+                        <span class="mt-2 text-xs text-muted-foreground" x-text="ai + 1"></span>
+                        <div class="grid flex-1 gap-2 sm:grid-cols-2">
+                            <x-input type="text" x-model="day.activities_ms[ai]" placeholder="MY" />
+                            <x-input type="text" x-model="day.activities_en[ai]" placeholder="EN" />
+                        </div>
+                        <button type="button" @click="day.activities_ms.splice(ai, 1); day.activities_en.splice(ai, 1)" class="mt-1.5 text-destructive"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+</div>

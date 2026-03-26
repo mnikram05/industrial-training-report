@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\PortalAdministration\Models;
 
 use App\Modules\User\Models\User;
-use Modules\Reference\Models\DataReference;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Reference\Models\DataReference;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 
 class Menu extends Model
 {
@@ -17,13 +20,9 @@ class Menu extends Model
 
     public $timestamps = true;
 
-    protected $table = 'portal_menus';
+    protected $table = 'menus';
 
-    /**
-     * The attributes that are mass assignable.
-     */
     protected $fillable = [
-        'id',
         'parent_id',
         'title_my',
         'title_en',
@@ -33,81 +32,80 @@ class Menu extends Model
         'sort',
         'url',
         'slug',
-        'created_at',
         'created_by',
-        'updated_at',
         'updated_by',
-        'deleted_at',
         'deleted_by',
     ];
 
-    /**
-     * @param  array{status?: int}  $attributes
-     */
-    // protected function casts(): array
-    // {
-    //     return [
-    //         'status' => 'boolean',
-    //         'sort'   => 'integer',
-    //     ];
-    // }
+    protected function casts(): array
+    {
+        return [
+            'sort'      => 'integer',
+            'type_id'   => 'integer',
+            'status_id' => 'integer',
+        ];
+    }
 
     /**
-     * Scope: search by name, ddsa_code, fullname, or iso_code.
+     * @return BelongsTo<self, $this>
      */
-    // public function scopeSearch( Builder $query, ?string $term ): Builder
-    // {
-    //     if ( ! $term ) {
-    //         return $query;
-    //     }
-
-    //     return $query->where( function ( Builder $q ) use ( $term ) {
-    //         $q->where( 'name', 'like', "%{$term}%" )
-    //             ->orWhere( 'fullname', 'like', "%{$term}%" )
-    //             ->orWhere( 'ddsa_code', 'like', "%{$term}%" )
-    //             ->orWhere( 'iso_code', 'like', "%{$term}%" );
-    //     } );
-    // }
-
-    /**
-     * Scope: order by sort column, then by name.
-     */
-    public function scopeOrdered( Builder $query ): Builder
-    {
-        return $query->orderBy( 'sort' )->orderBy( 'name' );
-    }
-
-     public function createdBy()
-    {
-        return $this->belongsTo( User::class, 'created_by' );
-    }
-
-      public function updatedBy()
-    {
-        return $this->belongsTo( User::class, 'updated_by' );
-    }
-
-    public function deletedBy()
-    {
-        return $this->belongsTo( User::class, 'deleted_by' );
-    }
-
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo( self::class, 'parent_id' );
     }
 
-    public function type()
+    /**
+     * @return HasMany<self, $this>
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany( self::class, 'parent_id' )->ordered();
+    }
+
+    /**
+     * @return BelongsTo<DataReference, $this>
+     */
+    public function type(): BelongsTo
     {
         return $this->belongsTo( DataReference::class, 'type_id' );
     }
 
-    public function status()
+    public function createdBy(): BelongsTo
     {
-        return $this->belongsTo( DataReference::class, 'status_id' );
+        return $this->belongsTo( User::class, 'created_by' );
     }
 
-    
+    public function updatedBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'updated_by' );
+    }
 
+    public function deletedBy(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'deleted_by' );
+    }
 
+    /**
+     * Scope: search by title_my, title_en, or slug.
+     */
+    public function scopeSearch( Builder $query, ?string $term ): Builder
+    {
+        if ( ! $term ) {
+            return $query;
+        }
+
+        return $query->where( function ( Builder $q ) use ( $term ) {
+            $q->where( 'title_my', 'like', "%{$term}%" )
+                ->orWhere( 'title_en', 'like', "%{$term}%" )
+                ->orWhere( 'slug', 'like', "%{$term}%" );
+        } );
+    }
+
+    /**
+     * Scope: order by sort column, then by title_en.
+     */
+    public function scopeOrdered( Builder $query ): Builder
+    {
+        return $query->orderBy( 'sort' )->orderBy( 'title_en' );
+    }
 }

@@ -51,4 +51,5 @@ return [
     'inactive'             => 'Inactive',
     'move_up'              => 'Move Up',
     'move_down'            => 'Move Down',
+    'settings'             => 'Settings',
 ];

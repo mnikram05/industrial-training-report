@@ -7,6 +7,7 @@ namespace Modules\Reference\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Modules\Reference\Models\Dun;
 use Modules\Reference\Models\State;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -159,14 +160,35 @@ class StateController extends Controller
     }
 
     /**
-     * Toggle status of a state.
+     * Toggle status of a state and cascade to parliaments, districts, and DUNs.
      */
     public function toggleStatus( State $state ): RedirectResponse
     {
+        $newStatus = ! $state->status;
+
         $state->update( [
-            'status'     => ! $state->status,
+            'status'     => $newStatus,
             'updated_by' => auth()->id(),
         ] );
+
+        $state->parliaments()->update( [
+            'status'     => $newStatus,
+            'updated_by' => auth()->id(),
+        ] );
+
+        $state->districts()->update( [
+            'status'     => $newStatus,
+            'updated_by' => auth()->id(),
+        ] );
+
+        $parliamentIds = $state->parliaments()->pluck( 'id' );
+
+        Dun::query()
+            ->whereIn( 'parliament_id', $parliamentIds )
+            ->update( [
+                'status'     => $newStatus,
+                'updated_by' => auth()->id(),
+            ] );
 
         return redirect()
             ->back()

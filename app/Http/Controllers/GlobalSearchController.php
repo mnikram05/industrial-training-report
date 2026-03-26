@@ -7,10 +7,10 @@ namespace App\Http\Controllers;
 use App\Modules\User\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
-use App\Modules\Article\Models\Article;
 use App\Modules\Landing\Models\Landing;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\GlobalSearchRequest;
+use Modules\PortalAdministration\Models\Article;
 
 class GlobalSearchController extends Controller
 {

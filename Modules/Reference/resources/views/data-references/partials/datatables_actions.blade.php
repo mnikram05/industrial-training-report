@@ -1,4 +1,8 @@
 <x-datatable-actions-menu>
+    <x-datatable-action-link :href="route('reference.data-references.children', $dataReference)">
+        {{ __('modules/reference/data-reference.children_list') }}
+    </x-datatable-action-link>
+
     <x-datatable-action-link :href="route('reference.data-references.edit', $dataReference)">
         {{ __('crud.edit') }}
     </x-datatable-action-link>

@@ -57,4 +57,5 @@ return [
     'inactive'             => 'Tidak Aktif',
     'move_up'              => 'Gerak Atas',
     'move_down'            => 'Gerak Bawah',
+    'settings'             => 'Tetapan',
 ];

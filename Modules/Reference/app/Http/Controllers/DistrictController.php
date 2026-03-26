@@ -26,12 +26,19 @@ class DistrictController extends Controller
      */
     public function index( Request $request ): JsonResponse|View
     {
+        $stateId = $request->integer( 'state_id' ) ?: null;
+
+        $this->districtDataTable->setStateId( $stateId );
+
         if ( $request->ajax() ) {
             return $this->districtDataTable->ajax();
         }
 
+        $state = $stateId ? State::find( $stateId ) : null;
+
         return view( 'reference::districts.index', [
             'dataTable' => $this->districtDataTable,
+            'state'     => $state,
         ] );
     }
 
@@ -162,6 +169,21 @@ class DistrictController extends Controller
         return redirect()
             ->route( 'reference.districts.index' )
             ->with( 'status', 'district-deleted' );
+    }
+
+    /**
+     * Toggle status of a district.
+     */
+    public function toggleStatus( District $district ): RedirectResponse
+    {
+        $district->update( [
+            'status'     => ! $district->status,
+            'updated_by' => auth()->id(),
+        ] );
+
+        return redirect()
+            ->back()
+            ->with( 'status', 'district-updated' );
     }
 
     /**

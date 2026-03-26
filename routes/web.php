@@ -3,12 +3,10 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use App\Modules\Portal\Controllers\LandingController;
 
-Route::get( '/', LandingController::class )->name( 'home' );
+Route::get( '/', fn () => redirect()->route( 'dashboard' ) );
 
 require __DIR__ . '/modules/dashboard.php';
-require __DIR__ . '/modules/articles.php';
 require __DIR__ . '/modules/users.php';
 require __DIR__ . '/modules/roles.php';
 require __DIR__ . '/modules/landings.php';

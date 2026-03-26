@@ -12,6 +12,15 @@ use App\Support\DataTable\BaseModuleDataTable;
 
 class DunDataTable extends BaseModuleDataTable
 {
+    protected ?int $parliamentId = null;
+
+    public function setParliamentId( ?int $parliamentId ): static
+    {
+        $this->parliamentId = $parliamentId;
+
+        return $this;
+    }
+
     /**
      * @return Builder<Dun>
      */
@@ -19,6 +28,7 @@ class DunDataTable extends BaseModuleDataTable
     {
         return Dun::query()
             ->with( ['parliament', 'createdBy', 'updatedBy'] )
+            ->when( $this->parliamentId, fn ( Builder $q ) => $q->where( 'parliament_id', $this->parliamentId ) )
             ->ordered();
     }
 
@@ -66,6 +76,11 @@ class DunDataTable extends BaseModuleDataTable
         return 'reference.duns.index';
     }
 
+    public function ajaxUrl(): string
+    {
+        return route( $this->ajaxRouteName(), array_filter( ['parliament_id' => $this->parliamentId] ) );
+    }
+
     /**
      * @return list<array{label: string, class?: string}>
      */
@@ -93,7 +108,7 @@ class DunDataTable extends BaseModuleDataTable
             ['data' => 'sort_action', 'name' => 'sort', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
             ['data' => 'name', 'name' => 'name'],
             ['data' => 'parliament_name', 'name' => 'parliament_name'],
-            ['data' => 'status', 'name' => 'status'],
+            ['data' => 'status_label', 'name' => 'status', 'searchable' => false, 'orderable' => false],
             ['data' => 'created_at', 'name' => 'created_at'],
             ['data' => 'updated_at', 'name' => 'updated_at'],
             ['data' => 'action', 'name' => 'action', 'searchable' => false, 'orderable' => false, 'className' => 'text-right whitespace-nowrap'],

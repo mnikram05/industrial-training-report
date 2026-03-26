@@ -8,6 +8,7 @@ use App\Modules\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -49,6 +50,14 @@ class Parliament extends Model
     public function state(): BelongsTo
     {
         return $this->belongsTo( State::class );
+    }
+
+    /**
+     * @return HasMany<Dun, $this>
+     */
+    public function duns(): HasMany
+    {
+        return $this->hasMany( Dun::class );
     }
 
     /**

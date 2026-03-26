@@ -8,6 +8,7 @@ use App\Modules\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class State extends Model
@@ -70,12 +71,28 @@ class State extends Model
         return $query->orderBy( 'sort' )->orderBy( 'name' );
     }
 
-     public function createdBy()
+    /**
+     * @return HasMany<Parliament, $this>
+     */
+    public function parliaments(): HasMany
+    {
+        return $this->hasMany( Parliament::class );
+    }
+
+    /**
+     * @return HasMany<District, $this>
+     */
+    public function districts(): HasMany
+    {
+        return $this->hasMany( District::class );
+    }
+
+    public function createdBy()
     {
         return $this->belongsTo( User::class, 'created_by' );
     }
 
-      public function updatedBy()
+    public function updatedBy()
     {
         return $this->belongsTo( User::class, 'updated_by' );
     }
@@ -84,5 +101,4 @@ class State extends Model
     {
         return $this->belongsTo( User::class, 'deleted_by' );
     }
-
 }

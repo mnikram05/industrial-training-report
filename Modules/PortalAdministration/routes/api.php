@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Modules\PortalAdministration\Http\Controllers\PortalAdministrationController;
+declare(strict_types=1);
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('portaladministrations', PortalAdministrationController::class)->names('portaladministration');
-});
+// API routes for PortalAdministration module

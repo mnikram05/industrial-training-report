@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Modules\Landing\Models\Landing;
-use App\Modules\Article\Services\ArticleService;
 use App\Modules\Landing\Enums\LandingStatusEnum;
+use Modules\PortalAdministration\Services\ArticleService;
 
 class LandingFormDataService
 {
