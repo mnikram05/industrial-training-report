@@ -150,7 +150,7 @@ class PortalSettingsController extends Controller
         return Media::query()
             ->latest()
             ->get()
-            ->mapWithKeys( fn ( Media $media ) => [$media->path => $media->name . ' (' . $media->file_name . ')'] )
+            ->mapWithKeys( fn ( Media $media ) => [$media->path => ( $media->collection ? $media->collection . ' — ' : '' ) . $media->name] )
             ->all();
     }
 }

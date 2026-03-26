@@ -115,6 +115,8 @@ return [
         'reflection'          => 'Refleksi Mingguan',
         'card_layout'         => 'Susun Atur Kad',
         'display_type'        => 'Jenis Paparan',
+        'image_label_my'      => 'Label Gambar (MY)',
+        'image_label_en'      => 'Label Gambar (EN)',
     ],
 
     'hints' => [
@@ -154,6 +156,7 @@ return [
         'profile_card'     => 'Kad Profil',
         'weekly_grid'      => 'Grid Mingguan',
         'daily_log'        => 'Log Aktiviti Harian',
+        'task_showcase'    => 'Pameran Tugasan',
     ],
 
     'groups' => [

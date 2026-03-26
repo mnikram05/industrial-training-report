@@ -13,6 +13,7 @@
         'profile-card'      => __('modules/portal/setting.block_types.profile_card'),
         'weekly-grid'       => __('modules/portal/setting.block_types.weekly_grid'),
         'daily-log'         => __('modules/portal/setting.block_types.daily_log'),
+        'task-showcase'     => __('modules/portal/setting.block_types.task_showcase'),
     ];
 
     $blockDefaults = [
@@ -29,6 +30,7 @@
         'profile-card'     => ['photo_path' => '', 'nama' => '', 'no_pelajar' => '', 'program' => '', 'program_ms' => '', 'program_en' => '', 'sesi_latihan' => '', 'tempoh_li' => '', 'tarikh_lahir' => '', 'telefon' => '', 'email' => '', 'alamat' => ''],
         'weekly-grid'      => ['heading_ms' => '', 'heading_en' => '', 'items' => []],
         'daily-log'        => ['icon' => '', 'heading_ms' => '', 'heading_en' => '', 'days' => []],
+        'task-showcase'    => ['heading_ms' => '', 'heading_en' => '', 'items' => []],
     ];
 @endphp
 
@@ -153,6 +155,9 @@
                     </template>
                     <template x-if="block.type === 'daily-log'">
                         @include('portaladministration::portal.partials.blocks.edit-daily-log')
+                    </template>
+                    <template x-if="block.type === 'task-showcase'">
+                        @include('portaladministration::portal.partials.blocks.edit-task-showcase')
                     </template>
                 </div>
             </div>

@@ -115,6 +115,8 @@ return [
         'reflection'          => 'Weekly Reflection',
         'card_layout'         => 'Card Layout',
         'display_type'        => 'Display Type',
+        'image_label_my'      => 'Image Label (MY)',
+        'image_label_en'      => 'Image Label (EN)',
     ],
 
     'hints' => [
@@ -154,6 +156,7 @@ return [
         'profile_card'     => 'Profile Card',
         'weekly_grid'      => 'Weekly Grid',
         'daily_log'        => 'Daily Activity Log',
+        'task_showcase'    => 'Task Showcase',
     ],
 
     'groups' => [
