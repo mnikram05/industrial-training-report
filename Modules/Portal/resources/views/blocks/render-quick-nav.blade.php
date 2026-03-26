@@ -12,7 +12,7 @@
             <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($navItems as $item)
                     <a href="{{ !empty($item['url']) ? url($item['url']) : '#' }}"
-                        class="group flex items-center justify-between rounded-2xl border border-gray-100/50 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style="background-color: var(--portal-card-bg)">
+                        class="portal-stagger-item group flex items-center justify-between rounded-2xl border border-gray-100/50 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style="background-color: var(--portal-card-bg)">
                         <div class="flex items-center gap-4">
                             <div class="flex size-12 items-center justify-center rounded-xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-md" style="background-color: color-mix(in srgb, var(--portal-accent) 10%, transparent); color: var(--portal-accent)">
                                 @if (!empty($item['icon']))

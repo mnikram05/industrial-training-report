@@ -29,6 +29,15 @@
         }
     @endphp
     <style>
+        @keyframes heroGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -20px) scale(1.1); }
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
@@ -37,11 +46,61 @@
             from { opacity: 0; transform: translateY(-8px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes scrollFadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollScaleIn {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .portal-skeleton {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background-color: var(--portal-body-bg);
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .portal-skeleton.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .skeleton-bone {
+            border-radius: 10px;
+            background: linear-gradient(90deg,
+                color-mix(in srgb, var(--portal-text) 8%, transparent) 25%,
+                color-mix(in srgb, var(--portal-text) 15%, transparent) 50%,
+                color-mix(in srgb, var(--portal-text) 8%, transparent) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
         .animate-fade-in {
             animation: fadeIn 0.7s ease-out both;
         }
         .animate-slide-down {
             animation: slideDown 0.4s ease-out both;
+        }
+        .portal-block {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+        .portal-block.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .portal-block .portal-stagger-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+        }
+        .portal-block.is-visible .portal-stagger-item {
+            opacity: 1;
+            transform: translateY(0);
         }
         .portal-nav-link:hover,
         .portal-nav-link.active {
@@ -75,6 +134,7 @@
 <body class="flex min-h-screen flex-col antialiased" style="background-color: var(--portal-body-bg); color: var(--portal-text)"
     x-data="{
         mobileMenuOpen: false,
+        scrolled: false,
         darkMode: localStorage.getItem('portal-dark') === 'true',
         toggleDark() {
             this.darkMode = !this.darkMode;
@@ -82,12 +142,60 @@
             document.documentElement.classList.toggle('dark-portal', this.darkMode);
         }
     }"
-    x-init="document.documentElement.classList.toggle('dark-portal', darkMode)">
+    x-init="document.documentElement.classList.toggle('dark-portal', darkMode)"
+    @scroll.window="scrolled = (window.scrollY > 20)">
+
+    {{-- Skeleton Loading --}}
+    <div id="portal-skeleton" class="portal-skeleton">
+        <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+            {{-- Skeleton Header --}}
+            <div style="display: flex; align-items: center; justify-content: space-between; height: 56px;">
+                <div class="skeleton-bone" style="width: 180px; height: 24px;"></div>
+                <div style="display: flex; gap: 16px;">
+                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
+                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
+                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
+                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
+                </div>
+            </div>
+            {{-- Skeleton Hero --}}
+            <div style="display: flex; flex-direction: column; align-items: center; padding: 60px 0 40px;">
+                <div class="skeleton-bone" style="width: 200px; height: 14px; margin-bottom: 16px;"></div>
+                <div class="skeleton-bone" style="width: 400px; max-width: 80%; height: 36px; margin-bottom: 12px;"></div>
+                <div class="skeleton-bone" style="width: 80px; height: 4px; margin-bottom: 12px;"></div>
+                <div class="skeleton-bone" style="width: 250px; height: 16px;"></div>
+            </div>
+            {{-- Skeleton Cards --}}
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 40px;">
+                <div class="skeleton-bone" style="height: 160px;"></div>
+                <div class="skeleton-bone" style="height: 160px;"></div>
+                <div class="skeleton-bone" style="height: 160px;"></div>
+            </div>
+            {{-- Skeleton Content --}}
+            <div class="skeleton-bone" style="height: 200px; margin-bottom: 20px;"></div>
+            <div class="skeleton-bone" style="height: 200px;"></div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            var skeleton = document.getElementById('portal-skeleton');
+            if (skeleton) {
+                skeleton.classList.add('hidden');
+                setTimeout(function() { skeleton.remove(); }, 500);
+            }
+        });
+    </script>
 
     @php $menuUrl = fn ($m) => ($m->url && $m->url !== '#') ? url($m->url) : '#'; @endphp
 
     {{-- Header Navigation --}}
-    <header class="sticky top-0 z-50 animate-slide-down text-white shadow-xl" style="background-color: var(--portal-header-bg)">
+    <header class="sticky top-0 z-50 animate-slide-down text-white transition-all duration-500"
+        :class="scrolled ? 'shadow-2xl' : 'shadow-xl'"
+        :style="scrolled
+            ? 'background-color: color-mix(in srgb, var(--portal-header-bg) 75%, transparent); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); border-bottom: 1px solid rgba(255,255,255,0.08)'
+            : 'background-color: var(--portal-header-bg); backdrop-filter: none; border-bottom: 1px solid transparent'"
+    >
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-14 items-center justify-between">
                 @php $logoPath = $colors['logo_path'] ?? null; @endphp
@@ -210,7 +318,27 @@
         </div>
     </header>
 
-    <main class="flex-1">
+    <main class="flex-1" x-data x-init="
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Stagger children
+                    entry.target.querySelectorAll('.portal-stagger-item').forEach((item, i) => {
+                        item.style.transitionDelay = (i * 40) + 'ms';
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        $nextTick(() => {
+            $el.querySelectorAll(':scope > section, :scope > div > section, :scope > :not(section)').forEach((block, i) => {
+                block.classList.add('portal-block');
+                block.style.transitionDelay = (i * 50) + 'ms';
+                observer.observe(block);
+            });
+        });
+    ">
         {{ $slot }}
     </main>
 
@@ -224,6 +352,25 @@
             </div>
         </div>
     </footer>
+
+    {{-- Scroll to Top Button --}}
+    <button
+        x-show="scrolled"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-y-4 scale-90"
+        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+        x-transition:leave-end="opacity-0 translate-y-4 scale-90"
+        @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+        class="flex items-center justify-center rounded-full text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+        style="position: fixed; bottom: 2.5rem; right: 2rem; z-index: 50; width: 2.75rem; height: 2.75rem; background-color: var(--portal-accent); display: none;"
+        aria-label="Scroll to top"
+    >
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+    </button>
 
 </body>
 </html>

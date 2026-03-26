@@ -14,18 +14,18 @@
                 <div class="overflow-x-auto">
                     <table class="w-full" style="border-collapse: collapse">
                         <thead>
-                            <tr style="background-color: rgba(0,0,0,0.02)">
-                                <th class="w-28 border-b border-gray-200 px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-gray-500">
+                            <tr style="background-color: color-mix(in srgb, var(--portal-text) 3%, transparent)">
+                                <th class="w-28 border-b px-6 py-4 text-left text-xs font-bold uppercase tracking-wide opacity-50">
                                     {{ $l === 'ms' ? 'Hari' : 'Day' }}
                                 </th>
-                                <th class="border-b border-gray-200 px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-gray-500">
+                                <th class="border-b px-6 py-4 text-left text-xs font-bold uppercase tracking-wide opacity-50">
                                     {{ $l === 'ms' ? 'Ringkasan Aktiviti / Tugas' : 'Activity Summary / Tasks' }}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($days as $day)
-                                <tr class="border-b border-gray-100 last:border-b-0">
+                                <tr class="border-b border-opacity-10 last:border-b-0">
                                     <td class="px-6 py-5 align-top text-sm font-bold" style="color: var(--portal-text)">
                                         {{ $day['day_' . $l] ?? $day['day_ms'] ?? '' }}
                                     </td>
