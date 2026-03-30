@@ -8,12 +8,12 @@ class HomeSeeder extends PortalPageSeeder
 {
     public function run(): void
     {
-        $this->seedBlockPage('home', [
+        $this->seedBlockPage( 'home', [
             ['type' => 'hero', 'id' => 'home_hero', 'data' => [
                 'institution_ms' => 'POLITEKNIK SULTAN IDRIS SHAH - 2026',
                 'institution_en' => 'POLITEKNIK SULTAN IDRIS SHAH - 2026',
                 'title_ms'       => 'LAPORAN AKHIR LATIHAN INDUSTRI',
-                'title_en'       => 'FINAL REPORT INDUSTRIAL TRAINING',
+                'title_en'       => 'INDUSTRIAL TRAINING FINAL REPORT',
                 'subtitle2_ms'   => 'DIPLOMA TEKNOLOGI MAKLUMAT (TEKNOLOGI DIGITAL)',
                 'subtitle2_en'   => 'DIPLOMA IN INFORMATION TECHNOLOGY (DIGITAL TECHNOLOGY)',
                 'session_ms'     => 'Sesi II 2025 / 2026  |  12 Januari 2026 – 29 Mei 2026',
@@ -36,6 +36,6 @@ class HomeSeeder extends PortalPageSeeder
                     ['icon' => '📄', 'title_ms' => 'Laporan Teknikal', 'title_en' => 'Technical Report', 'subtitle_ms' => 'Tugasan & projek', 'subtitle_en' => 'Tasks & projects', 'url' => '/portal/laporan-teknikal'],
                 ],
             ]],
-        ]);
+        ] );
     }
 }
