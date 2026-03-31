@@ -34,6 +34,7 @@ abstract class PortalPageSeeder extends Seeder
             'dark_text'          => '#f5f6fa',
             'dark_footer_bg'     => '#0a0a15',
             'dark_accent'        => '#e94560',
+            'dark_lang_active'   => '#e94560',
         ];
     }
 

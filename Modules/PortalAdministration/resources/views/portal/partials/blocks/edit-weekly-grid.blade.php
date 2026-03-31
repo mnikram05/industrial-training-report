@@ -1,3 +1,4 @@
+@php $cmsLocale = app()->getLocale(); $titleField = 'title_' . $cmsLocale; @endphp
 <div class="space-y-4" x-data="{ editingWeek: null }">
     <div class="grid gap-4 sm:grid-cols-2">
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
@@ -5,9 +6,46 @@
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_en" /></x-field>
     </div>
+    <div x-data="{ colorMode: 'light' }" class="rounded-lg border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-muted-foreground/70">{{ __('modules/portal/setting.fields.text_colors') }}</span>
+            <div class="flex items-center gap-1">
+                <button type="button" @click="colorMode = 'light'"
+                    :class="colorMode === 'light' ? 'bg-amber-100 text-amber-700 border-amber-300 font-bold' : 'bg-background text-muted-foreground border-input'"
+                    class="rounded border px-2.5 py-1 text-xs transition-colors">☀️ Light</button>
+                <button type="button" @click="colorMode = 'dark'"
+                    :class="colorMode === 'dark' ? 'bg-indigo-100 text-indigo-700 border-indigo-300 font-bold' : 'bg-background text-muted-foreground border-input'"
+                    class="rounded border px-2.5 py-1 text-xs transition-colors">🌙 Dark</button>
+            </div>
+        </div>
+        @php
+            $wcFields = [
+                ['key' => 'title_color',          'label' => __('modules/portal/setting.fields.week_title_color'),    'placeholder' => 'var(--portal-text)'],
+                ['key' => 'topic_color',           'label' => __('modules/portal/setting.fields.topic_color'),         'placeholder' => 'var(--portal-accent)'],
+                ['key' => 'report_heading_color',  'label' => __('modules/portal/setting.fields.report_heading_color'),'placeholder' => 'var(--portal-text)'],
+                ['key' => 'day_color',             'label' => __('modules/portal/setting.fields.day_color'),           'placeholder' => 'var(--portal-text)'],
+                ['key' => 'activity_color',        'label' => __('modules/portal/setting.fields.activity_color'),      'placeholder' => 'var(--portal-text)'],
+            ];
+        @endphp
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            @foreach ($wcFields as $wc)
+                <x-field class="gap-1.5">
+                    <x-slot:labelText>{{ $wc['label'] }}</x-slot:labelText>
+                    <div class="flex items-center gap-2" x-show="colorMode === 'light'">
+                        <input type="color" x-model="block.data.{{ $wc['key'] }}" class="h-9 w-12 cursor-pointer rounded border border-input bg-background p-1" />
+                        <x-input type="text" x-model="block.data.{{ $wc['key'] }}" placeholder="{{ $wc['placeholder'] }}" class="flex-1 font-mono text-xs" />
+                    </div>
+                    <div class="flex items-center gap-2" x-show="colorMode === 'dark'">
+                        <input type="color" x-model="block.data.{{ $wc['key'] }}_dark" class="h-9 w-12 cursor-pointer rounded border border-input bg-background p-1" />
+                        <x-input type="text" x-model="block.data.{{ $wc['key'] }}_dark" placeholder="{{ $wc['placeholder'] }}" class="flex-1 font-mono text-xs" />
+                    </div>
+                </x-field>
+            @endforeach
+        </div>
+    </div>
 
     <div class="flex items-center justify-end">
-        <button type="button" @click="block.data.items.push({ title_ms: '', title_en: '', start_date: '', end_date: '', days: [], reflection_ms: '', reflection_en: '' })"
+        <button type="button" @click="block.data.items.push({ title_ms: '', title_en: '', start_date: '', end_date: '', title_color: '', topic_ms: '', topic_en: '', topic_color: '', days: [], reflection_ms: '', reflection_en: '' })"
             class="inline-flex items-center gap-1.5 rounded-md border border-input bg-background px-3 py-1.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
             <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
             {{ __('modules/portal/setting.actions.add') }}
@@ -20,7 +58,7 @@
             <button type="button" @click="editingWeek = editingWeek === wi ? null : wi"
                 class="rounded-lg border-2 p-3 text-center transition-all duration-200 hover:shadow-md"
                 :class="editingWeek === wi ? 'border-primary bg-primary/5 shadow-md' : 'border-gray-200 hover:border-primary/40'">
-                <p class="text-sm font-bold" :class="editingWeek === wi ? 'text-primary' : 'text-foreground'" x-text="item.title_ms || ('{{ __('modules/portal/setting.actions.item_label') }} ' + (wi + 1))"></p>
+                <p class="text-sm font-bold" :class="editingWeek === wi ? 'text-primary' : 'text-foreground'" x-text="(item['{{ $titleField }}'] || item.title_ms) || ('{{ __('modules/portal/setting.actions.item_label') }} ' + (wi + 1))"></p>
                 <p class="mt-0.5 text-[10px] text-muted-foreground" x-show="item.start_date && item.end_date"
                     x-text="new Date(item.start_date).toLocaleDateString('ms-MY', {day:'numeric',month:'short'}).toUpperCase() + ' - ' + new Date(item.end_date).toLocaleDateString('ms-MY', {day:'numeric',month:'short',year:'numeric'}).toUpperCase()">
                 </p>
@@ -34,7 +72,7 @@
         <div class="rounded-lg border-2 border-primary/20 bg-primary/5 p-4 space-y-4">
             {{-- Header --}}
             <div class="flex items-center justify-between">
-                <span class="text-sm font-bold text-primary" x-text="block.data.items[editingWeek].title_ms || ('{{ __('modules/portal/setting.actions.item_label') }} ' + (editingWeek + 1))"></span>
+                <span class="text-sm font-bold text-primary" x-text="(block.data.items[editingWeek]['{{ $titleField }}'] || block.data.items[editingWeek].title_ms) || ('{{ __('modules/portal/setting.actions.item_label') }} ' + (editingWeek + 1))"></span>
                 <div class="flex items-center gap-2">
                     <button type="button" @click="if(confirm('{{ __('modules/portal/setting.actions.confirm_remove') }}')) { block.data.items.splice(editingWeek, 1); editingWeek = null; }"
                         class="rounded p-1 text-destructive hover:bg-destructive/10">
@@ -60,6 +98,12 @@
                 <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.end_date') }}</x-slot:labelText>
                     <x-input type="date" x-model="block.data.items[editingWeek].end_date" /></x-field>
             </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.topic_my') }}</x-slot:labelText>
+                    <x-input type="text" x-model="block.data.items[editingWeek].topic_ms" :placeholder="__('modules/portal/setting.hints.topic_placeholder_my')" /></x-field>
+                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.topic_en') }}</x-slot:labelText>
+                    <x-input type="text" x-model="block.data.items[editingWeek].topic_en" :placeholder="__('modules/portal/setting.hints.topic_placeholder_en')" /></x-field>
+            </div>
 
             <hr />
 
@@ -74,7 +118,7 @@
                 <template x-for="(day, di) in (block.data.items[editingWeek].days || [])" :key="di">
                     <div class="rounded-md border bg-background p-3 space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold text-muted-foreground" x-text="day.day_ms || ('{{ __('modules/portal/setting.fields.day_my') }} ' + (di + 1))"></span>
+                            <span class="text-xs font-semibold text-muted-foreground" x-text="(day['day_{{ $cmsLocale }}'] || day.day_ms) || ('{{ __('modules/portal/setting.fields.day') }} ' + (di + 1))"></span>
                             <button type="button" @click="block.data.items[editingWeek].days.splice(di, 1)" class="text-destructive hover:text-destructive/80"><svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>
                         </div>
                         <div class="grid gap-2 sm:grid-cols-2">
@@ -103,12 +147,12 @@
 
             <hr />
 
-            {{-- Refleksi --}}
+            {{-- Reflection --}}
             <div class="space-y-2">
                 <h4 class="text-xs font-bold uppercase tracking-wide text-muted-foreground">💭 {{ __('modules/portal/setting.fields.reflection') }}</h4>
                 <div class="grid gap-3 sm:grid-cols-2">
-                    <textarea x-model="block.data.items[editingWeek].reflection_ms" rows="4" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Refleksi (MY)"></textarea>
-                    <textarea x-model="block.data.items[editingWeek].reflection_en" rows="4" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Reflection (EN)"></textarea>
+                    <textarea x-model="block.data.items[editingWeek].reflection_ms" rows="4" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.hints.reflection_my') }}"></textarea>
+                    <textarea x-model="block.data.items[editingWeek].reflection_en" rows="4" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.hints.reflection_en') }}"></textarea>
                 </div>
             </div>
         </div>

@@ -23,6 +23,9 @@ return [
         'footer_text'        => 'Footer Text',
         'colors'             => 'Colors',
         'dark_colors'        => 'Dark Mode Colors',
+        'colors_background'  => 'Background',
+        'colors_accent'      => 'Accent & Text',
+        'colors_card'        => 'Card',
         'profile_photo'      => 'Profile Photo',
         'personal_info'      => 'Personal Information',
         'academic_info'      => 'Academic Information',
@@ -113,5 +116,18 @@ return [
         'syarikat' => 'Company',
         'tempoh'   => 'Duration',
         'program'  => 'Programme',
+    ],
+
+    'color_fields' => [
+        'header_bg'    => 'Header Background',
+        'hero_bg_from' => 'Hero Gradient From',
+        'hero_bg_to'   => 'Hero Gradient To',
+        'footer_bg'    => 'Footer Background',
+        'body_bg'      => 'Body Background',
+        'accent'       => 'Accent / Highlight',
+        'text'         => 'Text Color',
+        'lang_active'  => 'MY/EN Active',
+        'nav_bg'       => 'Nav Button Background',
+        'card_bg'      => 'Card Background',
     ],
 ];

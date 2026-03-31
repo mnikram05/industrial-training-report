@@ -23,6 +23,9 @@ return [
         'footer_text'        => 'Teks Footer',
         'colors'             => 'Warna',
         'dark_colors'        => 'Warna Dark Mode',
+        'colors_background'  => 'Latar Belakang',
+        'colors_accent'      => 'Aksen & Teks',
+        'colors_card'        => 'Kad',
         'profile_photo'      => 'Gambar Profil',
         'personal_info'      => 'Maklumat Peribadi',
         'academic_info'      => 'Maklumat Akademik',
@@ -113,5 +116,18 @@ return [
         'syarikat' => 'Syarikat',
         'tempoh'   => 'Tempoh',
         'program'  => 'Program',
+    ],
+
+    'color_fields' => [
+        'header_bg'    => 'Latar Header',
+        'hero_bg_from' => 'Gradien Hero Dari',
+        'hero_bg_to'   => 'Gradien Hero Ke',
+        'footer_bg'    => 'Latar Footer',
+        'body_bg'      => 'Latar Halaman',
+        'accent'       => 'Aksen / Highlight',
+        'text'         => 'Warna Teks',
+        'lang_active'  => 'Aktif MY/EN',
+        'nav_bg'       => 'Latar Butang Nav',
+        'card_bg'      => 'Latar Kad',
     ],
 ];

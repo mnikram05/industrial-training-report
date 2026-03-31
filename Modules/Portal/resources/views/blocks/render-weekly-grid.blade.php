@@ -1,4 +1,18 @@
-@php $d = $block['data']; @endphp
+@php
+    $d = $block['data'];
+
+    $c = function(string $key, string $fallback = 'var(--portal-text)') use ($d): string {
+        return !empty($d[$key]) ? $d[$key] : $fallback;
+    };
+@endphp
+
+<style>
+    html.dark-portal .wg-title    { color: var(--wg-title-dark)    !important; }
+    html.dark-portal .wg-topic    { color: var(--wg-topic-dark)    !important; }
+    html.dark-portal .wg-rh      { color: var(--wg-rh-dark)       !important; }
+    html.dark-portal .wg-day     { color: var(--wg-day-dark)      !important; }
+    html.dark-portal .wg-act     { color: var(--wg-act-dark)      !important; }
+</style>
 
 <section class="py-10">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -51,8 +65,22 @@
         <section class="pt-2 pb-8">
             <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
 
+                @php
+                    $titleL  = $c('title_color', 'var(--portal-text)');
+                    $titleD  = $c('title_color_dark', $titleL);
+                    $topicL  = $c('topic_color', 'var(--portal-accent)');
+                    $topicD  = $c('topic_color_dark', $topicL);
+                    $rhL     = $c('report_heading_color', 'var(--portal-text)');
+                    $rhD     = $c('report_heading_color_dark', $rhL);
+                    $dayL    = $c('day_color', 'var(--portal-text)');
+                    $dayD    = $c('day_color_dark', $dayL);
+                    $actL    = $c('activity_color', 'var(--portal-text)');
+                    $actD    = $c('activity_color_dark', $actL);
+                @endphp
+
                 {{-- Week title --}}
-                <h2 id="minggu-{{ $idx + 1 }}" class="mb-4 text-2xl font-black" style="color: var(--portal-text); scroll-margin-top: 5rem">
+                <h2 id="minggu-{{ $idx + 1 }}" class="mb-4 text-2xl font-black wg-title"
+                    style="--wg-title-dark: {{ $titleD }}; color: {{ $titleL }}; scroll-margin-top: 5rem">
                     {{ $item['title_' . $l] ?? $item['title_ms'] ?? '' }}
                     @if (!empty($item['start_date']) && !empty($item['end_date']))
                         <span class="ml-2 text-base font-medium text-gray-400">
@@ -61,12 +89,20 @@
                     @endif
                 </h2>
 
+                {{-- Week Topic --}}
+                @if (!empty($item['topic_' . $l]))
+                    <p class="mb-4 text-sm font-semibold uppercase tracking-wide wg-topic"
+                        style="--wg-topic-dark: {{ $topicD }}; color: {{ $topicL }}">
+                        {{ $item['topic_' . $l] }}
+                    </p>
+                @endif
+
                 {{-- Daily Log Table --}}
                 @if (!empty($item['days']))
                     <div class="overflow-hidden rounded-2xl border border-gray-100/50 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
                         <div class="flex items-center gap-3 px-6 py-4">
                             <span class="text-xl">📅</span>
-                            <h3 class="text-lg font-black" style="color: var(--portal-text)">
+                            <h3 class="wg-rh text-lg font-black" style="--wg-rh-dark: {{ $rhD }}; color: {{ $rhL }}">
                                 {{ $l === 'ms' ? 'LAPORAN AKTIVITI HARIAN' : 'DAILY ACTIVITY REPORT' }}
                             </h3>
                         </div>
@@ -85,13 +121,15 @@
                                 <tbody>
                                     @foreach ($item['days'] as $day)
                                         <tr class="border-b border-opacity-10 last:border-b-0">
-                                            <td class="px-6 py-5 align-top text-sm font-bold" style="color: var(--portal-text)">
+                                            <td class="wg-day px-6 py-5 align-top text-sm font-bold"
+                                                style="--wg-day-dark: {{ $dayD }}; color: {{ $dayL }}">
                                                 {{ $day['day_' . $l] ?? $day['day_ms'] ?? '' }}
                                             </td>
                                             <td class="px-6 py-5 align-top">
                                                 <ul class="list-disc space-y-1.5 pl-4">
                                                     @foreach (($day['activities_' . $l] ?? $day['activities_ms'] ?? []) as $activity)
-                                                        <li class="text-sm" style="color: var(--portal-text)">{{ $activity }}</li>
+                                                        <li class="wg-act text-sm"
+                                                            style="--wg-act-dark: {{ $actD }}; color: {{ $actL }}">{{ $activity }}</li>
                                                     @endforeach
                                                 </ul>
                                             </td>

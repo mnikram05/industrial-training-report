@@ -19,7 +19,7 @@
                 'color_lang_active', 'color_card_bg', 'color_nav_bg', 'color_text',
                 'dark_header_bg', 'dark_hero_bg_from', 'dark_hero_bg_to',
                 'dark_body_bg', 'dark_card_bg', 'dark_nav_bg',
-                'dark_text', 'dark_footer_bg', 'dark_accent',
+                'dark_text', 'dark_footer_bg', 'dark_accent', 'dark_lang_active',
             ];
             foreach ($colorKeys as $key) {
                 if (!empty($pageColors[$key])) {
@@ -128,6 +128,7 @@
             --portal-card-bg: {{ $colors['dark_card_bg'] ?? '#1e293b' }};
             --portal-text: {{ $colors['dark_text'] ?? '#e2e8f0' }};
             --portal-nav-bg: {{ $colors['dark_nav_bg'] ?? ($colors['dark_accent'] ?? '#fb7185') }};
+            --portal-lang-active: {{ $colors['dark_lang_active'] ?? ($colors['dark_accent'] ?? '#fb7185') }};
         }
     </style>
 </head>
