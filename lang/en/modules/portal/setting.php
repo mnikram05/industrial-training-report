@@ -170,6 +170,7 @@ return [
         'weekly_grid'      => 'Weekly Grid',
         'daily_log'        => 'Daily Activity Log',
         'task_showcase'    => 'Task Showcase',
+        'reference_links'  => 'Reference Links',
     ],
 
     'groups' => [
@@ -201,6 +202,7 @@ return [
         'horizontal' => 'Horizontal',
         'compact'    => 'Compact',
         'featured'   => 'Featured (First Large)',
+        'gallery'    => 'Photo gallery (square tiles)',
     ],
 
     'cards' => [

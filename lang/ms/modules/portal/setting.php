@@ -170,6 +170,7 @@ return [
         'weekly_grid'      => 'Grid Mingguan',
         'daily_log'        => 'Log Aktiviti Harian',
         'task_showcase'    => 'Pameran Tugasan',
+        'reference_links'  => 'Pautan Rujukan',
     ],
 
     'groups' => [
@@ -201,6 +202,7 @@ return [
         'horizontal' => 'Mendatar',
         'compact'    => 'Padat',
         'featured'   => 'Utama (Pertama Besar)',
+        'gallery'    => 'Galeri gambar (petak)',
     ],
 
     'cards' => [

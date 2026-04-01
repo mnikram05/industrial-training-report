@@ -141,7 +141,7 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
                 'heading_en' => 'RESULTS',
                 'items'      => [
                     [
-                        'image'          => 'media/2026/03/eNG7vDZRlDt7fpK6tgr2gSiP5ZbAEQlRayiLo06D.png',
+                        'image'          => 'media/2026/04/pC3qbUFfLeyp6x75Pp1PozfFwsxroKydg4MnIN89.png',
                         'image_label_ms' => 'Rajah 6: Paparan hasil akhir sistem yang telah dibangunkan',
                         'image_label_en' => 'Figure 6: Final view of the developed system',
                         'title_ms'       => 'Hasil Pembangunan Sistem',

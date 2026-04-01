@@ -14,6 +14,7 @@
         'weekly-grid'       => __('modules/portal/setting.block_types.weekly_grid'),
         'daily-log'         => __('modules/portal/setting.block_types.daily_log'),
         'task-showcase'     => __('modules/portal/setting.block_types.task_showcase'),
+        'reference-links'   => __('modules/portal/setting.block_types.reference_links'),
     ];
 
     $blockDefaults = [
@@ -31,6 +32,7 @@
         'weekly-grid'      => ['heading_ms' => '', 'heading_en' => '', 'items' => []],
         'daily-log'        => ['icon' => '', 'heading_ms' => '', 'heading_en' => '', 'days' => []],
         'task-showcase'    => ['heading_ms' => '', 'heading_en' => '', 'items' => []],
+        'reference-links'  => ['icon' => '🔗', 'heading_ms' => '', 'heading_en' => '', 'items' => []],
     ];
 @endphp
 
@@ -158,6 +160,9 @@
                     </template>
                     <template x-if="block.type === 'task-showcase'">
                         @include('portaladministration::portal.partials.blocks.edit-task-showcase')
+                    </template>
+                    <template x-if="block.type === 'reference-links'">
+                        @include('portaladministration::portal.partials.blocks.edit-reference-links')
                     </template>
                 </div>
             </div>

@@ -5,6 +5,7 @@
             <option value="horizontal">{{ __('modules/portal/setting.layouts.horizontal') }}</option>
             <option value="compact">{{ __('modules/portal/setting.layouts.compact') }}</option>
             <option value="featured">{{ __('modules/portal/setting.layouts.featured') }}</option>
+            <option value="gallery">{{ __('modules/portal/setting.layouts.gallery') }}</option>
         </select>
     </x-field>
     <div class="flex items-center justify-end">

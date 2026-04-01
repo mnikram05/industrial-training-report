@@ -145,13 +145,13 @@ class MediaSeeder extends Seeder
         );
 
         Media::query()->updateOrCreate(
-            ['name' => 'Screenshot 2026-03-26 100858'],
+            ['name' => 'laporan-teknikal-hasil'],
             [
-                'file_name'  => 'Screenshot 2026-03-26 100858.png',
+                'file_name'  => 'Screenshot 2026-04-01 124357.png',
                 'mime_type'  => 'image/png',
-                'path'       => 'media/2026/03/eNG7vDZRlDt7fpK6tgr2gSiP5ZbAEQlRayiLo06D.png',
+                'path'       => 'media/2026/04/pC3qbUFfLeyp6x75Pp1PozfFwsxroKydg4MnIN89.png',
                 'disk'       => 'public',
-                'size'       => 332722,
+                'size'       => 405265,
                 'collection' => 'hasil',
             ],
         );

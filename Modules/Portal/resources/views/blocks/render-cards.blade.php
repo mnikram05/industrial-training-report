@@ -23,6 +23,32 @@
                     @endforeach
                 </div>
 
+            @elseif ($layout === 'gallery')
+                {{-- Photo gallery: square tiles in a row --}}
+                <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                    @foreach ($items as $card)
+                        <div class="portal-stagger-item group flex flex-col overflow-hidden rounded-2xl border border-gray-100/50 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background-color: var(--portal-card-bg)">
+                            <div class="aspect-square w-full overflow-hidden bg-black/5">
+                                @if (! empty($card['image']))
+                                    <img src="{{ Storage::disk('public')->url($card['image']) }}" alt="{{ $card['label_' . $l] ?? '' }}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                                @elseif (! empty($card['icon']))
+                                    <div class="flex h-full w-full items-center justify-center text-4xl">{{ $card['icon'] }}</div>
+                                @endif
+                            </div>
+                            @if (! empty($card['label_' . $l]) || ! empty($card['value_' . $l]))
+                                <div class="p-3 text-center">
+                                    @if (! empty($card['label_' . $l]))
+                                        <p class="text-xs font-bold" style="color: var(--portal-text)">{{ $card['label_' . $l] }}</p>
+                                    @endif
+                                    @if (! empty($card['value_' . $l]))
+                                        <p class="mt-1 text-[11px] leading-snug opacity-80" style="color: var(--portal-text)">{{ $card['value_' . $l] }}</p>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
             @elseif ($layout === 'compact')
                 {{-- Compact: small inline badges --}}
                 <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
