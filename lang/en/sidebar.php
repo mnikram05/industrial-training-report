@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     'platform'              => 'Platform',
     'dashboard'             => 'Dashboard',
+    'portal'                => 'Portal',
     'cms'                   => 'CMS',
     'admin_dashboard'       => 'Admin Dashboard',
     'landings'              => 'Landings',

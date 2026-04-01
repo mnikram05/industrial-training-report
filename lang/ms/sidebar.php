@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     'platform'              => 'Platform',
     'dashboard'             => 'Papan Pemuka',
+    'portal'                => 'Portal',
     'cms'                   => 'CMS',
     'admin_dashboard'       => 'Papan Pemuka Admin',
     'landings'              => 'Halaman Pendaratan',

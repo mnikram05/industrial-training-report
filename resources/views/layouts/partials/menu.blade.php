@@ -71,6 +71,16 @@
             </x-sidebar-submenu>
         </div>
 
+        <x-sidebar-menu-link :href="route('portal.home')" :active="request()->routeIs('portal.*')" :title="__('sidebar.portal')"
+            x-bind:class="$store.layout.sidebarCollapsed ? 'justify-center px-0' : ''">
+            <svg class="size-4 shrink-0 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5M13.5 6L21 3m0 0v5.25M21 3h-5.25" />
+            </svg>
+            <span x-show="!$store.layout.sidebarCollapsed">{{ __('sidebar.portal') }}</span>
+        </x-sidebar-menu-link>
+
         <button type="button" @click="portalOpen = !portalOpen"
             x-bind:class="$store.layout.sidebarCollapsed ? 'justify-center px-0' : ''"
             class="group flex h-8 w-full items-center gap-2 rounded-md px-2 text-left text-[13px] font-medium text-foreground/90 transition-colors hover:bg-accent hover:text-foreground">

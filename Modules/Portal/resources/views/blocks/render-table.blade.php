@@ -22,7 +22,11 @@
                         <tbody>
                             @foreach ($rows as $row)
                                 <tr>
-                                    @foreach ($row as $key => $cell)
+                                    @php
+                                        $cells = $row;
+                                        ksort($cells, SORT_NATURAL);
+                                    @endphp
+                                    @foreach ($cells as $cell)
                                         <td style="padding: 20px; border: 1px solid color-mix(in srgb, var(--portal-text) 15%, transparent); color: var(--portal-text)">{{ $cell }}</td>
                                     @endforeach
                                 </tr>

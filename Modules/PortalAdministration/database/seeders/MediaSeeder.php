@@ -82,5 +82,78 @@ class MediaSeeder extends Seeder
                 'collection' => 'core-business',
             ],
         );
+
+        // Laporan teknikal (screenshots; paths match Portal\LaporanTeknikalSeeder)
+        Media::query()->updateOrCreate(
+            ['name' => 'Screenshot 2026-03-26 100439'],
+            [
+                'file_name'  => 'Screenshot 2026-03-26 100439.png',
+                'mime_type'  => 'image/png',
+                'path'       => 'media/2026/03/dfUHXD0uvyad7BH8qXJRKSWI1R5niHnX3iaK6lWk.png',
+                'disk'       => 'public',
+                'size'       => 162803,
+                'collection' => 'model',
+            ],
+        );
+
+        Media::query()->updateOrCreate(
+            ['name' => 'Screenshot 2026-03-26 100536'],
+            [
+                'file_name'  => 'Screenshot 2026-03-26 100536.png',
+                'mime_type'  => 'image/png',
+                'path'       => 'media/2026/03/7MYSJ98wgROtSOGqmqV3grn3KCbNhJCPjH6qXg8T.png',
+                'disk'       => 'public',
+                'size'       => 237614,
+                'collection' => 'migration',
+            ],
+        );
+
+        Media::query()->updateOrCreate(
+            ['name' => 'Screenshot 2026-03-26 100613'],
+            [
+                'file_name'  => 'Screenshot 2026-03-26 100613.png',
+                'mime_type'  => 'image/png',
+                'path'       => 'media/2026/03/yO2EBXkWy5Nnf1bjWpwdE6R1GYKj85fYVRfxYtTD.png',
+                'disk'       => 'public',
+                'size'       => 185222,
+                'collection' => 'seeder',
+            ],
+        );
+
+        Media::query()->updateOrCreate(
+            ['name' => 'Screenshot 2026-03-26 100721'],
+            [
+                'file_name'  => 'Screenshot 2026-03-26 100721.png',
+                'mime_type'  => 'image/png',
+                'path'       => 'media/2026/03/3xXVI5MHSDbj7dn6PQWvtE5sP3qxZUi2IvwQnTCW.png',
+                'disk'       => 'public',
+                'size'       => 208459,
+                'collection' => 'controller',
+            ],
+        );
+
+        Media::query()->updateOrCreate(
+            ['name' => 'Screenshot 2026-03-26 100810'],
+            [
+                'file_name'  => 'Screenshot 2026-03-26 100810.png',
+                'mime_type'  => 'image/png',
+                'path'       => 'media/2026/03/QPvzPgHpHDfv1YkyKkFaAWfS8T1ojy7hxOPLKtgh.png',
+                'disk'       => 'public',
+                'size'       => 203937,
+                'collection' => 'route',
+            ],
+        );
+
+        Media::query()->updateOrCreate(
+            ['name' => 'Screenshot 2026-03-26 100858'],
+            [
+                'file_name'  => 'Screenshot 2026-03-26 100858.png',
+                'mime_type'  => 'image/png',
+                'path'       => 'media/2026/03/eNG7vDZRlDt7fpK6tgr2gSiP5ZbAEQlRayiLo06D.png',
+                'disk'       => 'public',
+                'size'       => 332722,
+                'collection' => 'hasil',
+            ],
+        );
     }
 }
