@@ -31,13 +31,13 @@
 
 <x-datatables-assets />
 
-<div class="space-y-6">
+<div class="space-y-7 sm:space-y-8">
     <x-flash-status-alert :saved-statuses="$savedStatuses" :deleted-statuses="$deletedStatuses" />
     <x-latest-export-alert :path="$latestExportPath" />
 
     <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-            <h1 class="text-2xl font-semibold tracking-tight">{{ $headingContent }}</h1>
+            <h1 class="text-2xl font-semibold tracking-tight text-foreground sm:text-[1.65rem]">{{ $headingContent }}</h1>
 
             @if (filled($subtitleContent))
                 <p class="text-sm text-muted-foreground">{{ $subtitleContent }}</p>

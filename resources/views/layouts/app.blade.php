@@ -35,11 +35,12 @@
     <!-- Scripts -->
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('layouts.partials.portal-admin-theme')
     @stack('styles')
 </head>
 
 <body class="font-sans antialiased" x-data>
-    <div class="min-h-screen bg-background">
+    <div class="admin-shell min-h-screen">
         @include('layouts.partials.navigation')
 
         <div class="js-app-content pt-14 lg:pt-0 lg:pl-60" :class="$store.layout.sidebarCollapsed ? 'lg:pl-0' : ''">
@@ -50,7 +51,7 @@
             @endphp
 
             @if ($hasPageHeading)
-                <header class="bg-transparent">
+                <header class="admin-page-header">
                     <div class="flex items-start justify-between gap-3 px-4 py-5 sm:px-6 lg:px-8">
                         <div class="min-w-0 flex-1 space-y-2">
                             <x-breadcrumb :items="$breadcrumbItems" />
@@ -95,7 +96,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="px-4 py-6 sm:px-6 lg:px-8">
+            <main class="admin-main px-4 py-7 sm:px-6 sm:py-8 lg:px-8">
                 @unless ($hasPageHeading)
                     <div class="mb-4 hidden items-center justify-end gap-2 lg:flex">
                         <x-global-search />
