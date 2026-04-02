@@ -43,7 +43,8 @@
     <div class="admin-shell min-h-screen">
         @include('layouts.partials.navigation')
 
-        <div class="js-app-content pt-14 lg:pt-0 lg:pl-60" :class="$store.layout.sidebarCollapsed ? 'lg:pl-0' : ''">
+        <div class="js-app-content admin-content-pane min-h-screen pt-14 lg:pt-0 lg:pl-60"
+            :class="$store.layout.sidebarCollapsed ? 'lg:pl-0' : ''">
             <!-- Page Heading -->
             @php
                 $breadcrumbItems = \App\Support\Breadcrumbs\Breadcrumbs::current();

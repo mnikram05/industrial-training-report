@@ -6,14 +6,22 @@ namespace App\Modules\Dashboard\Controllers;
 
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Modules\User\Models\User;
+use App\Support\Dashboard\DashboardHomeData;
 
 class DashboardController extends Controller
 {
     /**
      * Display the dashboard page.
      */
-    public function __invoke(): View
+    public function __invoke( Request $request, DashboardHomeData $dashboardHomeData ): View
     {
-        return view( 'modules.dashboard.index' );
+        /** @var User $user */
+        $user = $request->user();
+
+        return view( 'modules.dashboard.index', [
+            'home' => $dashboardHomeData->build( $user ),
+        ] );
     }
 }
