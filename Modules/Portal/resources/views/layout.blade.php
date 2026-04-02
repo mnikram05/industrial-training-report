@@ -28,84 +28,8 @@
             }
         }
     @endphp
+    {{-- Static portal UI: resources/css/portal/public-layout.css (via app.css) --}}
     <style>
-        @keyframes heroGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes floatBlob {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(20px, -20px) scale(1.1); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scrollFadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scrollScaleIn {
-            from { opacity: 0; transform: scale(0.95) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        .portal-skeleton {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background-color: var(--portal-body-bg);
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        .portal-skeleton.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .skeleton-bone {
-            border-radius: 10px;
-            background: linear-gradient(90deg,
-                color-mix(in srgb, var(--portal-text) 8%, transparent) 25%,
-                color-mix(in srgb, var(--portal-text) 15%, transparent) 50%,
-                color-mix(in srgb, var(--portal-text) 8%, transparent) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s ease-in-out infinite;
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.7s ease-out both;
-        }
-        .animate-slide-down {
-            animation: slideDown 0.4s ease-out both;
-        }
-        .portal-block {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        }
-        .portal-block.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .portal-block .portal-stagger-item {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.25s ease-out, transform 0.25s ease-out;
-        }
-        .portal-block.is-visible .portal-stagger-item {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .portal-nav-link:hover,
-        .portal-nav-link.active {
-            background: color-mix(in srgb, var(--portal-accent) 20%, transparent);
-        }
         :root {
             --portal-header-bg: {{ $colors['color_header_bg'] ?? '#0f172a' }};
             --portal-hero-from: {{ $colors['color_hero_bg_from'] ?? '#0f172a' }};
@@ -199,7 +123,7 @@
     >
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-14 items-center justify-between">
-                @php $logoPath = $colors['logo_path'] ?? null; @endphp
+                @php $logoPath = \Modules\PortalAdministration\Models\PortalSetting::resolvedLogoPathForHeaderFooter(); @endphp
                 <a href="{{ route('portal.home') }}" class="flex shrink-0 items-center gap-2 text-sm font-bold tracking-wide uppercase transition-opacity duration-200 hover:opacity-80">
                     @if ($logoPath)
                         <img src="{{ Storage::disk('public')->url($logoPath) }}" alt="Logo" class="h-7 drop-shadow" />

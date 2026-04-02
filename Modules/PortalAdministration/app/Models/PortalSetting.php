@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\PortalAdministration\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class PortalSetting extends Model
@@ -67,5 +68,51 @@ class PortalSetting extends Model
             ->sort()
             ->values()
             ->all();
+    }
+
+    /**
+     * Imej terbaharu dalam Media yang biasa digunakan sebagai logo lalai (nama "logo" atau fail logo.png).
+     */
+    public static function fallbackLogoMediaPath(): ?string
+    {
+        $path = Media::query()
+            ->where( function ( Builder $q ): void {
+                $q->whereRaw( 'LOWER(COALESCE(name, "")) = ?', ['logo'] )
+                    ->orWhereRaw( 'LOWER(COALESCE(file_name, "")) = ?', ['logo.png'] );
+            } )
+            ->where( 'mime_type', 'like', 'image/%' )
+            ->latest( 'id' )
+            ->value( 'path' );
+
+        return is_string( $path ) && $path !== '' ? $path : null;
+    }
+
+    /**
+     * Lalai logo portal/CMS: nilai tetapan header-footer, atau sandaran Media di atas.
+     */
+    public static function resolvedLogoPathForHeaderFooter(): ?string
+    {
+        $explicit = self::getValue( 'logo_path', null, 'header-footer' );
+
+        if ( is_string( $explicit ) && $explicit !== '' ) {
+            return $explicit;
+        }
+
+        return self::fallbackLogoMediaPath();
+    }
+
+    /**
+     * Lalai bar CMS: logo khas CMS jika ada, jika tidak sama seperti {@see resolvedLogoPathForHeaderFooter()}.
+     */
+    public static function resolvedCmsBarLogoPath(): ?string
+    {
+        $cmsOnly = self::getValue( 'cms_logo_path', null, 'cms' )
+            ?? self::getValue( 'cms_logo_path', null, 'header-footer' );
+
+        if ( is_string( $cmsOnly ) && $cmsOnly !== '' ) {
+            return $cmsOnly;
+        }
+
+        return self::resolvedLogoPathForHeaderFooter();
     }
 }

@@ -1,0 +1,13 @@
+/**
+ * CMS-only: Laravel Debugbar position when using the fixed sidebar (local dev).
+ */
+
+div.phpdebugbar.phpdebugbar-closed {
+    bottom: 5.5rem !important;
+}
+
+@media (min-width: 1024px) {
+    html:not(.sidebar-collapsed) div.phpdebugbar.phpdebugbar-closed {
+        left: 15.5rem !important;
+    }
+}

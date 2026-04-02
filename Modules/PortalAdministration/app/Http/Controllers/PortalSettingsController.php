@@ -17,8 +17,15 @@ class PortalSettingsController extends Controller
 {
     public function edit( Request $request ): View
     {
-        $page     = $request->query( 'page', '' );
-        $settings = $page ? PortalSetting::forPage( $page ) : [];
+        $page = $request->query( 'page', '' );
+
+        if ( $page === 'cms' ) {
+            $settings = PortalSetting::forPage( 'cms' );
+        } elseif ( $page !== '' ) {
+            $settings = PortalSetting::forPage( $page );
+        } else {
+            $settings = [];
+        }
 
         $parentMenus = Menu::query()
             ->whereNull( 'parent_id' )
@@ -26,7 +33,7 @@ class PortalSettingsController extends Controller
             ->ordered()
             ->get();
 
-        $blocks = ( $page && $page !== 'header-footer' )
+        $blocks = ( $page && ! in_array( $page, ['header-footer', 'cms'], true ) )
             ? PortalSetting::getBlocks( $page )
             : [];
 
@@ -44,6 +51,10 @@ class PortalSettingsController extends Controller
     {
         $page = $request->input( 'page', 'home' );
 
+        if ( $page === 'cms' ) {
+            return $this->updateCmsOnly( $request );
+        }
+
         if ( $page === 'header-footer' ) {
             return $this->updateHeaderFooter( $request );
         }
@@ -54,6 +65,18 @@ class PortalSettingsController extends Controller
 
         return redirect()
             ->route( 'portal-settings.edit', ['page' => $page] )
+            ->with( 'status', 'settings-updated' );
+    }
+
+    private function updateCmsOnly( Request $request ): RedirectResponse
+    {
+        PortalSetting::setValue( 'cms_logo_path', $request->input( 'cms_logo_path' ), 'cms' );
+        PortalSetting::setValue( 'cms_footer_ms', $request->input( 'cms_footer_ms' ), 'cms' );
+        PortalSetting::setValue( 'cms_footer_en', $request->input( 'cms_footer_en' ), 'cms' );
+        $this->saveColors( $request, 'cms' );
+
+        return redirect()
+            ->route( 'portal-settings.edit', ['page' => 'cms'] )
             ->with( 'status', 'settings-updated' );
     }
 
@@ -85,7 +108,7 @@ class PortalSettingsController extends Controller
             'color_lang_active', 'color_card_bg', 'color_nav_bg', 'color_text',
             'dark_header_bg', 'dark_hero_bg_from', 'dark_hero_bg_to',
             'dark_body_bg', 'dark_card_bg', 'dark_nav_bg',
-            'dark_text', 'dark_footer_bg', 'dark_accent',
+            'dark_text', 'dark_footer_bg', 'dark_accent', 'dark_lang_active',
         ];
 
         foreach ( $colors as $color ) {
@@ -102,6 +125,10 @@ class PortalSettingsController extends Controller
     {
         $general = [
             'header-footer' => __( 'modules/portal-administration/portal-setting.pages.header_footer' ),
+        ];
+
+        $cms = [
+            'cms' => __( 'modules/portal-administration/portal-setting.pages.cms' ),
         ];
 
         $pages = [
@@ -138,6 +165,7 @@ class PortalSettingsController extends Controller
 
         return [
             __( 'modules/portal-administration/portal-setting.groups.general' ) => $general,
+            __( 'modules/portal-administration/portal-setting.groups.cms' )     => $cms,
             __( 'modules/portal-administration/portal-setting.groups.pages' )   => $pages,
         ];
     }

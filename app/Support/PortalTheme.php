@@ -9,7 +9,8 @@ use Modules\PortalAdministration\Models\PortalSetting;
 final class PortalTheme
 {
     /**
-     * Defaults aligned with {@see \Modules\Portal\resources\views\layout.blade.php}.
+     * Defaults aligned with portal layout (dynamic --portal-* in layout.blade.php;
+     * static portal CSS: resources/css/portal/public-layout.css).
      *
      * @var array<string, string>
      */
@@ -37,18 +38,23 @@ final class PortalTheme
     ];
 
     /**
+     * Warna untuk shell pentadbir CMS (app layout + portal-admin-theme).
+     * Gabung: lalai → warna portal (header-footer / home) → overrides page `cms`.
+     * Paparan portal awam guna {@see PortalSetting::forPage('header-footer')} terus dalam layout portal, bukan kelas ini.
+     *
      * @return array<string, string>
      */
     public static function rawColors(): array
     {
-        $from = PortalSetting::forPage('header-footer');
-        if ($from === []) {
-            $from = PortalSetting::forPage('home');
-        }
+        $fromCms = PortalSetting::forPage('cms');
 
         $merged = self::DEFAULTS;
-        foreach ($from as $key => $value) {
-            if (is_string($value) && $value !== '') {
+
+        foreach ($fromCms as $key => $value) {
+            if (! is_string($value) || $value === '') {
+                continue;
+            }
+            if (str_starts_with($key, 'color_') || str_starts_with($key, 'dark_')) {
                 $merged[$key] = $value;
             }
         }

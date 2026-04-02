@@ -1,6 +1,6 @@
 /**
- * Admin / app layout polish (CMS, modules, portal settings).
- * Uses --portal-* from layouts/partials/portal-admin-theme.blade.php (PortalTheme).
+ * CMS (app-layout): admin shell, content pane, page header chrome.
+ * Uses --portal-* from layouts/partials/portal-admin-theme.blade.php (App\Support\PortalTheme).
  */
 
 @layer components {
@@ -31,9 +31,6 @@
             );
     }
 
-    /**
-     * Main column (right of sidebar): richer tint so the page feels less “flat white”.
-     */
     .admin-content-pane {
         background-color: color-mix(in srgb, var(--portal-body-bg) 94%, var(--portal-hero-to) 6%);
         background-image: radial-gradient(
@@ -76,16 +73,20 @@
 
     .admin-page-header {
         @apply border-b border-border/80 backdrop-blur-md;
-        background-color: color-mix(in srgb, var(--portal-body-bg) 72%, transparent);
+        background-color: hsl(var(--background) / 0.96);
     }
 
     @supports (backdrop-filter: blur(1px)) {
         .admin-page-header {
-            background-color: color-mix(in srgb, var(--portal-body-bg) 52%, transparent);
+            background-color: hsl(var(--background) / 0.88);
         }
     }
 
     .admin-main {
         @apply pb-10 sm:pb-12;
+    }
+
+    .admin-cms-footer {
+        @apply shrink-0;
     }
 }

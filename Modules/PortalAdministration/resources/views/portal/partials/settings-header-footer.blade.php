@@ -1,11 +1,15 @@
-{{-- Logo --}}
-<div x-data="{ logoPreview: '{{ !empty($settings['logo_path']) ? Storage::disk('public')->url($settings['logo_path']) : '' }}' }">
+{{-- Logo portal awam — logo CMS di skrin Tetapan CMS --}}
+<div
+    x-data="{
+        logoPreview: @js(! empty($settings['logo_path']) ? Storage::disk('public')->url($settings['logo_path']) : ''),
+    }">
     <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">{{ __('modules/portal-administration/portal-setting.sections.logo') }}</h3>
     <div class="space-y-3">
-        <div class="flex items-center gap-4">
-            <img x-show="logoPreview" :src="logoPreview" alt="Logo" class="shrink-0 rounded border bg-white object-contain p-1" style="max-height: 48px; max-width: 192px" />
-            <p x-show="logoPreview" class="text-xs text-muted-foreground">Logo semasa</p>
-            <p x-show="!logoPreview" class="text-xs italic text-muted-foreground">Tiada logo dipilih</p>
+        <p class="text-xs font-medium text-muted-foreground">{{ __('modules/portal-administration/portal-setting.fields.portal_public_logo') }}</p>
+        <div class="flex flex-wrap items-center gap-4">
+            <img x-show="logoPreview" :src="logoPreview" alt="" class="shrink-0 rounded border bg-white object-contain p-1" style="max-height: 48px; max-width: 192px" />
+            <p x-show="logoPreview" class="text-xs text-muted-foreground">{{ __('modules/portal-administration/portal-setting.hints.logo_portal_preview') }}</p>
+            <p x-show="!logoPreview" class="text-xs italic text-muted-foreground">{{ __('modules/portal-administration/portal-setting.messages.none') }}</p>
         </div>
         <x-field for="logo_path" class="gap-1.5">
             <x-slot:labelText>{{ __('modules/portal-administration/portal-setting.fields.select_logo') }}</x-slot:labelText>
@@ -95,5 +99,7 @@
 </div>
 
 <hr />
+
+<p class="mb-3 text-xs text-muted-foreground">{{ __('modules/portal-administration/portal-setting.hints.portal_colors_only') }}</p>
 
 @include('portaladministration::portal.partials.settings-colors')

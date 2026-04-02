@@ -24,6 +24,8 @@
                     <div class="space-y-6 pb-6">
                         @if ($selectedPage === 'header-footer')
                             @include('portaladministration::portal.partials.settings-header-footer')
+                        @elseif ($selectedPage === 'cms')
+                            @include('portaladministration::portal.partials.settings-cms')
                         @else
                             @include('portaladministration::portal.partials.settings-blocks')
                         @endif

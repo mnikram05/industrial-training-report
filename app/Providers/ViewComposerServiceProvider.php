@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Modules\User\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\View as BladeView;
 use Illuminate\Support\ServiceProvider;
+use Modules\PortalAdministration\Models\PortalSetting;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -54,13 +56,24 @@ class ViewComposerServiceProvider extends ServiceProvider
 
             $locale = app()->getLocale();
 
+            $pathForCmsBar = PortalSetting::resolvedCmsBarLogoPath() ?? '';
+            $cmsPortalLogoUrl = $pathForCmsBar !== ''
+                ? Storage::disk( 'public' )->url( $pathForCmsBar )
+                : null;
+
+            $cmsHeaderBrandLine = PortalSetting::getValue( 'site_name_ms', null, 'header-footer' )
+                ?: PortalSetting::getValue( 'site_name_en', null, 'header-footer' )
+                ?: config( 'app.name' );
+
             $view->with( [
-                'user'            => $user,
-                'avatarFallback'  => $this->avatarFallback( $user ),
-                'profileEditUrl'  => route( 'account.edit' ),
-                'currentLocale'   => $locale,
-                'localeLabel'     => $locale === 'ms' ? __( 'Melayu' ) : __( 'English' ),
-                'isImpersonating' => function_exists( 'is_impersonating' ) && is_impersonating(),
+                'user'                 => $user,
+                'avatarFallback'       => $this->avatarFallback( $user ),
+                'profileEditUrl'       => route( 'account.edit' ),
+                'currentLocale'        => $locale,
+                'localeLabel'          => $locale === 'ms' ? __( 'Melayu' ) : __( 'English' ),
+                'isImpersonating'      => function_exists( 'is_impersonating' ) && is_impersonating(),
+                'cmsPortalLogoUrl'     => $cmsPortalLogoUrl,
+                'cmsHeaderBrandLine'   => is_string( $cmsHeaderBrandLine ) ? $cmsHeaderBrandLine : config( 'app.name' ),
             ] );
         } );
     }

@@ -16,9 +16,9 @@
             <p class="max-w-2xl text-sm text-muted-foreground">{{ __('dashboard.intro') }}</p>
         </div>
 
-        <div class="grid gap-6 lg:grid-cols-2">
-            <x-card module>
-                <div class="space-y-4">
+        <div class="grid items-stretch gap-6 lg:grid-cols-2">
+            <x-card module class="h-full">
+                <div class="flex h-full flex-col space-y-4">
                     <h3 class="text-base font-semibold text-foreground">{{ __('dashboard.shortcuts_heading') }}</h3>
                     <ul class="grid gap-2 sm:grid-cols-2">
                         @foreach ($shortcuts as $item)
@@ -43,11 +43,12 @@
                             </li>
                         @endforeach
                     </ul>
+                    <div class="min-h-0 flex-1" aria-hidden="true"></div>
                 </div>
             </x-card>
 
-            <x-card module>
-                <div class="space-y-4">
+            <x-card module class="h-full">
+                <div class="flex h-full flex-col space-y-4">
                     <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
                         <h3 class="text-base font-semibold text-foreground">{{ __('dashboard.checklist_heading') }}</h3>
                         <p class="text-xs font-medium text-muted-foreground sm:text-right">

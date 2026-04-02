@@ -141,7 +141,7 @@ final class DashboardHomeData
 
         $hasBranding = filled($settings['site_name_ms'] ?? null)
             || filled($settings['site_name_en'] ?? null)
-            || filled($settings['logo_path'] ?? null);
+            || filled(PortalSetting::resolvedLogoPathForHeaderFooter());
 
         return $hasMenu && $hasBranding;
     }

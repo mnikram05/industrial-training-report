@@ -16,6 +16,7 @@ use Modules\PortalAdministration\Database\Seeders\Portal\LatarBelakangSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\ObjektifOrganisasiSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\PengenalanDiriSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\PenghargaanSeeder;
+use Modules\PortalAdministration\Database\Seeders\Portal\CmsSettingSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\RingkasanAktivitiSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\RumusanSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\VisiMisiSeeder;
@@ -26,6 +27,7 @@ class PortalSettingSeeder extends Seeder
     {
         $this->call([
             HeaderFooterSeeder::class,
+            CmsSettingSeeder::class,
             HomeSeeder::class,
             PengenalanDiriSeeder::class,
             LatarBelakangSeeder::class,
