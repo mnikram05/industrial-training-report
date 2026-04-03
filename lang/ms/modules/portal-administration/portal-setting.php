@@ -137,6 +137,7 @@ return [
         'header_bg'    => 'Latar Header',
         'hero_bg_from' => 'Gradien Hero Dari',
         'hero_bg_to'   => 'Gradien Hero Ke',
+        'hero_glow'    => 'Cahaya / aksen hero (jalur animasi, blob, teks kecil)',
         'cms_content_bg' => 'Latar Kandungan',
         'footer_bg'    => 'Latar Footer',
         'body_bg'      => 'Latar Halaman',

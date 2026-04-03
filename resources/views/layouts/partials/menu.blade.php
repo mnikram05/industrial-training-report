@@ -105,6 +105,12 @@
 
         <div x-cloak x-show="portalOpen" x-transition.opacity.duration.150ms>
             <x-sidebar-submenu>
+                <x-sidebar-submenu-link
+                    :href="route('portal-settings.edit', ['page' => 'header-footer'])"
+                    :active="request()->routeIs('portal-settings.edit') && request('page') === 'header-footer'">
+                    <span>{{ __('sidebar.header_footer') }}</span>
+                </x-sidebar-submenu-link>
+
                 <x-sidebar-submenu-link :href="route('portal-administration.menus.index')" :active="request()->routeIs('portal-administration.menus.*')">
                     <span>{{ __('sidebar.menus') }}</span>
                 </x-sidebar-submenu-link>

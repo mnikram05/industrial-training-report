@@ -14,6 +14,7 @@ return [
     'roles'                 => 'Roles',
     'activity_logs'         => 'Activity Logs',
     'portal_administration' => 'Portal Administration',
+    'header_footer'         => 'Header & footer',
     'menus'                 => 'Menus',
     'articles'              => 'Articles',
     'media'                 => 'Media',

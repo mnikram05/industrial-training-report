@@ -137,6 +137,7 @@ return [
         'header_bg'    => 'Header Background',
         'hero_bg_from' => 'Hero Gradient From',
         'hero_bg_to'   => 'Hero Gradient To',
+        'hero_glow'    => 'Hero glow / highlight (animated band, blobs, accents)',
         'cms_content_bg' => 'Content Background',
         'footer_bg'    => 'Footer Background',
         'body_bg'      => 'Body Background',

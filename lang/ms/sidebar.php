@@ -14,6 +14,7 @@ return [
     'roles'                 => 'Peranan',
     'activity_logs'         => 'Log Aktiviti',
     'portal_administration' => 'Pentadbiran Portal',
+    'header_footer'         => 'Header & pengaki',
     'menus'                 => 'Menu',
     'articles'              => 'Artikel',
     'media'                 => 'Media',

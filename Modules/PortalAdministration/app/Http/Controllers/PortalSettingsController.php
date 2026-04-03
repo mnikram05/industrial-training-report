@@ -96,17 +96,17 @@ class PortalSettingsController extends Controller
         $this->saveColors( $request, $page );
 
         return redirect()
-            ->route( 'portal-settings.edit', ['page' => $request->input( 'page', 'home' )] )
+            ->route( 'portal-settings.edit', ['page' => $page] )
             ->with( 'status', 'settings-updated' );
     }
 
     private function saveColors( Request $request, string $page ): void
     {
         $colors = [
-            'color_header_bg', 'color_hero_bg_from', 'color_hero_bg_to',
+            'color_header_bg', 'color_hero_bg_from', 'color_hero_bg_to', 'color_hero_glow',
             'color_accent', 'color_footer_bg', 'color_body_bg',
             'color_lang_active', 'color_card_bg', 'color_nav_bg', 'color_text',
-            'dark_header_bg', 'dark_hero_bg_from', 'dark_hero_bg_to',
+            'dark_header_bg', 'dark_hero_bg_from', 'dark_hero_bg_to', 'dark_hero_glow',
             'dark_body_bg', 'dark_card_bg', 'dark_nav_bg',
             'dark_text', 'dark_footer_bg', 'dark_accent', 'dark_lang_active',
         ];

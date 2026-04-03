@@ -9,6 +9,7 @@ use Modules\PortalAdministration\Database\Seeders\Portal\CartaOrganisasiSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\FungsiBahagianSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\HalatujuOrganisasiSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\HeaderFooterSeeder;
+use Modules\PortalAdministration\Database\Seeders\Portal\HeroGlowSettingsSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\HomeSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\LampiranSeeder;
 use Modules\PortalAdministration\Database\Seeders\Portal\LaporanTeknikalSeeder;
@@ -41,6 +42,7 @@ class PortalSettingSeeder extends Seeder
             LaporanTeknikalSeeder::class,
             RumusanSeeder::class,
             LampiranSeeder::class,
+            HeroGlowSettingsSeeder::class,
         ]);
     }
 }

@@ -14,10 +14,10 @@
         if (!empty($portalPage)) {
             $pageColors = \Modules\PortalAdministration\Models\PortalSetting::forPage($portalPage);
             $colorKeys = [
-                'color_header_bg', 'color_hero_bg_from', 'color_hero_bg_to',
+                'color_header_bg', 'color_hero_bg_from', 'color_hero_bg_to', 'color_hero_glow',
                 'color_accent', 'color_footer_bg', 'color_body_bg',
                 'color_lang_active', 'color_card_bg', 'color_nav_bg', 'color_text',
-                'dark_header_bg', 'dark_hero_bg_from', 'dark_hero_bg_to',
+                'dark_header_bg', 'dark_hero_bg_from', 'dark_hero_bg_to', 'dark_hero_glow',
                 'dark_body_bg', 'dark_card_bg', 'dark_nav_bg',
                 'dark_text', 'dark_footer_bg', 'dark_accent', 'dark_lang_active',
             ];
@@ -34,6 +34,7 @@
             --portal-header-bg: {{ $colors['color_header_bg'] ?? '#0f172a' }};
             --portal-hero-from: {{ $colors['color_hero_bg_from'] ?? '#0f172a' }};
             --portal-hero-to: {{ $colors['color_hero_bg_to'] ?? '#1e293b' }};
+            --portal-hero-glow: {{ $colors['color_hero_glow'] ?? $colors['color_accent'] ?? '#f43f5e' }};
             --portal-accent: {{ $colors['color_accent'] ?? '#f43f5e' }};
             --portal-footer-bg: {{ $colors['color_footer_bg'] ?? '#0f172a' }};
             --portal-body-bg: {{ $colors['color_body_bg'] ?? '#f8fafc' }};
@@ -46,6 +47,7 @@
             --portal-header-bg: {{ $colors['dark_header_bg'] ?? '#020617' }};
             --portal-hero-from: {{ $colors['dark_hero_bg_from'] ?? '#020617' }};
             --portal-hero-to: {{ $colors['dark_hero_bg_to'] ?? '#0f172a' }};
+            --portal-hero-glow: {{ $colors['dark_hero_glow'] ?? $colors['dark_accent'] ?? '#fb7185' }};
             --portal-accent: {{ $colors['dark_accent'] ?? '#fb7185' }};
             --portal-footer-bg: {{ $colors['dark_footer_bg'] ?? '#020617' }};
             --portal-body-bg: {{ $colors['dark_body_bg'] ?? '#0f172a' }};
