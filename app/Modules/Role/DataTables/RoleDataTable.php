@@ -47,10 +47,10 @@ class RoleDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( 'No.' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
-            ['label' => __( 'Name' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Guard' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
+            ['label' => __( 'ui.no_fbd39f' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
+            ['label' => __( 'ui.name' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.guard' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
 
@@ -69,6 +69,6 @@ class RoleDataTable extends BaseModuleDataTable
 
     public function filterPlaceholder(): string
     {
-        return __( 'Filter roles...' );
+        return __( 'ui.filter_roles' );
     }
 }

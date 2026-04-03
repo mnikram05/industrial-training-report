@@ -8,5 +8,5 @@ use App\Support\Breadcrumbs\BreadcrumbTrail;
 Breadcrumbs::for( 'admin.dashboard', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'dashboard' )
-        ->push( __( 'Admin Dashboard' ) );
+        ->push( __( 'ui.admin_dashboard' ) );
 } );

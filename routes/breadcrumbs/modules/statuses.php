@@ -9,19 +9,19 @@ use App\Support\Breadcrumbs\BreadcrumbTrail;
 Breadcrumbs::for( 'statuses.index', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'dashboard' )
-        ->push( __( 'Statuses' ), route( 'statuses.index' ) );
+        ->push( __( 'ui.statuses' ), route( 'statuses.index' ) );
 } );
 
 Breadcrumbs::for( 'statuses.create', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'statuses.index' )
-        ->push( __( 'Create' ) );
+        ->push( __( 'ui.create' ) );
 } );
 
 Breadcrumbs::for( 'statuses.show', function ( BreadcrumbTrail $trail, mixed $status ): void {
     $label = $status instanceof Status
         ? sprintf( '%s (%s)', $status->label(), $status->key )
-        : __( 'Show' );
+        : __( 'ui.show' );
 
     $trail
         ->parent( 'statuses.index' )
@@ -31,5 +31,5 @@ Breadcrumbs::for( 'statuses.show', function ( BreadcrumbTrail $trail, mixed $sta
 Breadcrumbs::for( 'statuses.edit', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'statuses.index' )
-        ->push( __( 'Edit' ) );
+        ->push( __( 'ui.edit' ) );
 } );

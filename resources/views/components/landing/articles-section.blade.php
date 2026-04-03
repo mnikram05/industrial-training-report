@@ -11,7 +11,7 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8 space-y-2">
                 <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
-                    {{ __('Articles') }}
+                    {{ __('ui.articles') }}
                 </h2>
             </div>
 
@@ -21,7 +21,7 @@
                         @if (!empty($article['image']))
                             <div class="mb-4 overflow-hidden rounded-xl">
                                 <img src="{{ asset('storage/' . $article['image']) }}"
-                                    alt="{{ $article['alt'] ?? ($article['_title'] ?? __('Article image')) }}"
+                                    alt="{{ $article['alt'] ?? ($article['_title'] ?? __('ui.article_image_77275d')) }}"
                                     class="h-40 w-full object-cover" loading="lazy">
                             </div>
                         @endif
@@ -42,7 +42,7 @@
                             <x-button as="a" href="{{ $article['_url'] }}"
                                 target="{{ str_starts_with($article['_url'], 'http') ? '_blank' : '_self' }}"
                                 variant="link" class="mt-4 px-0">
-                                {{ __('Read more') }}
+                                {{ __('ui.read_more') }}
                             </x-button>
                         @endif
                     </article>

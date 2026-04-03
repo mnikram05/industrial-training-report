@@ -3,8 +3,8 @@
     'id' => null,
     'accept' => null,
     'required' => false,
-    'buttonLabel' => __('Choose File'),
-    'placeholder' => __('No file selected'),
+    'buttonLabel' => __('ui.choose_file'),
+    'placeholder' => __('ui.no_file_selected'),
 ])
 
 @php

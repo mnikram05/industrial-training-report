@@ -8,5 +8,5 @@ use App\Support\Breadcrumbs\BreadcrumbTrail;
 Breadcrumbs::for( 'account.edit', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'dashboard' )
-        ->push( __( 'Account' ) );
+        ->push( __( 'ui.account' ) );
 } );

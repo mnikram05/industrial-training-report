@@ -195,9 +195,9 @@ class AdminDashboardService
      */
     private function buildLatestActivityItems( int $limit ): array
     {
-        $activityLogsLabel = __( 'Activity Logs' );
-        $systemLabel       = __( 'System' );
-        $unknownLabel      = __( 'Unknown' );
+        $activityLogsLabel = __( 'ui.activity_logs' );
+        $systemLabel       = __( 'ui.system' );
+        $unknownLabel      = __( 'ui.unknown' );
         $fallbackTitle     = is_string( $activityLogsLabel ) ? $activityLogsLabel : 'Activity Logs';
         $fallbackActor     = is_string( $systemLabel ) ? $systemLabel : 'System';
         $fallbackTime      = is_string( $unknownLabel ) ? $unknownLabel : 'Unknown';

@@ -9,19 +9,19 @@ use App\Support\Breadcrumbs\BreadcrumbTrail;
 Breadcrumbs::for( 'roles.index', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'dashboard' )
-        ->push( __( 'Roles' ), route( 'roles.index' ) );
+        ->push( __( 'ui.roles' ), route( 'roles.index' ) );
 } );
 
 Breadcrumbs::for( 'roles.create', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'roles.index' )
-        ->push( __( 'Create' ) );
+        ->push( __( 'ui.create' ) );
 } );
 
 Breadcrumbs::for( 'roles.show', function ( BreadcrumbTrail $trail, mixed $role ): void {
     $label = $role instanceof Role
         ? $role->name
-        : __( 'Show' );
+        : __( 'ui.show' );
 
     $trail
         ->parent( 'roles.index' )
@@ -31,5 +31,5 @@ Breadcrumbs::for( 'roles.show', function ( BreadcrumbTrail $trail, mixed $role )
 Breadcrumbs::for( 'roles.edit', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'roles.index' )
-        ->push( __( 'Edit' ) );
+        ->push( __( 'ui.edit' ) );
 } );

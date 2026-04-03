@@ -72,7 +72,7 @@ class GlobalSearchController extends Controller
             $results[] = [
                 'id'       => $this->normalizeKey( $model->getKey() ),
                 'type'     => 'user',
-                'label'    => (string) __( 'User' ),
+                'label'    => (string) __( 'ui.user' ),
                 'title'    => (string) $model->name,
                 'subtitle' => (string) $model->email,
                 'url'      => route( 'users.show', $model ),
@@ -106,7 +106,7 @@ class GlobalSearchController extends Controller
             $results[] = [
                 'id'       => $this->normalizeKey( $model->getKey() ),
                 'type'     => 'article',
-                'label'    => (string) __( 'Article' ),
+                'label'    => (string) __( 'ui.article' ),
                 'title'    => (string) $model->title,
                 'subtitle' => (string) $model->slug,
                 'url'      => route( 'articles.edit', $model ),
@@ -140,9 +140,9 @@ class GlobalSearchController extends Controller
             $results[] = [
                 'id'       => $this->normalizeKey( $model->getKey() ),
                 'type'     => 'landing',
-                'label'    => (string) __( 'Landing' ),
+                'label'    => (string) __( 'ui.landing' ),
                 'title'    => (string) $model->slug,
-                'subtitle' => (string) __( 'Landing page' ),
+                'subtitle' => (string) __( 'ui.landing_page' ),
                 'url'      => route( 'landings.edit', $model ),
             ];
         }

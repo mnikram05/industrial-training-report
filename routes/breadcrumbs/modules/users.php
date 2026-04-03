@@ -9,19 +9,19 @@ use App\Support\Breadcrumbs\BreadcrumbTrail;
 Breadcrumbs::for( 'users.index', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'dashboard' )
-        ->push( __( 'Users' ), route( 'users.index' ) );
+        ->push( __( 'ui.users' ), route( 'users.index' ) );
 } );
 
 Breadcrumbs::for( 'users.create', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'users.index' )
-        ->push( __( 'Create' ) );
+        ->push( __( 'ui.create' ) );
 } );
 
 Breadcrumbs::for( 'users.show', function ( BreadcrumbTrail $trail, mixed $user ): void {
     $label = $user instanceof User
         ? $user->name
-        : __( 'Show' );
+        : __( 'ui.show' );
 
     $trail
         ->parent( 'users.index' )
@@ -31,5 +31,5 @@ Breadcrumbs::for( 'users.show', function ( BreadcrumbTrail $trail, mixed $user )
 Breadcrumbs::for( 'users.edit', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'users.index' )
-        ->push( __( 'Edit' ) );
+        ->push( __( 'ui.edit' ) );
 } );

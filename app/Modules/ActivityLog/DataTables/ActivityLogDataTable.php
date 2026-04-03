@@ -33,7 +33,7 @@ class ActivityLogDataTable extends BaseModuleDataTable
 
                 return is_string( $causerName ) && $causerName !== ''
                     ? $causerName
-                    : __( 'System' );
+                    : __( 'ui.system' );
             } )
             ->editColumn( 'created_at', static fn ( Activity $activity ): string => $activity->created_at?->diffForHumans() ?? '—' )
             ->addColumn( 'action', static fn ( Activity $activity ): string => view(
@@ -60,12 +60,12 @@ class ActivityLogDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( 'No.' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
-            ['label' => __( 'Event' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Description' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Causer' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'When' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
+            ['label' => __( 'ui.no_fbd39f' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
+            ['label' => __( 'ui.event' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.description' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.causer' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.when' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
 
@@ -86,6 +86,6 @@ class ActivityLogDataTable extends BaseModuleDataTable
 
     public function filterPlaceholder(): string
     {
-        return __( 'Filter activities...' );
+        return __( 'ui.filter_activities' );
     }
 }

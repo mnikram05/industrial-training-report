@@ -4,7 +4,7 @@
     'showExport' => true,
     'showImport' => true,
     'showCreate' => true,
-    'importButtonLabel' => __('Import XLSX'),
+    'importButtonLabel' => __('ui.import_xlsx'),
     'importInputName' => 'file',
 ])
 
@@ -19,7 +19,7 @@
 
 @if ($hasExportAction)
     <a href="{{ route($resource . '.export') }}">
-        <x-button variant="outline">{{ __('Export') }}</x-button>
+        <x-button variant="outline">{{ __('ui.export') }}</x-button>
     </a>
 @endif
 

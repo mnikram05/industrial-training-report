@@ -13,11 +13,11 @@
     $exportStatusUrl = null;
 
     if (in_array($status, $savedStatuses, true)) {
-        $message = __('Saved.');
+        $message = __('ui.saved');
     } elseif (in_array($status, $deletedStatuses, true)) {
-        $message = __('Deleted.');
+        $message = __('ui.deleted');
     } elseif ($status === 'export-started') {
-        $message = __('Export started. The file will be available after processing completes.');
+        $message = __('ui.export_started_background');
         $transferId = session('export_transfer_id');
 
         if (is_int($transferId) || (is_string($transferId) && ctype_digit($transferId))) {
@@ -31,8 +31,8 @@
 @if ($message !== null)
     @if ($status === 'export-started')
         <x-alert inline data-initial-message="{{ $message }}"
-            data-completed-message="{{ __('Export completed. Download is ready.') }}"
-            data-failed-message="{{ __('Export failed. Please try again.') }}"
+            data-completed-message="{{ __('ui.export_completed_ready') }}"
+            data-failed-message="{{ __('ui.export_failed_retry') }}"
             data-poll-url="{{ $exportStatusUrl ?? '' }}" x-data="{
                 ready: false,
                 message: '',
@@ -115,7 +115,7 @@
             <template x-if="downloadUrl !== null">
                 <x-button as="a" x-bind:href="downloadUrl" size="sm" variant="secondary"
                     class="shrink-0">
-                    {{ __('Download') }}
+                    {{ __('ui.download') }}
                 </x-button>
             </template>
         </x-alert>

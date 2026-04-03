@@ -50,7 +50,7 @@ class StatusRequest extends FormRequest
                 function ( string $attribute, mixed $value, Closure $fail ) use ( $type, $statusId ): void {
                     if ( $type === StatusType::Module->value ) {
                         if ( filled( $value ) ) {
-                            $fail( __( 'Module type cannot have a parent status.' ) );
+                            $fail( __( 'ui.module_type_cannot_have_a_parent_status' ) );
                         }
 
                         return;
@@ -69,11 +69,11 @@ class StatusRequest extends FormRequest
                     }
 
                     if ( (string) $parent->key !== $type ) {
-                        $fail( __( 'Parent module must match the selected type.' ) );
+                        $fail( __( 'ui.parent_module_must_match_the_selected_type' ) );
                     }
 
                     if ( is_numeric( $statusId ) && $parent->getKey() == $statusId ) {
-                        $fail( __( 'Parent status cannot reference itself.' ) );
+                        $fail( __( 'ui.parent_status_cannot_reference_itself' ) );
                     }
                 },
             ],

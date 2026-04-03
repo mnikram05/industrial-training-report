@@ -1,7 +1,7 @@
 @props([
     'value' => null,
     'mode' => 'date',
-    'placeholder' => __('Select date'),
+    'placeholder' => __('ui.select_date'),
 ])
 
 @php
@@ -442,12 +442,12 @@
 
         <div class="mt-3 flex items-center justify-between">
             <button type="button" class="text-xs text-muted-foreground hover:text-foreground" @click="clear()">
-                {{ __('Clear') }}
+                {{ __('ui.clear') }}
             </button>
             <button type="button"
                 class="inline-flex h-8 items-center justify-center rounded-md border border-input px-3 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                 @click="open = false">
-                {{ __('Done') }}
+                {{ __('ui.done') }}
             </button>
         </div>
     </div>

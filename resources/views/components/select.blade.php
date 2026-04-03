@@ -1,7 +1,7 @@
 @props([
     'options' => [],
     'value' => null,
-    'placeholder' => __('Select an option'),
+    'placeholder' => __('ui.select_an_option'),
 ])
 
 @php

@@ -49,7 +49,7 @@ class StatusController extends Controller
 
         return view( 'modules.statuses.create', [
             'typeOptions'         => $this->statusService->getTypeOptions(),
-            'parentStatusOptions' => ['' => __( 'No Parent (module level)' )] + $moduleParentOptions,
+            'parentStatusOptions' => ['' => __( 'ui.no_parent_module_level' )] + $moduleParentOptions,
         ] );
     }
 
@@ -97,7 +97,7 @@ class StatusController extends Controller
         return view( 'modules.statuses.edit', [
             'status'              => $status,
             'typeOptions'         => $this->statusService->getTypeOptions(),
-            'parentStatusOptions' => ['' => __( 'No Parent (module level)' )] + $moduleParentOptions,
+            'parentStatusOptions' => ['' => __( 'ui.no_parent_module_level' )] + $moduleParentOptions,
         ] );
     }
 

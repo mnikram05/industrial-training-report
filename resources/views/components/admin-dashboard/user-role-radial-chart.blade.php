@@ -18,8 +18,8 @@
 @endphp
 
 <div class="min-h-[420px]" data-react-radial-chart data-chart-data="{{ json_encode($chartData) }}" data-show-grid="false"
-    data-title="{{ __('Users by Role') }}" data-description="{{ __('Total: :count users', ['count' => $totalUsers]) }}"
-    data-footer-trend="" data-footer-description="{{ __('Distribution across all roles') }}"></div>
+    data-title="{{ __('ui.users_by_role') }}" data-description="{{ __('Total: :count users', ['count' => $totalUsers]) }}"
+    data-footer-trend="" data-footer-description="{{ __('ui.distribution_across_all_roles') }}"></div>
 
 @once
     @push('scripts')

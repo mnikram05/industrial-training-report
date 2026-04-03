@@ -91,11 +91,11 @@ class StatusDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( 'No.' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
-            ['label' => __( 'Status Key' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Name (English)' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Name (Malay)' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
+            ['label' => __( 'ui.no_fbd39f' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
+            ['label' => __( 'ui.status_key' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.name_english' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.name_malay' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
 
@@ -116,7 +116,7 @@ class StatusDataTable extends BaseModuleDataTable
     public function filterPlaceholder(): string
     {
         return $this->moduleParentsOnly
-            ? __( 'Filter modules...' )
-            : __( 'Filter statuses...' );
+            ? __( 'ui.filter_modules' )
+            : __( 'ui.filter_statuses' );
     }
 }

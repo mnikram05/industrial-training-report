@@ -24,7 +24,7 @@
             <div class="flex flex-wrap items-center justify-center gap-3">
                 @auth
                     <x-button as="a" href="{{ route('dashboard') }}" size="lg">
-                        {{ __('Go to Dashboard') }}
+                        {{ __('ui.go_to_dashboard') }}
                     </x-button>
                 @else
                     @if ($primaryText !== '')

@@ -1,44 +1,44 @@
 <x-guest-layout>
-    {{ html()->form('POST', route('password.store'))->open() }}
-    <!-- Password Reset Token -->
-    {{ html()->hidden('token', $request->route('token')) }}
+    <x-card module class="w-full shadow-card ring-1 ring-black/[0.03] dark:shadow-card-dark dark:ring-white/[0.06]">
+        <x-card-header>
+            <x-card-title>{{ __('modules/login.reset.heading') }}</x-card-title>
+            <x-card-description>{{ __('modules/login.reset.description') }}</x-card-description>
+        </x-card-header>
 
-    <!-- Email Address -->
-    <div>
-        <x-label for="email">{{ __('Email') }}</x-label>
-        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus
-            autocomplete="username" />
-        @error('email')
-            <p class="mt-2 text-sm font-medium text-destructive">{{ $message }}</p>
-        @enderror
-    </div>
+        {{ html()->form('POST', route('password.store'))->open() }}
+        {{ html()->hidden('token', $request->route('token')) }}
 
-    <!-- Password -->
-    <div class="mt-4">
-        <x-label for="password">{{ __('Password') }}</x-label>
-        <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
-            autocomplete="new-password" />
-        @error('password')
-            <p class="mt-2 text-sm font-medium text-destructive">{{ $message }}</p>
-        @enderror
-    </div>
+        <x-card-content class="space-y-4">
+            <div class="space-y-1.5">
+                <x-label for="email">{{ __('modules/login.field.email') }}</x-label>
+                <x-input id="email" class="w-full" type="email" name="email" :value="old('email', $request->email)" required
+                    autofocus autocomplete="username" />
+                @error('email')
+                    <p class="mt-1 text-sm font-medium text-destructive">{{ $message }}</p>
+                @enderror
+            </div>
 
-    <!-- Confirm Password -->
-    <div class="mt-4">
-        <x-label for="password_confirmation">{{ __('Confirm Password') }}</x-label>
+            <div class="space-y-1.5">
+                <x-label for="password">{{ __('modules/login.field.password') }}</x-label>
+                <x-input id="password" class="w-full" type="password" name="password" required autocomplete="new-password" />
+                @error('password')
+                    <p class="mt-1 text-sm font-medium text-destructive">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation"
-            required autocomplete="new-password" />
+            <div class="space-y-1.5">
+                <x-label for="password_confirmation">{{ __('modules/login.field.confirm_password') }}</x-label>
+                <x-input id="password_confirmation" class="w-full" type="password" name="password_confirmation" required
+                    autocomplete="new-password" />
+                @error('password_confirmation')
+                    <p class="mt-1 text-sm font-medium text-destructive">{{ $message }}</p>
+                @enderror
+            </div>
+        </x-card-content>
 
-        @error('password_confirmation')
-            <p class="mt-2 text-sm font-medium text-destructive">{{ $message }}</p>
-        @enderror
-    </div>
-
-    <div class="flex items-center justify-end mt-4">
-        <x-button type="submit">
-            {{ __('Reset Password') }}
-        </x-button>
-    </div>
-    {{ html()->form()->close() }}
+        <x-card-footer class="justify-end border-t border-border/60 bg-muted/20 dark:bg-muted/10">
+            <x-button type="submit">{{ __('modules/login.reset.submit') }}</x-button>
+        </x-card-footer>
+        {{ html()->form()->close() }}
+    </x-card>
 </x-guest-layout>

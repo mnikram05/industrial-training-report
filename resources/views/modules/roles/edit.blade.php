@@ -2,7 +2,7 @@
 
     <x-card module>
         <x-card-header flush>
-            <x-card-title>{{ __('Edit Role') }}</x-card-title>
+            <x-card-title>{{ __('ui.edit_role') }}</x-card-title>
         </x-card-header>
 
         <x-card-content flush>
@@ -15,8 +15,8 @@
 
             <x-button-group plain between>
                 <x-button type="submit" variant="destructive"
-                    form="delete-role-management-form">{{ __('Delete') }}</x-button>
-                <x-button type="submit" form="edit-role-management-form">{{ __('Save Changes') }}</x-button>
+                    form="delete-role-management-form">{{ __('ui.delete') }}</x-button>
+                <x-button type="submit" form="edit-role-management-form">{{ __('ui.save_changes') }}</x-button>
             </x-button-group>
 
             {{ html()->form('POST', route('roles.destroy', $role))->id('delete-role-management-form')->class('hidden')->open() }}

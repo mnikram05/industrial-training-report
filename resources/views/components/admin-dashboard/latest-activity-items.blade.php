@@ -22,13 +22,13 @@
 
 <x-card>
     <x-card-header class="pb-2">
-        <x-card-title>{{ __('Latest Activity Logs') }}</x-card-title>
-        <x-card-description>{{ __('Showing the 5 most recent events') }}</x-card-description>
+        <x-card-title>{{ __('ui.latest_activity_logs') }}</x-card-title>
+        <x-card-description>{{ __('ui.showing_the_5_most_recent_events') }}</x-card-description>
     </x-card-header>
 
     <x-card-content class="pb-2 px-3 sm:px-6">
         @if ($normalizedItems === [])
-            <p class="text-muted-foreground text-sm">{{ __('No recent activity') }}</p>
+            <p class="text-muted-foreground text-sm">{{ __('ui.no_recent_activity') }}</p>
         @else
             <x-item-group role="list">
                 @foreach ($normalizedItems as $item)

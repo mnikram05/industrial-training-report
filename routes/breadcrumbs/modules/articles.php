@@ -9,25 +9,25 @@ use Modules\PortalAdministration\Models\Article;
 Breadcrumbs::for( 'articles.index', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'dashboard' )
-        ->push( __( 'Articles' ), route( 'articles.index' ) );
+        ->push( __( 'ui.articles' ), route( 'articles.index' ) );
 } );
 
 Breadcrumbs::for( 'articles.create', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'articles.index' )
-        ->push( __( 'Create' ) );
+        ->push( __( 'ui.create' ) );
 } );
 
 Breadcrumbs::for( 'articles.edit', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'articles.index' )
-        ->push( __( 'Edit' ) );
+        ->push( __( 'ui.edit' ) );
 } );
 
 Breadcrumbs::for( 'articles.show', function ( BreadcrumbTrail $trail, mixed $article ): void {
     $label = $article instanceof Article
         ? $article->title
-        : __( 'Show' );
+        : __( 'ui.show' );
 
     $trail
         ->parent( 'articles.index' )

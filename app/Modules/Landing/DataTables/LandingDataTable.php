@@ -58,12 +58,12 @@ class LandingDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( 'No.' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
-            ['label' => __( 'Title' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Slug' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Status' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Updated' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
+            ['label' => __( 'ui.no_fbd39f' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
+            ['label' => __( 'ui.title' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.slug' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.status' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.updated' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
 
@@ -84,6 +84,6 @@ class LandingDataTable extends BaseModuleDataTable
 
     public function filterPlaceholder(): string
     {
-        return __( 'Filter landings...' );
+        return __( 'ui.filter_landings' );
     }
 }

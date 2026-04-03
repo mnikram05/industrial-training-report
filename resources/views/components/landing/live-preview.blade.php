@@ -3,7 +3,7 @@
 ])
 
 <p class="text-sm text-muted-foreground">
-    {{ __('This preview matches your live landing page layout and updates while you edit.') }}</p>
+    {{ __('ui.this_preview_matches_your_live_landing_page_layout_and_updates_while_you_edit') }}</p>
 
 @once
     <svg class="sr-only" aria-hidden="true" focusable="false">
@@ -79,7 +79,7 @@
                                 <x-dropdown-menu-item @click="preview.locale = 'en'; open = false"
                                     class="w-full justify-between gap-2 rounded-md px-2 py-1.5 text-left text-sm leading-5 transition-colors"
                                     x-bind:class="preview.locale === 'en' ? 'bg-accent text-accent-foreground' : ''">
-                                    <span>{{ __('English') }}</span>
+                                    <span>{{ __('ui.english') }}</span>
                                     <svg x-show="preview.locale === 'en'" class="size-4" viewBox="0 0 20 20"
                                         fill="none" aria-hidden="true">
                                         <path d="M5 10L8.5 13.5L15 7" stroke="currentColor" stroke-width="1.5"
@@ -89,7 +89,7 @@
                                 <x-dropdown-menu-item @click="preview.locale = 'ms'; open = false"
                                     class="w-full justify-between gap-2 rounded-md px-2 py-1.5 text-left text-sm leading-5 transition-colors"
                                     x-bind:class="preview.locale === 'ms' ? 'bg-accent text-accent-foreground' : ''">
-                                    <span>{{ __('Melayu') }}</span>
+                                    <span>{{ __('ui.melayu') }}</span>
                                     <svg x-show="preview.locale === 'ms'" class="size-4" viewBox="0 0 20 20"
                                         fill="none" aria-hidden="true">
                                         <path d="M5 10L8.5 13.5L15 7" stroke="currentColor" stroke-width="1.5"
@@ -100,19 +100,19 @@
                         </x-dropdown-menu>
                         <template x-if="preview.isAuthenticated">
                             <x-button as="a" size="sm" ::href="preview.dashboardUrl || '#'">
-                                {{ __('Dashboard') }}
+                                {{ __('ui.dashboard') }}
                             </x-button>
                         </template>
 
                         <template x-if="!preview.isAuthenticated">
                             <x-button as="a" variant="outline" size="sm" ::href="preview.loginUrl || '#'">
-                                {{ __('Login') }}
+                                {{ __('ui.login') }}
                             </x-button>
                         </template>
 
                         <template x-if="!preview.isAuthenticated && preview.canRegister">
                             <x-button as="a" size="sm" ::href="preview.registerUrl || '#'">
-                                {{ __('Register') }}
+                                {{ __('ui.register') }}
                             </x-button>
                         </template>
                     </nav>
@@ -133,7 +133,7 @@
                         <div class="flex flex-wrap items-center justify-center gap-3">
                             <template x-if="preview.isAuthenticated">
                                 <x-button as="a" size="lg" ::href="preview.dashboardUrl || '#'">
-                                    {{ __('Go to Dashboard') }}
+                                    {{ __('ui.go_to_dashboard') }}
                                 </x-button>
                             </template>
 
@@ -170,7 +170,7 @@
                             <template x-if="isFilled(preview.bannerImageUrl)">
                                 <div class="overflow-hidden rounded-3xl ring-1 ring-foreground/10 bg-background">
                                     <img :src="preview.bannerImageUrl"
-                                        :alt="preview.bannerAlt || preview.bannerTitle || '{{ __('Banner image') }}'"
+                                        :alt="preview.bannerAlt || preview.bannerTitle || '{{ __('ui.banner_image_137d2d') }}'"
                                         class="h-48 w-full object-cover sm:h-64" loading="lazy">
                                 </div>
                             </template>
@@ -195,7 +195,7 @@
                             <template x-if="isFilled(preview.aboutImageUrl)">
                                 <div class="overflow-hidden rounded-3xl ring-1 ring-foreground/10 bg-background">
                                     <img :src="preview.aboutImageUrl"
-                                        :alt="preview.aboutAlt || preview.aboutTitle || '{{ __('About image') }}'"
+                                        :alt="preview.aboutAlt || preview.aboutTitle || '{{ __('ui.about_image_57d7f4') }}'"
                                         class="h-48 w-full object-cover sm:h-64" loading="lazy">
                                 </div>
                             </template>
@@ -220,7 +220,7 @@
                             <template x-if="isFilled(preview.securityImageUrl)">
                                 <div class="overflow-hidden rounded-3xl ring-1 ring-foreground/10 bg-background">
                                     <img :src="preview.securityImageUrl"
-                                        :alt="preview.securityAlt || preview.securityTitle || '{{ __('Security image') }}'"
+                                        :alt="preview.securityAlt || preview.securityTitle || '{{ __('ui.security_image_117ee2') }}'"
                                         class="h-48 w-full object-cover sm:h-64" loading="lazy">
                                 </div>
                             </template>
@@ -233,7 +233,7 @@
                 <section class="w-full border-t border-border py-12 md:py-24">
                     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="mb-8 space-y-2">
-                            <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">{{ __('Articles') }}</h2>
+                            <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">{{ __('ui.articles') }}</h2>
                         </div>
                         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             <template x-for="(article, index) in visibleArticles()" :key="'preview-article-' + index">
@@ -241,7 +241,7 @@
                                     <template x-if="isFilled(article.imageUrl)">
                                         <div class="mb-4 overflow-hidden rounded-xl">
                                             <img :src="article.imageUrl"
-                                                :alt="article.alt || article.title || '{{ __('Article image') }}'"
+                                                :alt="article.alt || article.title || '{{ __('ui.article_image_77275d') }}'"
                                                 class="h-40 w-full object-cover" loading="lazy">
                                         </div>
                                     </template>
@@ -257,7 +257,7 @@
                                     <template x-if="isFilled(article.url)">
                                         <a :href="article.url" :target="articleTarget(article.url)"
                                             class="mt-4 inline-flex items-center text-sm font-medium text-primary hover:underline">
-                                            {{ __('Read more') }}
+                                            {{ __('ui.read_more') }}
                                         </a>
                                     </template>
                                 </article>

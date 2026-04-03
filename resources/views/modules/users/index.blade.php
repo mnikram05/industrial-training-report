@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-module-index-shell :latest-export-path="$latestExportPath ?? null">
-        <x-slot:heading>{{ __('Users') }}</x-slot:heading>
-        <x-slot:subtitle>{{ __('Manage application users.') }}</x-slot:subtitle>
+        <x-slot:heading>{{ __('ui.users') }}</x-slot:heading>
+        <x-slot:subtitle>{{ __('ui.manage_application_users') }}</x-slot:subtitle>
 
         <x-slot:actions>
             <x-index-actions resource="users">
-                <x-slot:create>{{ __('New User') }}</x-slot:create>
+                <x-slot:create>{{ __('ui.new_user') }}</x-slot:create>
             </x-index-actions>
         </x-slot:actions>
 

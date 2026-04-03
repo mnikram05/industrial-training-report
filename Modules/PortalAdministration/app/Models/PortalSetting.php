@@ -115,4 +115,23 @@ class PortalSetting extends Model
 
         return self::resolvedLogoPathForHeaderFooter();
     }
+
+    /**
+     * Nama paparan header (Tetapan Umum / header-footer), selari dengan bar CMS dan header portal awam.
+     */
+    public static function headerSiteDisplayName( ?string $locale = null ): string
+    {
+        $locale = $locale ?? app()->getLocale();
+        $page = 'header-footer';
+        $primaryKey = $locale === 'ms' ? 'site_name_ms' : 'site_name_en';
+        $fallbackKey = $locale === 'ms' ? 'site_name_en' : 'site_name_ms';
+        $name = self::getValue( $primaryKey, null, $page )
+            ?: self::getValue( $fallbackKey, null, $page );
+
+        if ( is_string( $name ) && $name !== '' ) {
+            return $name;
+        }
+
+        return (string) config( 'app.name' );
+    }
 }

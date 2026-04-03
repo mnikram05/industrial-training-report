@@ -18,8 +18,8 @@
 @endphp
 
 <div class="min-h-[420px]" data-react-radial-chart data-chart-data="{{ json_encode($chartData) }}" data-show-grid="true"
-    data-title="{{ __('Activity by Category') }}" data-description="{{ __('Total: :count events', ['count' => $total]) }}"
-    data-footer-trend="" data-footer-description="{{ __('All activity log categories') }}"></div>
+    data-title="{{ __('ui.activity_by_category') }}" data-description="{{ __('Total: :count events', ['count' => $total]) }}"
+    data-footer-trend="" data-footer-description="{{ __('ui.all_activity_log_categories') }}"></div>
 
 @once
     @push('scripts')

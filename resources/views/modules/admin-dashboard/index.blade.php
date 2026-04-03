@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
         <x-card class="gap-3 p-4 py-4 sm:gap-6 sm:p-6 sm:py-6">
             <x-card-header flush class="gap-1">
-                <x-card-title class="text-sm sm:text-base">{{ __('Total Users') }}</x-card-title>
+                <x-card-title class="text-sm sm:text-base">{{ __('ui.total_users') }}</x-card-title>
             </x-card-header>
             <x-card-content flush>
                 <p class="text-2xl font-semibold sm:text-3xl">{{ number_format($totalUsers) }}</p>
@@ -12,7 +12,7 @@
 
         <x-card class="gap-3 p-4 py-4 sm:gap-6 sm:p-6 sm:py-6">
             <x-card-header flush class="gap-1">
-                <x-card-title class="text-sm sm:text-base">{{ __('Total Articles') }}</x-card-title>
+                <x-card-title class="text-sm sm:text-base">{{ __('ui.total_articles') }}</x-card-title>
             </x-card-header>
             <x-card-content flush>
                 <p class="text-2xl font-semibold sm:text-3xl">{{ number_format($totalArticles) }}</p>
@@ -21,7 +21,7 @@
 
         <x-card class="gap-3 p-4 py-4 sm:gap-6 sm:p-6 sm:py-6">
             <x-card-header flush class="gap-1">
-                <x-card-title class="text-sm sm:text-base">{{ __('Published Articles') }}</x-card-title>
+                <x-card-title class="text-sm sm:text-base">{{ __('ui.published_articles') }}</x-card-title>
             </x-card-header>
             <x-card-content flush>
                 <p class="text-2xl font-semibold sm:text-3xl">{{ number_format($publishedArticles) }}</p>
@@ -30,7 +30,7 @@
 
         <x-card class="gap-3 p-4 py-4 sm:gap-6 sm:p-6 sm:py-6">
             <x-card-header flush class="gap-1">
-                <x-card-title class="text-sm sm:text-base">{{ __('Roles') }}</x-card-title>
+                <x-card-title class="text-sm sm:text-base">{{ __('ui.roles') }}</x-card-title>
             </x-card-header>
             <x-card-content flush>
                 <p class="text-2xl font-semibold sm:text-3xl">{{ number_format($totalRoles) }}</p>

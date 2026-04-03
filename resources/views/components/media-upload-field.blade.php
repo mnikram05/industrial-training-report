@@ -11,7 +11,7 @@
     <x-label :for="$id">{{ $label }}</x-label>
 
     <x-file-upload :id="$id" :name="$name" accept="image/*" :class="$uploadClass"
-        button-label="{{ __('Upload Image') }}" placeholder="{{ __('No image selected') }}" />
+        button-label="{{ __('ui.upload_image') }}" placeholder="{{ __('ui.no_image_selected') }}" />
 
     @if (filled($path))
         <p class="break-all text-xs text-muted-foreground">

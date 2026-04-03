@@ -2,7 +2,7 @@
 
     <x-card module>
         <x-card-header flush>
-            <x-card-title>{{ __('Create User') }}</x-card-title>
+            <x-card-title>{{ __('ui.create_user') }}</x-card-title>
         </x-card-header>
 
         <x-card-content flush>
@@ -14,7 +14,7 @@
             {{ html()->form()->close() }}
 
             <x-button-group plain end>
-                <x-button type="submit" form="create-user-management-form">{{ __('Create User') }}</x-button>
+                <x-button type="submit" form="create-user-management-form">{{ __('ui.create_user') }}</x-button>
             </x-button-group>
         </x-card-content>
     </x-card>

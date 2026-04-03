@@ -1,5 +1,5 @@
 @props([
-    'placeholder' => __('Search'),
+    'placeholder' => __('ui.search'),
 ])
 
 @php
@@ -132,7 +132,7 @@
     }
 }"
     @keydown.escape.window="close()">
-    <label for="global-search-input" class="sr-only">{{ __('Global search') }}</label>
+    <label for="global-search-input" class="sr-only">{{ __('ui.global_search') }}</label>
 
     <div class="relative">
         <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-muted-foreground">
@@ -156,13 +156,13 @@
         </span>
 
         <x-button type="button" variant="ghost" size="icon-xs" x-cloak x-show="!loading && query.length > 0"
-            @click="clearSearch()" title="{{ __('Clear') }}" aria-label="{{ __('Clear') }}"
+            @click="clearSearch()" title="{{ __('ui.clear') }}" aria-label="{{ __('ui.clear') }}"
             class="absolute inset-y-0 right-1 my-auto text-muted-foreground hover:text-foreground">
             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m18 6-12 12" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="m6 6 12 12" />
             </svg>
-            <span class="sr-only">{{ __('Clear') }}</span>
+            <span class="sr-only">{{ __('ui.clear') }}</span>
         </x-button>
     </div>
 
@@ -170,7 +170,7 @@
         class="absolute left-0 right-0 top-[calc(100%+0.375rem)] z-40 overflow-hidden rounded-md border border-border bg-popover shadow-md">
         <p
             class="border-b border-border px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-            {{ __('Top 5 results') }}
+            {{ __('ui.top_5_results') }}
         </p>
 
         <div class="max-h-72 overflow-y-auto p-1.5">

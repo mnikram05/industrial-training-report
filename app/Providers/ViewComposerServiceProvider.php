@@ -61,19 +61,15 @@ class ViewComposerServiceProvider extends ServiceProvider
                 ? Storage::disk( 'public' )->url( $pathForCmsBar )
                 : null;
 
-            $cmsHeaderBrandLine = PortalSetting::getValue( 'site_name_ms', null, 'header-footer' )
-                ?: PortalSetting::getValue( 'site_name_en', null, 'header-footer' )
-                ?: config( 'app.name' );
-
             $view->with( [
                 'user'                 => $user,
                 'avatarFallback'       => $this->avatarFallback( $user ),
                 'profileEditUrl'       => route( 'account.edit' ),
                 'currentLocale'        => $locale,
-                'localeLabel'          => $locale === 'ms' ? __( 'Melayu' ) : __( 'English' ),
+                'localeLabel'          => $locale === 'ms' ? __( 'ui.melayu' ) : __( 'ui.english' ),
                 'isImpersonating'      => function_exists( 'is_impersonating' ) && is_impersonating(),
                 'cmsPortalLogoUrl'     => $cmsPortalLogoUrl,
-                'cmsHeaderBrandLine'   => is_string( $cmsHeaderBrandLine ) ? $cmsHeaderBrandLine : config( 'app.name' ),
+                'cmsHeaderBrandLine'   => PortalSetting::headerSiteDisplayName( $locale ),
             ] );
         } );
     }

@@ -92,7 +92,7 @@
 
                 <button type="button" @click="toggleFullscreen()"
                     class="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-600 shadow-md transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-                    title="{{ __('Full screen') }}" aria-label="{{ __('Full screen') }}">
+                    title="{{ __('ui.full_screen') }}" aria-label="{{ __('ui.full_screen') }}">
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
@@ -101,7 +101,7 @@
 
                 <button type="button" @click="$store.layout.toggleTheme()"
                     class="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-600 shadow-md transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-                    title="{{ __('Theme') }}" aria-label="{{ __('Theme') }}">
+                    title="{{ __('ui.theme') }}" aria-label="{{ __('ui.theme') }}">
                     <svg x-cloak x-show="$store.layout.theme !== 'dark'" class="size-4" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="1.8">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -119,7 +119,7 @@
                     <button type="button" @click="headerProfileOpen = !headerProfileOpen"
                         class="inline-flex size-9 shrink-0 items-center justify-center rounded-full border-2 border-white bg-white shadow-md ring-1 ring-slate-200/80 dark:border-slate-700 dark:bg-slate-800 dark:ring-slate-600"
                         :aria-expanded="headerProfileOpen" aria-haspopup="true"
-                        aria-label="{{ __('Account') }}">
+                        aria-label="{{ __('ui.account') }}">
                         <x-avatar size="sm">
                             <x-avatar-fallback class="text-[10px]">{{ $avatarFallback }}</x-avatar-fallback>
                         </x-avatar>
@@ -138,20 +138,20 @@
                         <x-separator class="my-1" />
                         <a href="{{ $profileEditUrl }}"
                             class="focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground relative flex w-full select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none">
-                            {{ __('Account') }}
+                            {{ __('ui.account') }}
                         </a>
                         <x-separator class="my-1" />
                         {{ html()->form('POST', route('logout'))->class('w-full')->open() }}
                         <button type="submit"
                             class="focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground relative flex w-full select-none items-center justify-start rounded-sm px-2 py-1.5 text-left text-sm font-medium text-popover-foreground outline-none">
-                            {{ __('Log Out') }}
+                            {{ __('ui.log_out') }}
                         </button>
                         {{ html()->form()->close() }}
                         @if ($isImpersonating)
                             <x-separator class="my-1" />
                             <a href="{{ route('impersonate.leave') }}"
                                 class="focus:bg-accent hover:bg-accent relative flex w-full select-none items-center justify-start rounded-sm px-2 py-1.5 text-left text-sm font-medium text-orange-600 outline-none transition-colors hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-400">
-                                {{ __('Stop Impersonating') }}
+                                {{ __('ui.stop_impersonating') }}
                             </a>
                         @endif
                     </div>

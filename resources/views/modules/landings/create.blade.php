@@ -2,7 +2,7 @@
 
     <x-card module>
         <x-card-header flush>
-            <x-card-title>{{ __('Create Landing') }}</x-card-title>
+            <x-card-title>{{ __('ui.create_landing') }}</x-card-title>
         </x-card-header>
 
         <x-card-content flush>
@@ -11,7 +11,7 @@
             {{ html()->form()->close() }}
 
             <x-button-group plain end>
-                <x-button type="submit" form="create-landing-management-form">{{ __('Create Landing') }}</x-button>
+                <x-button type="submit" form="create-landing-management-form">{{ __('ui.create_landing') }}</x-button>
             </x-button-group>
         </x-card-content>
     </x-card>

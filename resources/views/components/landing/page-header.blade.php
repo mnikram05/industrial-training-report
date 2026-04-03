@@ -5,7 +5,7 @@
 ])
 
 @php
-    $activeLocaleLabel = $localeLabels[$currentLocale] ?? __('Language');
+    $activeLocaleLabel = $localeLabels[$currentLocale] ?? __('ui.language');
 @endphp
 
 <header
@@ -22,7 +22,7 @@
                 <x-dropdown-menu class="w-full sm:w-auto">
                     <x-dropdown-menu-trigger
                         class="inline-flex h-8 w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap rounded-md border border-input bg-background px-3 text-sm font-medium shadow-xs transition-all outline-none hover:bg-accent hover:text-accent-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:w-auto sm:justify-center"
-                        :aria-label="__('Switch language')">
+                        :aria-label="__('ui.switch_language')">
                         <span>{{ $activeLocaleLabel }}</span>
                         <svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                             <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5"
@@ -52,15 +52,15 @@
 
                 @auth
                     <x-button as="a" href="{{ route('dashboard') }}" size="sm">
-                        {{ __('Dashboard') }}
+                        {{ __('ui.dashboard') }}
                     </x-button>
                 @else
                     <x-button as="a" href="{{ route('login') }}" variant="outline" size="sm">
-                        {{ __('Login') }}
+                        {{ __('ui.login') }}
                     </x-button>
                     @if ($canRegister)
                         <x-button as="a" href="{{ route('register') }}" size="sm">
-                            {{ __('Register') }}
+                            {{ __('ui.register') }}
                         </x-button>
                     @endif
                 @endauth

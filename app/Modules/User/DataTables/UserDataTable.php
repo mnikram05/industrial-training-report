@@ -49,11 +49,11 @@ class UserDataTable extends BaseModuleDataTable
     protected function headings(): array
     {
         return [
-            ['label' => __( 'No.' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
-            ['label' => __( 'Name' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Email' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Created' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'Actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
+            ['label' => __( 'ui.no_fbd39f' ), 'class' => 'px-4 py-3 text-left font-medium w-14'],
+            ['label' => __( 'ui.name' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.email' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.created' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'ui.actions' ), 'class' => 'px-4 py-3 text-right font-medium'],
         ];
     }
 
@@ -73,6 +73,6 @@ class UserDataTable extends BaseModuleDataTable
 
     public function filterPlaceholder(): string
     {
-        return __( 'Filter users...' );
+        return __( 'ui.filter_users' );
     }
 }

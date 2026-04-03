@@ -17,19 +17,19 @@
             ];
 
         $resolvedTranslations = [
-            'filterPlaceholder' => __('Filter...'),
-            'clear' => __('Clear'),
-            'columns' => __('Columns'),
-            'info' => __('Showing _START_ to _END_ of _TOTAL_ entries'),
-            'infoEmpty' => __('Showing 0 to 0 of 0 entries'),
-            'zeroRecords' => __('No matching records found'),
-            'emptyTable' => __('No data available in table'),
-            'processing' => __('Processing...'),
-            'loadingRecords' => __('Loading...'),
-            'first' => __('First'),
-            'previous' => __('Previous'),
-            'next' => __('Next'),
-            'last' => __('Last'),
+            'filterPlaceholder' => __('ui.filter_f7c1eb'),
+            'clear' => __('ui.clear'),
+            'columns' => __('ui.columns'),
+            'info' => __('ui.showing_start_to_end_of_total_entries'),
+            'infoEmpty' => __('ui.showing_0_to_0_of_0_entries'),
+            'zeroRecords' => __('ui.no_matching_records_found'),
+            'emptyTable' => __('ui.no_data_available_in_table'),
+            'processing' => __('ui.processing'),
+            'loadingRecords' => __('ui.loading'),
+            'first' => __('ui.first'),
+            'previous' => __('ui.previous'),
+            'next' => __('ui.next'),
+            'last' => __('ui.last'),
         ];
     @endphp
 

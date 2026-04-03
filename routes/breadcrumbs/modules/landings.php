@@ -8,17 +8,17 @@ use App\Support\Breadcrumbs\BreadcrumbTrail;
 Breadcrumbs::for( 'landings.index', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'dashboard' )
-        ->push( __( 'Landings' ), route( 'landings.index' ) );
+        ->push( __( 'ui.landings' ), route( 'landings.index' ) );
 } );
 
 Breadcrumbs::for( 'landings.create', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'landings.index' )
-        ->push( __( 'Create' ) );
+        ->push( __( 'ui.create' ) );
 } );
 
 Breadcrumbs::for( 'landings.edit', function ( BreadcrumbTrail $trail ): void {
     $trail
         ->parent( 'landings.index' )
-        ->push( __( 'Edit' ) );
+        ->push( __( 'ui.edit' ) );
 } );

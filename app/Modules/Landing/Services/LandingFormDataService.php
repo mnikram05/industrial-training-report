@@ -63,12 +63,12 @@ class LandingFormDataService
     private function featureIconOptions(): array
     {
         return [
-            'sparkles' => __( 'Sparkles' ),
-            'shield'   => __( 'Shield' ),
-            'globe'    => __( 'Globe' ),
-            'zap'      => __( 'Zap' ),
-            'heart'    => __( 'Heart' ),
-            'star'     => __( 'Star' ),
+            'sparkles' => __( 'ui.sparkles' ),
+            'shield'   => __( 'ui.shield' ),
+            'globe'    => __( 'ui.globe' ),
+            'zap'      => __( 'ui.zap' ),
+            'heart'    => __( 'ui.heart' ),
+            'star'     => __( 'ui.star' ),
         ];
     }
 

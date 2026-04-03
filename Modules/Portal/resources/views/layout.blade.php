@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $pageTitle ?? config('app.name') }}</title>
+    <title>{{ __('app.document_title') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @php
         $colors = \Modules\PortalAdministration\Models\PortalSetting::forPage('header-footer');
@@ -132,7 +132,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a23.54 23.54 0 0 0-2.688 11.354 23.54 23.54 0 0 1 7.17-2.583M4.26 10.147A23.46 23.46 0 0 1 12 8.243a23.46 23.46 0 0 1 7.74 1.904M12 2.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
                         </svg>
                     @endif
-                    <span class="hidden sm:inline">{{ $colors['site_name_' . app()->getLocale()] ?? $pageTitle ?? config('app.name') }}</span>
+                    <span class="hidden sm:inline">{{ \Modules\PortalAdministration\Models\PortalSetting::headerSiteDisplayName() }}</span>
                 </a>
 
                 <nav class="hidden items-center lg:flex">

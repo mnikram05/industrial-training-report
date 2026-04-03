@@ -15,9 +15,9 @@
         ->all();
 
     $timeRangeOptions = [
-        '90d' => __('Last 3 months'),
-        '30d' => __('Last 30 days'),
-        '7d' => __('Last 7 days'),
+        '90d' => __('ui.last_3_months'),
+        '30d' => __('ui.last_30_days'),
+        '7d' => __('ui.last_7_days'),
     ];
 @endphp
 
@@ -47,8 +47,8 @@
 }" class="rounded-xl border bg-card text-card-foreground shadow pt-0">
     <div class="flex items-center justify-between gap-4 border-b p-6 py-5">
         <div class="grid gap-1">
-            <h3 class="font-semibold leading-none tracking-tight">{{ __('Authentication Activity') }}</h3>
-            <p class="text-sm text-muted-foreground">{{ __('Showing login and logout activity') }}</p>
+            <h3 class="font-semibold leading-none tracking-tight">{{ __('ui.authentication_activity') }}</h3>
+            <p class="text-sm text-muted-foreground">{{ __('ui.showing_login_and_logout_activity') }}</p>
         </div>
         <x-select :options="$timeRangeOptions" value="90d" class="!w-auto hidden sm:block"
             x-on:change="timeRange = $event.detail.value" />

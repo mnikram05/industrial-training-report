@@ -29,10 +29,10 @@ class StatusService
 
         foreach ( StatusType::cases() as $type ) {
             $options[$type->value] = match ( $type ) {
-                StatusType::Module       => __( 'Module' ),
-                StatusType::Article      => __( 'Article' ),
-                StatusType::Landing      => __( 'Landing' ),
-                StatusType::DataTransfer => __( 'Data Transfer' ),
+                StatusType::Module       => __( 'ui.module' ),
+                StatusType::Article      => __( 'ui.article' ),
+                StatusType::Landing      => __( 'ui.landing' ),
+                StatusType::DataTransfer => __( 'ui.data_transfer' ),
             };
         }
 

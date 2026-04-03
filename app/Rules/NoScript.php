@@ -42,7 +42,7 @@ class NoScript implements ValidationRule
 
         foreach ( $this->patterns as $pattern ) {
             if ( preg_match( $pattern, $value ) ) {
-                $fail( __( 'The :attribute field contains potentially dangerous content.' ) );
+                $fail( __( 'ui.the_attribute_field_contains_potentially_dangerous_content' ) );
 
                 return;
             }
