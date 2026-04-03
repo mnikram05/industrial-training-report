@@ -8,5 +8,5 @@ return [
     | Tajuk dokumen (tab pelayar)
     |--------------------------------------------------------------------------
     */
-    'document_title' => 'Industrial training report',
+    'document_title' => 'Industrial Training Report',
 ];
