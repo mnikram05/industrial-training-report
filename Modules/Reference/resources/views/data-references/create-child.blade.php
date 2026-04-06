@@ -2,7 +2,7 @@
 
     <x-card module>
         <x-card-header flush>
-            <x-card-title>{{ $dataReference->label_my ?? $dataReference->name }} — {{ __('modules/reference/data-reference.create_child') }}</x-card-title>
+            <x-card-title>{{ $dataReference->label_ms ?? $dataReference->name }} — {{ __('modules/reference/data-reference.create_child') }}</x-card-title>
         </x-card-header>
 
         <x-card-content flush>

@@ -26,7 +26,7 @@ class DataReference extends Model
      */
     protected $fillable = [
         'parent_id',
-        'label_my',
+        'label_ms',
         'label_en',
         'name',
         'description',
@@ -77,7 +77,7 @@ class DataReference extends Model
     }
 
     /**
-     * Scope: search by name, label_my, or label_en.
+     * Scope: search by name, label_ms, or label_en.
      */
     public function scopeSearch( Builder $query, ?string $term ): Builder
     {
@@ -87,7 +87,7 @@ class DataReference extends Model
 
         return $query->where( function ( Builder $q ) use ( $term ) {
             $q->where( 'name', 'like', "%{$term}%" )
-                ->orWhere( 'label_my', 'like', "%{$term}%" )
+                ->orWhere( 'label_ms', 'like', "%{$term}%" )
                 ->orWhere( 'label_en', 'like', "%{$term}%" );
         } );
     }

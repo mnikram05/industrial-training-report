@@ -9,7 +9,7 @@
             </select></x-field>
     </div>
     <div class="grid gap-4 sm:grid-cols-2">
-        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_ms') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_ms" /></x-field>
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_en" /></x-field>
@@ -30,7 +30,7 @@
             <x-field class="gap-1.5"><x-slot:labelText>URL</x-slot:labelText>
                 <x-input type="url" x-model="item.url" placeholder="https://" /></x-field>
             <div class="grid gap-3 sm:grid-cols-2">
-                <x-input type="text" x-model="item.label_ms" placeholder="{{ __('modules/portal/setting.fields.label_my') }}" />
+                <x-input type="text" x-model="item.label_ms" placeholder="{{ __('modules/portal/setting.fields.label_ms') }}" />
                 <x-input type="text" x-model="item.label_en" placeholder="{{ __('modules/portal/setting.fields.label_en') }}" />
             </div>
         </div>

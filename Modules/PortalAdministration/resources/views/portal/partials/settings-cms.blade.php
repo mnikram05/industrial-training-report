@@ -34,7 +34,7 @@
     <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">{{ __('modules/portal-administration/portal-setting.sections.cms_footer') }}</h3>
     <div class="grid gap-4 sm:grid-cols-2">
         <x-field for="cms_footer_ms" class="gap-1.5">
-            <x-slot:labelText>{{ __('modules/portal-administration/portal-setting.fields.cms_footer_my') }}</x-slot:labelText>
+            <x-slot:labelText>{{ __('modules/portal-administration/portal-setting.fields.cms_footer_ms') }}</x-slot:labelText>
             <x-input id="cms_footer_ms" name="cms_footer_ms" type="text" :value="$settings['cms_footer_ms'] ?? ''" />
         </x-field>
         <x-field for="cms_footer_en" class="gap-1.5">

@@ -25,7 +25,7 @@ return [
     ],
     'fields' => [
         'name'        => 'Name',
-        'label_my'    => 'Label (MY)',
+        'label_ms'    => 'Label (MS)',
         'label_en'    => 'Label (EN)',
         'parent'      => 'Parent',
         'sort'        => 'Sort',

@@ -1,6 +1,6 @@
 <div class="space-y-4">
     <div class="grid gap-4 sm:grid-cols-2">
-        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_ms') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_ms" /></x-field>
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_en" /></x-field>
@@ -26,11 +26,11 @@
                     @endforeach
                 </select></x-field>
             <div class="grid gap-3 sm:grid-cols-2">
-                <x-input type="text" x-model="item.title_ms" placeholder="{{ __('modules/portal/setting.fields.title_my') }}" />
+                <x-input type="text" x-model="item.title_ms" placeholder="{{ __('modules/portal/setting.fields.title_ms') }}" />
                 <x-input type="text" x-model="item.title_en" placeholder="{{ __('modules/portal/setting.fields.title_en') }}" />
             </div>
             <div class="grid gap-3 sm:grid-cols-2">
-                <textarea x-model="item.desc_ms" rows="2" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.fields.desc_my') }}"></textarea>
+                <textarea x-model="item.desc_ms" rows="2" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.fields.desc_ms') }}"></textarea>
                 <textarea x-model="item.desc_en" rows="2" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.fields.desc_en') }}"></textarea>
             </div>
             <div class="rounded border bg-gray-50/50 p-3 space-y-2">

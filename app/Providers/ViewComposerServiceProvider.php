@@ -21,8 +21,6 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer( 'layouts.partials.menu', function ( BladeView $view ): void {
             $view->with( 'cmsOpen', request()->routeIs(
                 'admin.dashboard',
-                'landings.*',
-                'statuses.*',
                 'users.*',
                 'roles.*',
                 'activity-logs.*',
@@ -35,16 +33,6 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'portal-settings.*',
             ) );
 
-            $view->with( 'referencesOpen', request()->routeIs(
-                'reference.states.*',
-                'reference.parliaments.*',
-                'reference.duns.*',
-                'reference.districts.*',
-                'reference.data-references.*',
-            ) );
-
-            // Note: DUNs and Districts are accessed via States > Parliaments/Districts actions,
-            // but still trigger referencesOpen for sidebar highlight.
         } );
 
         View::composer( 'layouts.partials.navigation', function ( BladeView $view ): void {
@@ -66,7 +54,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'avatarFallback'       => $this->avatarFallback( $user ),
                 'profileEditUrl'       => route( 'account.edit' ),
                 'currentLocale'        => $locale,
-                'localeLabel'          => $locale === 'ms' ? __( 'ui.melayu' ) : __( 'ui.english' ),
+                'localeLabel'          => $locale === 'ms' ? __( 'ui.locale_ms' ) : __( 'ui.english' ),
                 'isImpersonating'      => function_exists( 'is_impersonating' ) && is_impersonating(),
                 'cmsPortalLogoUrl'     => $cmsPortalLogoUrl,
                 'cmsHeaderBrandLine'   => PortalSetting::headerSiteDisplayName( $locale ),

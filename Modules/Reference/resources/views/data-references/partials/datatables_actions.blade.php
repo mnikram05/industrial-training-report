@@ -3,15 +3,15 @@
         {{ __('modules/reference/data-reference.children_list') }}
     </x-datatable-action-link>
 
-    @if ($dataReference->label_my === 'Jenis Menu')
+    @if ($dataReference->label_ms === 'Jenis Menu')
         <x-datatable-action-link :href="route('portal-administration.menus.index')">
             {{ __('modules/portal-administration/menu.plural') }}
         </x-datatable-action-link>
-    @elseif ($dataReference->label_my === 'Jenis Dokumen')
+    @elseif ($dataReference->label_ms === 'Jenis Dokumen')
         <x-datatable-action-link :href="route('articles.index')">
             {{ __('modules/portal-administration/article.plural') }}
         </x-datatable-action-link>
-    @elseif ($dataReference->label_my === 'Jenis Media')
+    @elseif ($dataReference->label_ms === 'Jenis Media')
         <x-datatable-action-link :href="route('media.index')">
             {{ __('modules/portal-administration/media.plural') }}
         </x-datatable-action-link>

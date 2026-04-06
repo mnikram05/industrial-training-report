@@ -16,7 +16,7 @@ return [
         'no'            => 'No.',
         'menu_type'     => 'Jenis Menu',
         'menu'          => 'Menu',
-        'title_my'      => 'Tajuk (MY)',
+        'title_ms'      => 'Tajuk (MS)',
         'title_en'      => 'Tajuk (EN)',
         'document_type' => 'Jenis Dokumen',
         'title'         => 'Tajuk',
@@ -31,7 +31,7 @@ return [
         'actions'       => 'Tindakan',
     ],
     'placeholders' => [
-        'title_my'             => 'Tajuk Melayu',
+        'title_ms'             => 'Tajuk (MS)',
         'title_en'             => 'Tajuk Inggeris',
         'title'                => 'Tajuk artikel',
         'title_doc'            => 'Tajuk dokumen',

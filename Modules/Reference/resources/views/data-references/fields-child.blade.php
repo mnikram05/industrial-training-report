@@ -1,8 +1,8 @@
 <div class="space-y-4 pb-6">
-    <x-field for="data_reference_label_my" :error="$errors->first('label_my')" class="gap-1.5">
-        <x-slot:labelText>{{ __('modules/reference/data-reference.fields.label_my') }}</x-slot:labelText>
-        <x-input id="data_reference_label_my" name="label_my" type="text" class="sm:w-1/2" placeholder="{{ __('modules/reference/data-reference.fields.label_my') }}"
-            :value="old('label_my', $child?->label_my ?? '')" maxlength="255" />
+    <x-field for="data_reference_label_ms" :error="$errors->first('label_ms')" class="gap-1.5">
+        <x-slot:labelText>{{ __('modules/reference/data-reference.fields.label_ms') }}</x-slot:labelText>
+        <x-input id="data_reference_label_ms" name="label_ms" type="text" class="sm:w-1/2" placeholder="{{ __('modules/reference/data-reference.fields.label_ms') }}"
+            :value="old('label_ms', $child?->label_ms ?? '')" maxlength="255" />
     </x-field>
 
     <x-field for="data_reference_label_en" :error="$errors->first('label_en')" class="gap-1.5">

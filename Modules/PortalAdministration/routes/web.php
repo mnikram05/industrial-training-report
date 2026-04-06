@@ -33,7 +33,7 @@ Route::middleware( ['auth'] )->group( function (): void {
             ->where( 'parent_id', $menuType->id )
             ->where( 'status_id', 1 )
             ->ordered()
-            ->get( ['id', 'title_my', 'title_en'] );
+            ->get( ['id', 'title_ms', 'title_en'] );
 
         return response()->json( $menus );
     } )->name( 'api.menus-by-type' );

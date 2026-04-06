@@ -19,7 +19,7 @@ class StoreDataReferenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'label_my'    => ['nullable', 'string', 'max:255'],
+            'label_ms'    => ['nullable', 'string', 'max:255'],
             'label_en'    => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'sort'        => ['nullable', 'integer', 'min:1'],

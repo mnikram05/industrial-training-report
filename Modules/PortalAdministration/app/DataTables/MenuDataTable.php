@@ -66,21 +66,21 @@ class MenuDataTable extends BaseModuleDataTable
                 'menu' => $menu,
             ] )->render() )
             ->addColumn( 'type_name', static fn ( Menu $menu ): string => $menu->type_id
-                ? ( $menu->type?->label_my ?? $menu->type?->label_en ?? 'null' )
+                ? ( $menu->type?->label_ms ?? $menu->type?->label_en ?? 'null' )
                 : 'null' )
             ->addColumn( 'parent_name', static fn ( Menu $menu ): string => $menu->parent_id
-                ? ( $menu->parent?->title_my ?? $menu->parent?->title_en ?? 'null' )
+                ? ( $menu->parent?->title_ms ?? $menu->parent?->title_en ?? 'null' )
                 : 'null' )
-            ->addColumn( 'display_title_my', static function ( Menu $menu ): string {
+            ->addColumn( 'display_title_ms', static function ( Menu $menu ): string {
                 if ( ! $menu->parent_id ) {
-                    return '<strong>' . ( $menu->title_my ?? '' ) . '</strong>';
+                    return '<strong>' . ( $menu->title_ms ?? '' ) . '</strong>';
                 }
 
                 if ( $menu->getAttribute( 'depth' ) === 2 ) {
-                    return '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_my ?? '' );
+                    return '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_ms ?? '' );
                 }
 
-                return '&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_my ?? '' );
+                return '&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_ms ?? '' );
             } )
             ->addColumn( 'display_title_en', static function ( Menu $menu ): string {
                 if ( ! $menu->parent_id ) {
@@ -99,7 +99,7 @@ class MenuDataTable extends BaseModuleDataTable
             ->addColumn( 'action', static fn ( Menu $menu ): string => view( 'portaladministration::menus.partials.datatables_actions', [
                 'menu' => $menu,
             ] )->render() )
-            ->rawColumns( ['sort_action', 'display_title_my', 'display_title_en', 'status_label', 'action'] )
+            ->rawColumns( ['sort_action', 'display_title_ms', 'display_title_en', 'status_label', 'action'] )
             ->toJson();
     }
 
@@ -123,7 +123,7 @@ class MenuDataTable extends BaseModuleDataTable
             ['label' => __( 'modules/portal-administration/menu.fields.sort_action' ), 'class' => 'px-4 py-3 text-center font-medium w-24'],
             ['label' => __( 'modules/portal-administration/menu.fields.type' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/portal-administration/menu.fields.parent' ), 'class' => 'px-4 py-3 text-left font-medium'],
-            ['label' => __( 'modules/portal-administration/menu.fields.title_my' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/portal-administration/menu.fields.title_ms' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/portal-administration/menu.fields.title_en' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/portal-administration/menu.fields.status' ), 'class' => 'px-4 py-3 text-center font-medium w-28'],
             ['label' => __( 'modules/portal-administration/menu.fields.slug' ), 'class' => 'px-4 py-3 text-left font-medium'],
@@ -142,7 +142,7 @@ class MenuDataTable extends BaseModuleDataTable
             ['data' => 'sort_action', 'name' => 'sort_action', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
             ['data' => 'type_name', 'name' => 'type_name', 'orderable' => false],
             ['data' => 'parent_name', 'name' => 'parent_name', 'orderable' => false],
-            ['data' => 'display_title_my', 'name' => 'title_my', 'orderable' => false],
+            ['data' => 'display_title_ms', 'name' => 'title_ms', 'orderable' => false],
             ['data' => 'display_title_en', 'name' => 'title_en', 'orderable' => false],
             ['data' => 'status_label', 'name' => 'status_id', 'searchable' => false, 'orderable' => false, 'className' => 'text-center'],
             ['data' => 'slug', 'name' => 'slug', 'orderable' => false],

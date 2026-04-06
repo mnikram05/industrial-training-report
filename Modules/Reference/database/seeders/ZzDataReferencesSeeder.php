@@ -26,7 +26,7 @@ class ZzDataReferencesSeeder extends Seeder
         }
 
         $categories = DataReference::firstOrCreate([
-            'label_my' => $data[0],
+            'label_ms' => $data[0],
             'label_en' => $data[1],
         ]);
 
@@ -34,12 +34,12 @@ class ZzDataReferencesSeeder extends Seeder
 
         // Guard: ensure index 2 exists before checking its value
         if (isset($data[2]) && !in_array($data[2], ['Kosong', 'kosong', 'KOSONG'])) {
-            $see = DataReference::where('label_my', $data[0])->first();
+            $see = DataReference::where('label_ms', $data[0])->first();
 
             if ($see && isset($data[3])) {
                 DataReference::firstOrCreate([
                     'parent_id' => $see->id,
-                    'label_my'  => $data[2],
+                    'label_ms'  => $data[2],
                     'label_en'  => $data[3],
                 ]);
             }

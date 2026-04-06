@@ -7,7 +7,7 @@
                     <option value="{{ $emoji }}">{{ $emoji }} {{ $label }}</option>
                 @endforeach
             </select></x-field>
-        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_ms') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_ms" /></x-field>
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_en" /></x-field>
@@ -28,7 +28,7 @@
                 <button type="button" @click="block.data.days.splice(di, 1)" class="text-destructive hover:text-destructive/80"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>
             </div>
             <div class="grid gap-3 sm:grid-cols-2">
-                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.day_my') }}</x-slot:labelText>
+                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.day_ms') }}</x-slot:labelText>
                     <x-input type="text" x-model="day.day_ms" placeholder="Isnin" /></x-field>
                 <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.day_en') }}</x-slot:labelText>
                     <x-input type="text" x-model="day.day_en" placeholder="Monday" /></x-field>

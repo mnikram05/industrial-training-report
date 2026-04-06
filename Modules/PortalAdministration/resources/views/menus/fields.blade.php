@@ -23,10 +23,10 @@
         </select>
     </x-field>
 
-    <x-field for="menu_title_my" :error="$errors->first('title_my')" class="gap-1.5">
-        <x-slot:labelText>{{ __('modules/portal-administration/menu.fields.title_my') }}</x-slot:labelText>
-        <x-input id="menu_title_my" name="title_my" type="text" class="sm:w-1/2" placeholder="{{ __('modules/portal-administration/menu.fields.title_my') }}"
-            :value="old('title_my', $menu?->title_my ?? '')" maxlength="255" />
+    <x-field for="menu_title_ms" :error="$errors->first('title_ms')" class="gap-1.5">
+        <x-slot:labelText>{{ __('modules/portal-administration/menu.fields.title_ms') }}</x-slot:labelText>
+        <x-input id="menu_title_ms" name="title_ms" type="text" class="sm:w-1/2" placeholder="{{ __('modules/portal-administration/menu.fields.title_ms') }}"
+            :value="old('title_ms', $menu?->title_ms ?? '')" maxlength="255" />
     </x-field>
 
     <x-field for="menu_title_en" :error="$errors->first('title_en')" class="gap-1.5">

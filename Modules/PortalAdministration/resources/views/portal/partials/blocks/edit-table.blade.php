@@ -1,6 +1,6 @@
 <div class="space-y-4">
     <div class="grid gap-4 sm:grid-cols-2">
-        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_ms') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_ms" /></x-field>
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_en" /></x-field>

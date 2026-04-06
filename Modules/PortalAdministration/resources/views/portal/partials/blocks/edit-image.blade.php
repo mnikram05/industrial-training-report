@@ -7,7 +7,7 @@
         <p class="text-xs text-muted-foreground">{{ __('modules/portal/setting.hints.upload_media_first') }}</p>
     </x-field>
     <div class="grid gap-4 sm:grid-cols-2">
-        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.caption_my') }}</x-slot:labelText>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.caption_ms') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.caption_ms" /></x-field>
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.caption_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.caption_en" /></x-field>

@@ -77,7 +77,7 @@
                             @csrf
                             <button type="submit" name="locale" value="ms"
                                 class="rounded-full px-2.5 py-1 text-[11px] font-bold tracking-wide transition sm:text-xs {{ $currentLocale === 'ms' ? 'bg-[var(--portal-accent)] text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700' }}">
-                                BM
+                                {{ __('ui.locale_ms') }}
                             </button>
                         </form>
                         <form method="POST" action="{{ route('locale.switch') }}" class="inline">

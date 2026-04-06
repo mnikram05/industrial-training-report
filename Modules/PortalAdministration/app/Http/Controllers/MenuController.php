@@ -282,7 +282,7 @@ class MenuController extends Controller
     {
         $jenisMenu = DataReference::query()
             ->whereNull( 'parent_id' )
-            ->where( 'label_my', 'Jenis Menu' )
+            ->where( 'label_ms', 'Jenis Menu' )
             ->first();
 
         if ( ! $jenisMenu ) {
@@ -292,7 +292,7 @@ class MenuController extends Controller
         if ( $menu->type_id ) {
             // Update existing Data Reference
             DataReference::where( 'id', $menu->type_id )->update( [
-                'label_my'   => $menu->title_my,
+                'label_ms'   => $menu->title_ms,
                 'label_en'   => $menu->title_en,
                 'status'     => $menu->status_id,
                 'updated_by' => auth()->id(),
@@ -305,7 +305,7 @@ class MenuController extends Controller
 
             $ref = DataReference::create( [
                 'parent_id'  => $jenisMenu->id,
-                'label_my'   => $menu->title_my,
+                'label_ms'   => $menu->title_ms,
                 'label_en'   => $menu->title_en,
                 'status'     => $menu->status_id,
                 'sort'       => $nextSort,
@@ -331,10 +331,10 @@ class MenuController extends Controller
         $options = [];
 
         foreach ( $parents as $parent ) {
-            $options[$parent->id] = $parent->title_my ?? $parent->title_en ?? '—';
+            $options[$parent->id] = $parent->title_ms ?? $parent->title_en ?? '—';
 
             foreach ( $parent->children as $child ) {
-                $options[$child->id] = '↳ ' . ( $child->title_my ?? $child->title_en ?? '—' );
+                $options[$child->id] = '↳ ' . ( $child->title_ms ?? $child->title_en ?? '—' );
             }
         }
 
@@ -351,7 +351,7 @@ class MenuController extends Controller
             ->where( 'parent_id', $parentId )
             ->when( $excludeId, fn ( $q ) => $q->where( 'id', '!=', $excludeId ) )
             ->orderBy( 'sort', 'asc' )
-            ->get( ['id', 'title_en', 'title_my', 'sort'] );
+            ->get( ['id', 'title_en', 'title_ms', 'sort'] );
 
         $options  = [];
         $position = 1;
@@ -362,7 +362,7 @@ class MenuController extends Controller
         foreach ( $items as $item ) {
             $options[$position] = __( 'modules/portal-administration/menu.sort_options.after', [
                 'position' => $this->ordinal( $position ),
-                'name'     => $item->title_my ?? $item->title_en,
+                'name'     => $item->title_ms ?? $item->title_en,
             ] );
             $position++;
         }

@@ -153,13 +153,13 @@ class PortalSettingsController extends Controller
                 ->get();
 
             foreach ( $children as $child ) {
-                $slug = Str::slug( $child->slug ?? $child->title_en ?? $child->title_my ?? '' );
+                $slug = Str::slug( $child->slug ?? $child->title_en ?? $child->title_ms ?? '' );
 
                 if ( $slug === 'home' ) {
                     continue;
                 }
 
-                $pages[$slug] = $child->title_my ?? $child->title_en ?? '—';
+                $pages[$slug] = $child->title_ms ?? $child->title_en ?? '—';
             }
         }
 

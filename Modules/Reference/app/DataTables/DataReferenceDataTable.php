@@ -54,7 +54,7 @@ class DataReferenceDataTable extends BaseModuleDataTable
     {
         return [
             ['label' => '#', 'class' => 'px-4 py-3 text-left font-medium w-14'],
-            ['label' => __( 'modules/reference/data-reference.fields.label_my' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/data-reference.fields.label_ms' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/reference/data-reference.fields.label_en' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/reference/data-reference.fields.description' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/reference/data-reference.fields.status' ), 'class' => 'px-4 py-3 text-center font-medium w-28'],
@@ -69,7 +69,7 @@ class DataReferenceDataTable extends BaseModuleDataTable
     {
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'searchable' => false, 'orderable' => false, 'className' => 'w-14 text-left'],
-            ['data' => 'label_my', 'name' => 'label_my'],
+            ['data' => 'label_ms', 'name' => 'label_ms'],
             ['data' => 'label_en', 'name' => 'label_en'],
             ['data' => 'description', 'name' => 'description'],
             ['data' => 'status_toggle', 'name' => 'status', 'searchable' => false, 'orderable' => false, 'className' => 'text-center'],

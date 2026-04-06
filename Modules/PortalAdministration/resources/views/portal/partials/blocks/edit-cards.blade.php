@@ -55,11 +55,11 @@
             </div>
 
             <div class="grid gap-3 sm:grid-cols-2">
-                <x-input type="text" x-model="card.label_ms" placeholder="{{ __('modules/portal/setting.fields.label_my') }}" />
+                <x-input type="text" x-model="card.label_ms" placeholder="{{ __('modules/portal/setting.fields.label_ms') }}" />
                 <x-input type="text" x-model="card.label_en" placeholder="{{ __('modules/portal/setting.fields.label_en') }}" />
             </div>
             <div class="grid gap-3 sm:grid-cols-2">
-                <x-input type="text" x-model="card.value_ms" placeholder="{{ __('modules/portal/setting.fields.value_my') }}" />
+                <x-input type="text" x-model="card.value_ms" placeholder="{{ __('modules/portal/setting.fields.value_ms') }}" />
                 <x-input type="text" x-model="card.value_en" placeholder="{{ __('modules/portal/setting.fields.value_en') }}" />
             </div>
         </div>

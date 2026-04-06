@@ -24,7 +24,7 @@ return [
     ],
     'fields' => [
         'title_en'    => 'Title (EN)',
-        'title_my'    => 'Title (MY)',
+        'title_ms'    => 'Title (MS)',
         'parent'      => 'Parent',
         'url'         => 'URL',
         'slug'        => 'Slug',

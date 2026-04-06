@@ -36,7 +36,7 @@ class Article extends Model
         'user_id',
         'menu_type_id',
         'menu_id',
-        'title_my',
+        'title_ms',
         'title_en',
         'document_type_id',
         'title',

@@ -117,7 +117,7 @@
                                 <button @click="open = !open"
                                     class="portal-nav-link flex items-center gap-1 rounded px-2 py-1 text-[11px] font-medium text-white/85 transition-all duration-200 hover:text-white">
                                     @if ($menu->icon)<span class="text-[10px]">{!! $menu->icon !!}</span>@endif
-                                    {{ app()->getLocale() === 'ms' ? ($menu->title_my ?? $menu->title_en) : ($menu->title_en ?? $menu->title_my) }}
+                                    {{ app()->getLocale() === 'ms' ? ($menu->title_ms ?? $menu->title_en) : ($menu->title_en ?? $menu->title_ms) }}
                                     <svg class="size-2.5 transition-transform duration-200" :class="open && 'rotate-180'" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                                     </svg>
@@ -128,7 +128,7 @@
                                         <a href="{{ $menuUrl($child) }}"
                                             class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900">
                                             @if ($child->icon)<span class="text-sm">{!! $child->icon !!}</span>@endif
-                                            {{ app()->getLocale() === 'ms' ? ($child->title_my ?? $child->title_en) : ($child->title_en ?? $child->title_my) }}
+                                            {{ app()->getLocale() === 'ms' ? ($child->title_ms ?? $child->title_en) : ($child->title_en ?? $child->title_ms) }}
                                         </a>
                                     @endforeach
                                 </div>
@@ -137,7 +137,7 @@
                             <a href="{{ $menuUrl($menu) }}"
                                 class="portal-nav-link flex items-center gap-1 rounded px-2 py-1 text-[11px] font-medium text-white/85 transition-all duration-200 hover:text-white">
                                 @if ($menu->icon)<span class="text-[10px]">{!! $menu->icon !!}</span>@endif
-                                {{ app()->getLocale() === 'ms' ? ($menu->title_my ?? $menu->title_en) : ($menu->title_en ?? $menu->title_my) }}
+                                {{ app()->getLocale() === 'ms' ? ($menu->title_ms ?? $menu->title_en) : ($menu->title_en ?? $menu->title_ms) }}
                             </a>
                         @endif
                     @endforeach
@@ -150,7 +150,7 @@
                             <button type="submit" name="locale" value="ms"
                                 class="rounded-lg px-2 py-0.5 text-[10px] font-bold tracking-wide transition-all duration-200 {{ app()->getLocale() === 'ms' ? 'text-white shadow-md' : 'text-gray-500 hover:text-gray-300' }}"
                                 @if(app()->getLocale() === 'ms') style="background-color: var(--portal-lang-active)" @endif>
-                                MY
+                                {{ __('ui.locale_ms') }}
                             </button>
                             <span class="text-[10px] text-gray-600">|</span>
                             <button type="submit" name="locale" value="en"
@@ -190,7 +190,7 @@
                                 class="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-gray-400 transition-all duration-200 hover:bg-white/10 hover:text-white">
                                 <span class="flex items-center gap-2">
                                     @if ($menu->icon)<span>{!! $menu->icon !!}</span>@endif
-                                    {{ app()->getLocale() === 'ms' ? ($menu->title_my ?? $menu->title_en) : ($menu->title_en ?? $menu->title_my) }}
+                                    {{ app()->getLocale() === 'ms' ? ($menu->title_ms ?? $menu->title_en) : ($menu->title_en ?? $menu->title_ms) }}
                                 </span>
                                 <svg class="size-4 transition-transform duration-200" :class="subOpen && 'rotate-180'" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -201,7 +201,7 @@
                                     <a href="{{ $menuUrl($child) }}"
                                         class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-400 transition-all duration-200 hover:bg-white/10 hover:text-white">
                                         @if ($child->icon)<span>{!! $child->icon !!}</span>@endif
-                                        {{ app()->getLocale() === 'ms' ? ($child->title_my ?? $child->title_en) : ($child->title_en ?? $child->title_my) }}
+                                        {{ app()->getLocale() === 'ms' ? ($child->title_ms ?? $child->title_en) : ($child->title_en ?? $child->title_ms) }}
                                     </a>
                                 @endforeach
                             </div>
@@ -210,7 +210,7 @@
                         <a href="{{ $menuUrl($menu) }}"
                             class="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 {{ request()->url() === $menuUrl($menu) ? 'bg-white/15 text-white' : 'text-gray-400 hover:bg-white/10 hover:text-white' }}">
                             @if ($menu->icon)<span>{!! $menu->icon !!}</span>@endif
-                            {{ app()->getLocale() === 'ms' ? ($menu->title_my ?? $menu->title_en) : ($menu->title_en ?? $menu->title_my) }}
+                            {{ app()->getLocale() === 'ms' ? ($menu->title_ms ?? $menu->title_en) : ($menu->title_en ?? $menu->title_ms) }}
                         </a>
                     @endif
                 @endforeach

@@ -57,7 +57,7 @@ final class ArticleDto
 
         $menuTypeId     = isset( $data['menu_type_id'] ) && is_numeric( $data['menu_type_id'] ) ? (int) $data['menu_type_id'] : null;
         $menuId         = isset( $data['menu_id'] ) && is_numeric( $data['menu_id'] ) ? (int) $data['menu_id'] : null;
-        $titleMy        = isset( $data['title_my'] ) && is_scalar( $data['title_my'] ) ? (string) $data['title_my'] : null;
+        $titleMy        = isset( $data['title_ms'] ) && is_scalar( $data['title_ms'] ) ? (string) $data['title_ms'] : null;
         $titleEn        = isset( $data['title_en'] ) && is_scalar( $data['title_en'] ) ? (string) $data['title_en'] : null;
         $documentTypeId = isset( $data['document_type_id'] ) && is_numeric( $data['document_type_id'] ) ? (int) $data['document_type_id'] : null;
         $filePath       = isset( $data['file_path'] ) && is_scalar( $data['file_path'] ) ? (string) $data['file_path'] : null;

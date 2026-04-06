@@ -80,6 +80,7 @@ return [
     |
     */
 
+    /** @see https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes Malay = ms */
     'locale' => env( 'APP_LOCALE', 'en' ),
 
     'fallback_locale' => env( 'APP_FALLBACK_LOCALE', 'en' ),

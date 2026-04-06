@@ -6,8 +6,8 @@
                 <x-detail-field :value="$dataReference->name">
                     <x-slot:labelText>{{ __('modules/reference/data-reference.fields.name') }}</x-slot:labelText>
                 </x-detail-field>
-                <x-detail-field :value="$dataReference->label_my ?? '—'">
-                    <x-slot:labelText>{{ __('modules/reference/data-reference.fields.label_my') }}</x-slot:labelText>
+                <x-detail-field :value="$dataReference->label_ms ?? '—'">
+                    <x-slot:labelText>{{ __('modules/reference/data-reference.fields.label_ms') }}</x-slot:labelText>
                 </x-detail-field>
                 <x-detail-field :value="$dataReference->label_en ?? '—'">
                     <x-slot:labelText>{{ __('modules/reference/data-reference.fields.label_en') }}</x-slot:labelText>

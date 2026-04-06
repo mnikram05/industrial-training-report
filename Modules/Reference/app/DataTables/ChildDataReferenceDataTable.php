@@ -72,7 +72,7 @@ class ChildDataReferenceDataTable extends BaseModuleDataTable
         return [
             ['label' => __( 'modules/reference/data-reference.fields.sort' ), 'class' => 'px-4 py-3 text-left font-medium w-20'],
             ['label' => __( 'modules/reference/data-reference.fields.sort_action' ), 'class' => 'px-4 py-3 text-center font-medium w-24'],
-            ['label' => __( 'modules/reference/data-reference.fields.label_my' ), 'class' => 'px-4 py-3 text-left font-medium'],
+            ['label' => __( 'modules/reference/data-reference.fields.label_ms' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/reference/data-reference.fields.label_en' ), 'class' => 'px-4 py-3 text-left font-medium'],
             ['label' => __( 'modules/reference/data-reference.fields.status' ), 'class' => 'px-4 py-3 text-center font-medium w-28'],
             ['label' => __( 'crud.action' ), 'class' => 'px-4 py-3 text-right font-medium'],
@@ -87,7 +87,7 @@ class ChildDataReferenceDataTable extends BaseModuleDataTable
         return [
             ['data' => 'sort', 'name' => 'sort', 'className' => 'w-20 text-left'],
             ['data' => 'sort_action', 'name' => 'sort_action', 'searchable' => false, 'orderable' => false, 'className' => 'w-24 text-center'],
-            ['data' => 'label_my', 'name' => 'label_my'],
+            ['data' => 'label_ms', 'name' => 'label_ms'],
             ['data' => 'label_en', 'name' => 'label_en'],
             ['data' => 'status_toggle', 'name' => 'status', 'searchable' => false, 'orderable' => false, 'className' => 'text-center'],
             ['data' => 'action', 'name' => 'action', 'searchable' => false, 'orderable' => false, 'className' => 'text-right whitespace-nowrap'],

@@ -39,7 +39,7 @@
                 <option value="">-- {{ __('modules/portal-administration/portal-setting.fields.select_menu') }} --</option>
                 @foreach ($parentMenus as $parentMenu)
                     <option value="{{ $parentMenu->id }}" {{ ($settings['menu_atas_id'] ?? '') == $parentMenu->id ? 'selected' : '' }}>
-                        {{ $parentMenu->title_my }} / {{ $parentMenu->title_en }}
+                        {{ $parentMenu->title_ms }} / {{ $parentMenu->title_en }}
                     </option>
                 @endforeach
             </select>
@@ -51,7 +51,7 @@
                 <option value="">-- {{ __('modules/portal-administration/portal-setting.fields.select_menu') }} --</option>
                 @foreach ($parentMenus as $parentMenu)
                     <option value="{{ $parentMenu->id }}" {{ ($settings['menu_bawah_id'] ?? '') == $parentMenu->id ? 'selected' : '' }}>
-                        {{ $parentMenu->title_my }} / {{ $parentMenu->title_en }}
+                        {{ $parentMenu->title_ms }} / {{ $parentMenu->title_en }}
                     </option>
                 @endforeach
             </select>
@@ -67,7 +67,7 @@
     <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">{{ __('modules/portal-administration/portal-setting.sections.site_name') }}</h3>
     <div class="grid gap-4 sm:grid-cols-2">
         <x-field for="site_name_ms" class="gap-1.5">
-            <x-slot:labelText>{{ __('modules/portal-administration/portal-setting.fields.site_name_my') }}</x-slot:labelText>
+            <x-slot:labelText>{{ __('modules/portal-administration/portal-setting.fields.site_name_ms') }}</x-slot:labelText>
             <x-input id="site_name_ms" name="site_name_ms" type="text"
                 :value="$settings['site_name_ms'] ?? ''" />
         </x-field>
@@ -86,7 +86,7 @@
     <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">{{ __('modules/portal-administration/portal-setting.sections.footer_text') }}</h3>
     <div class="grid gap-4 sm:grid-cols-2">
         <x-field for="footer_text_ms" class="gap-1.5">
-            <x-slot:labelText>{{ __('modules/portal-administration/portal-setting.fields.footer_text_my') }}</x-slot:labelText>
+            <x-slot:labelText>{{ __('modules/portal-administration/portal-setting.fields.footer_text_ms') }}</x-slot:labelText>
             <x-input id="footer_text_ms" name="footer_text_ms" type="text"
                 :value="$settings['footer_text_ms'] ?? ''" />
         </x-field>

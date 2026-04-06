@@ -1,7 +1,7 @@
 @php $cmsLocale = app()->getLocale(); $titleField = 'title_' . $cmsLocale; @endphp
 <div class="space-y-4" x-data="{ editingWeek: null }">
     <div class="grid gap-4 sm:grid-cols-2">
-        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_ms') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_ms" /></x-field>
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.heading_en" /></x-field>
@@ -87,7 +87,7 @@
 
             {{-- Metadata --}}
             <div class="grid gap-3 sm:grid-cols-2">
-                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_my') }}</x-slot:labelText>
+                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_ms') }}</x-slot:labelText>
                     <x-input type="text" x-model="block.data.items[editingWeek].title_ms" /></x-field>
                 <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.title_en') }}</x-slot:labelText>
                     <x-input type="text" x-model="block.data.items[editingWeek].title_en" /></x-field>
@@ -99,8 +99,8 @@
                     <x-input type="date" x-model="block.data.items[editingWeek].end_date" /></x-field>
             </div>
             <div class="grid gap-3 sm:grid-cols-2">
-                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.topic_my') }}</x-slot:labelText>
-                    <x-input type="text" x-model="block.data.items[editingWeek].topic_ms" :placeholder="__('modules/portal/setting.hints.topic_placeholder_my')" /></x-field>
+                <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.topic_ms') }}</x-slot:labelText>
+                    <x-input type="text" x-model="block.data.items[editingWeek].topic_ms" :placeholder="__('modules/portal/setting.hints.topic_placeholder_ms')" /></x-field>
                 <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.topic_en') }}</x-slot:labelText>
                     <x-input type="text" x-model="block.data.items[editingWeek].topic_en" :placeholder="__('modules/portal/setting.hints.topic_placeholder_en')" /></x-field>
             </div>
@@ -151,7 +151,7 @@
             <div class="space-y-2">
                 <h4 class="text-xs font-bold uppercase tracking-wide text-muted-foreground">💭 {{ __('modules/portal/setting.fields.reflection') }}</h4>
                 <div class="grid gap-3 sm:grid-cols-2">
-                    <textarea x-model="block.data.items[editingWeek].reflection_ms" rows="4" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.hints.reflection_my') }}"></textarea>
+                    <textarea x-model="block.data.items[editingWeek].reflection_ms" rows="4" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.hints.reflection_ms') }}"></textarea>
                     <textarea x-model="block.data.items[editingWeek].reflection_en" rows="4" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('modules/portal/setting.hints.reflection_en') }}"></textarea>
                 </div>
             </div>

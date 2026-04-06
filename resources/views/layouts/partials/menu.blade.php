@@ -1,4 +1,4 @@
-<div class="space-y-3 pb-1" x-data="{ cmsOpen: @js($cmsOpen), referencesOpen: @js($referencesOpen), portalOpen: @js($portalOpen) }">
+<div class="space-y-3 pb-1" x-data="{ cmsOpen: @js($cmsOpen), portalOpen: @js($portalOpen) }">
     <x-sidebar-group>
         <x-sidebar-group-label>{{ __('sidebar.platform') }}</x-sidebar-group-label>
 
@@ -38,18 +38,6 @@
                 @can(\App\Modules\Role\Constants\RolePermissionConstants::ADMIN_DASHBOARD_VIEW)
                     <x-sidebar-submenu-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         <span>{{ __('sidebar.admin_dashboard') }}</span>
-                    </x-sidebar-submenu-link>
-                @endcan
-
-                @can(\App\Modules\Role\Constants\RolePermissionConstants::LANDINGS_VIEW)
-                    <x-sidebar-submenu-link :href="route('landings.index')" :active="request()->routeIs('landings.*')">
-                        <span>{{ __('sidebar.landings') }}</span>
-                    </x-sidebar-submenu-link>
-                @endcan
-
-                @can(\App\Modules\Role\Constants\RolePermissionConstants::STATUSES_VIEW)
-                    <x-sidebar-submenu-link :href="route('statuses.index')" :active="request()->routeIs('statuses.*')">
-                        <span>{{ __('sidebar.statuses') }}</span>
                     </x-sidebar-submenu-link>
                 @endcan
 
@@ -128,42 +116,20 @@
             </x-sidebar-submenu>
         </div>
 
-        <button type="button" @click="referencesOpen = !referencesOpen"
-            class="group flex h-8 w-full min-w-0 items-center gap-2 rounded-md px-2 text-left text-[13px] font-medium text-white/85 transition-colors hover:bg-[color-mix(in_srgb,var(--portal-accent)_22%,transparent)] hover:text-white">
+        <x-sidebar-menu-link
+            :href="route('reference.data-references.index')"
+            :active="request()->routeIs('reference.data-references.*')"
+            :title="__('sidebar.data_references')">
             <span class="inline-flex size-4 shrink-0 items-center justify-center" aria-hidden="true">
-                <svg class="size-4 text-white/45 group-hover:text-white/85" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <svg class="size-4 text-white/45 group-hover:text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
                 </svg>
             </span>
-            <span class="min-w-0 flex-1 truncate text-left">{{ __('sidebar.references') }}</span>
-            <svg
-                class="size-4 text-white/45 transition-transform duration-200 group-hover:text-white/80" :class="{ 'rotate-90': referencesOpen }"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6" />
-            </svg>
-        </button>
-
-        <div x-cloak x-show="referencesOpen" x-transition.opacity.duration.150ms>
-            <x-sidebar-submenu>
-                @can(\App\Modules\Role\Constants\RolePermissionConstants::STATES_VIEW)
-                    <x-sidebar-submenu-link :href="route('reference.states.index')" :active="request()->routeIs('reference.states.*')">
-                        <span>{{ __('sidebar.states') }}</span>
-                    </x-sidebar-submenu-link>
-                @endcan
-
-                @can(\App\Modules\Role\Constants\RolePermissionConstants::PARLIAMENTS_VIEW)
-                    <x-sidebar-submenu-link :href="route('reference.parliaments.index')" :active="request()->routeIs('reference.parliaments.*')">
-                        <span>{{ __('sidebar.parliaments') }}</span>
-                    </x-sidebar-submenu-link>
-                @endcan
-
-                <x-sidebar-submenu-link :href="route('reference.data-references.index')" :active="request()->routeIs('reference.data-references.*')">
-                    <span>{{ __('sidebar.data_references') }}</span>
-                </x-sidebar-submenu-link>
-            </x-sidebar-submenu>
-        </div>
+            <span class="min-w-0 flex-1 truncate">{{ __('sidebar.data_references') }}</span>
+            <span class="size-4 shrink-0" aria-hidden="true"></span>
+        </x-sidebar-menu-link>
 
         <x-sidebar-menu-link
             :href="route('portal-settings.edit', ['page' => 'cms'])"

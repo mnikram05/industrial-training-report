@@ -33,7 +33,7 @@ class ArticleRequest extends FormRequest
         return [
             'menu_type_id'     => ['nullable', 'integer', 'exists:menus,id'],
             'menu_id'          => ['nullable', 'integer', 'exists:menus,id'],
-            'title_my'         => ['nullable', 'string', 'max:255'],
+            'title_ms'         => ['nullable', 'string', 'max:255'],
             'title_en'         => ['nullable', 'string', 'max:255'],
             'document_type_id' => ['nullable', 'integer', 'exists:zz_data_references,id'],
             'title'            => ['required', 'string', 'max:255'],

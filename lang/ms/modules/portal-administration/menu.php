@@ -24,7 +24,7 @@ return [
     ],
     'fields' => [
         'title_en'    => 'Tajuk (EN)',
-        'title_my'    => 'Tajuk (MY)',
+        'title_ms'    => 'Tajuk (MS)',
         'parent'      => 'Induk',
         'url'         => 'URL',
         'slug'        => 'Slug',

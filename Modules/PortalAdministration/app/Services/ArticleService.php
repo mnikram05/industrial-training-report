@@ -91,7 +91,7 @@ class ArticleService
             'user_id'          => (string) $userKey,
             'menu_type_id'     => $data->menuTypeId,
             'menu_id'          => $data->menuId,
-            'title_my'         => $data->titleMy,
+            'title_ms'         => $data->titleMy,
             'title_en'         => $data->titleEn,
             'document_type_id' => $data->documentTypeId,
             'title'            => $data->title,
@@ -116,7 +116,7 @@ class ArticleService
         $article->update( [
             'menu_type_id'     => $data->menuTypeId,
             'menu_id'          => $data->menuId,
-            'title_my'         => $data->titleMy,
+            'title_ms'         => $data->titleMy,
             'title_en'         => $data->titleEn,
             'document_type_id' => $data->documentTypeId,
             'title'            => $data->title,

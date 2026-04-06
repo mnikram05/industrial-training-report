@@ -472,7 +472,7 @@ export default function registerLandingPreview(Alpine) {
         },
 
         languageLabel() {
-            return this.preview.locale === 'ms' ? 'Melayu' : 'English';
+            return this.preview.locale === 'ms' ? 'MS' : 'English';
         },
 
         footerText() {

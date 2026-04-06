@@ -24,7 +24,7 @@ class Menu extends Model
 
     protected $fillable = [
         'parent_id',
-        'title_my',
+        'title_ms',
         'title_en',
         'type_id',
         'status_id',
@@ -86,7 +86,7 @@ class Menu extends Model
     }
 
     /**
-     * Scope: search by title_my, title_en, or slug.
+     * Scope: search by title_ms, title_en, or slug.
      */
     public function scopeSearch( Builder $query, ?string $term ): Builder
     {
@@ -95,7 +95,7 @@ class Menu extends Model
         }
 
         return $query->where( function ( Builder $q ) use ( $term ) {
-            $q->where( 'title_my', 'like', "%{$term}%" )
+            $q->where( 'title_ms', 'like', "%{$term}%" )
                 ->orWhere( 'title_en', 'like', "%{$term}%" )
                 ->orWhere( 'slug', 'like', "%{$term}%" );
         } );

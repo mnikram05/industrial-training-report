@@ -98,7 +98,7 @@ class ArticleController extends Controller
                 ->where( 'status_id', 1 )
                 ->ordered()
                 ->get()
-                ->mapWithKeys( fn ( Menu $m ) => [$m->id => $m->title_my ?? $m->title_en ?? '—'] )
+                ->mapWithKeys( fn ( Menu $m ) => [$m->id => $m->title_ms ?? $m->title_en ?? '—'] )
                 ->all();
         }
 
@@ -151,7 +151,7 @@ class ArticleController extends Controller
             ->where( 'status_id', 1 )
             ->ordered()
             ->get()
-            ->mapWithKeys( fn ( Menu $m ) => [$m->id => $m->title_my ?? $m->title_en ?? '—'] )
+            ->mapWithKeys( fn ( Menu $m ) => [$m->id => $m->title_ms ?? $m->title_en ?? '—'] )
             ->all();
     }
 
@@ -159,7 +159,7 @@ class ArticleController extends Controller
     {
         $parent = DataReference::query()
             ->whereNull( 'parent_id' )
-            ->where( 'label_my', 'Jenis Dokumen' )
+            ->where( 'label_ms', 'Jenis Dokumen' )
             ->first();
 
         if ( ! $parent ) {
@@ -168,7 +168,7 @@ class ArticleController extends Controller
 
         $ref = DataReference::query()
             ->where( 'parent_id', $parent->id )
-            ->where( 'label_my', $label )
+            ->where( 'label_ms', $label )
             ->first();
 
         return $ref ? (string) $ref->id : '';
@@ -181,7 +181,7 @@ class ArticleController extends Controller
     {
         $parent = DataReference::query()
             ->whereNull( 'parent_id' )
-            ->where( 'label_my', 'Jenis Dokumen' )
+            ->where( 'label_ms', 'Jenis Dokumen' )
             ->first();
 
         if ( ! $parent ) {
@@ -193,7 +193,7 @@ class ArticleController extends Controller
             ->where( 'status', 1 )
             ->ordered()
             ->get()
-            ->mapWithKeys( fn ( DataReference $ref ) => [$ref->id => $ref->label_my ?? $ref->label_en ?? '—'] )
+            ->mapWithKeys( fn ( DataReference $ref ) => [$ref->id => $ref->label_ms ?? $ref->label_en ?? '—'] )
             ->all();
     }
 }

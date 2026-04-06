@@ -20,7 +20,7 @@
     <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.programme') }}</x-slot:labelText>
         <x-input type="text" x-model="block.data.program" /></x-field>
     <div class="grid gap-4 sm:grid-cols-2">
-        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.programme_my') }}</x-slot:labelText>
+        <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.programme_ms') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.program_ms" /></x-field>
         <x-field class="gap-1.5"><x-slot:labelText>{{ __('modules/portal/setting.fields.programme_en') }}</x-slot:labelText>
             <x-input type="text" x-model="block.data.program_en" /></x-field>

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-module-index-shell>
-        <x-slot:heading>{{ $dataReference->label_my ?? $dataReference->name }} — {{ __('modules/reference/data-reference.children_list') }}</x-slot:heading>
+        <x-slot:heading>{{ $dataReference->label_ms ?? $dataReference->name }} — {{ __('modules/reference/data-reference.children_list') }}</x-slot:heading>
         <x-slot:subtitle>{{ __('modules/reference/data-reference.children_subtitle') }}</x-slot:subtitle>
 
         <x-slot:actions>

@@ -6,8 +6,8 @@
                 <x-detail-field :value="$menu->title_en ?? '—'">
                     <x-slot:labelText>{{ __('modules/portal-administration/menu.fields.title_en') }}</x-slot:labelText>
                 </x-detail-field>
-                <x-detail-field :value="$menu->title_my ?? '—'">
-                    <x-slot:labelText>{{ __('modules/portal-administration/menu.fields.title_my') }}</x-slot:labelText>
+                <x-detail-field :value="$menu->title_ms ?? '—'">
+                    <x-slot:labelText>{{ __('modules/portal-administration/menu.fields.title_ms') }}</x-slot:labelText>
                 </x-detail-field>
                 <x-detail-field :value="$menu->parent?->title_en ?? '—'">
                     <x-slot:labelText>{{ __('modules/portal-administration/menu.fields.parent') }}</x-slot:labelText>

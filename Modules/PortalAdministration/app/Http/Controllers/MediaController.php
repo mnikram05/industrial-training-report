@@ -167,7 +167,7 @@ class MediaController extends Controller
     {
         $parent = DataReference::query()
             ->whereNull( 'parent_id' )
-            ->where( 'label_my', 'Jenis Media' )
+            ->where( 'label_ms', 'Jenis Media' )
             ->first();
 
         if ( ! $parent ) {
@@ -179,7 +179,7 @@ class MediaController extends Controller
             ->where( 'status', 1 )
             ->ordered()
             ->get()
-            ->mapWithKeys( fn ( DataReference $ref ) => [$ref->id => $ref->label_my ?? $ref->label_en ?? '—'] )
+            ->mapWithKeys( fn ( DataReference $ref ) => [$ref->id => $ref->label_ms ?? $ref->label_en ?? '—'] )
             ->all();
     }
 }

@@ -28,65 +28,65 @@ class PortalAdministrationDatabaseSeeder extends Seeder
     {
         // Status
         $status = DataReference::query()->updateOrCreate(
-            ['label_my' => 'Status', 'parent_id' => null],
+            ['label_ms' => 'Status', 'parent_id' => null],
             ['label_en' => 'Status', 'status' => true],
         );
 
         foreach ( [
-            ['label_my' => 'Draf', 'label_en' => 'Draft'],
-            ['label_my' => 'Menunggu Semakan', 'label_en' => 'Awaiting Review'],
-            ['label_my' => 'Diluluskan', 'label_en' => 'Approved'],
-            ['label_my' => 'Ditolak', 'label_en' => 'Rejected'],
-            ['label_my' => 'Tidak Diluluskan', 'label_en' => 'Not Approved'],
+            ['label_ms' => 'Draf', 'label_en' => 'Draft'],
+            ['label_ms' => 'Menunggu Semakan', 'label_en' => 'Awaiting Review'],
+            ['label_ms' => 'Diluluskan', 'label_en' => 'Approved'],
+            ['label_ms' => 'Ditolak', 'label_en' => 'Rejected'],
+            ['label_ms' => 'Tidak Diluluskan', 'label_en' => 'Not Approved'],
         ] as $child ) {
             DataReference::query()->updateOrCreate(
-                ['label_my' => $child['label_my'], 'parent_id' => $status->id],
+                ['label_ms' => $child['label_ms'], 'parent_id' => $status->id],
                 ['label_en' => $child['label_en'], 'status' => true],
             );
         }
 
         // Jenis Menu
         $menuType = DataReference::query()->updateOrCreate(
-            ['label_my' => 'Jenis Menu', 'parent_id' => null],
+            ['label_ms' => 'Jenis Menu', 'parent_id' => null],
             ['label_en' => 'Menu Type', 'status' => true],
         );
 
         foreach ( [
-            ['label_my' => 'Atas', 'label_en' => 'Top'],
-            ['label_my' => 'Bawah', 'label_en' => 'Down'],
-            ['label_my' => 'Lain-lain', 'label_en' => 'Others'],
-            ['label_my' => 'Navigasi Cepat', 'label_en' => 'Quick Navigation'],
+            ['label_ms' => 'Atas', 'label_en' => 'Top'],
+            ['label_ms' => 'Bawah', 'label_en' => 'Down'],
+            ['label_ms' => 'Lain-lain', 'label_en' => 'Others'],
+            ['label_ms' => 'Navigasi Cepat', 'label_en' => 'Quick Navigation'],
         ] as $child ) {
             DataReference::query()->updateOrCreate(
-                ['label_my' => $child['label_my'], 'parent_id' => $menuType->id],
+                ['label_ms' => $child['label_ms'], 'parent_id' => $menuType->id],
                 ['label_en' => $child['label_en'], 'status' => true],
             );
         }
 
         // Jenis Dokumen
         $docType = DataReference::query()->updateOrCreate(
-            ['label_my' => 'Jenis Dokumen', 'parent_id' => null],
+            ['label_ms' => 'Jenis Dokumen', 'parent_id' => null],
             ['label_en' => 'Document Type', 'status' => true],
         );
 
         foreach ( [
-            ['label_my' => 'Kontent', 'label_en' => 'Content'],
-            ['label_my' => 'Dokumen', 'label_en' => 'Document'],
+            ['label_ms' => 'Kontent', 'label_en' => 'Content'],
+            ['label_ms' => 'Dokumen', 'label_en' => 'Document'],
         ] as $child ) {
             DataReference::query()->updateOrCreate(
-                ['label_my' => $child['label_my'], 'parent_id' => $docType->id],
+                ['label_ms' => $child['label_ms'], 'parent_id' => $docType->id],
                 ['label_en' => $child['label_en'], 'status' => true],
             );
         }
 
         // Jenis Media
         $mediaType = DataReference::query()->updateOrCreate(
-            ['label_my' => 'Jenis Media', 'parent_id' => null],
+            ['label_ms' => 'Jenis Media', 'parent_id' => null],
             ['label_en' => 'Media Type', 'status' => true],
         );
 
         DataReference::query()->updateOrCreate(
-            ['label_my' => 'Gambar', 'parent_id' => $mediaType->id],
+            ['label_ms' => 'Gambar', 'parent_id' => $mediaType->id],
             ['label_en' => 'Image', 'status' => true],
         );
     }

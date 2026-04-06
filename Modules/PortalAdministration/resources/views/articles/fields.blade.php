@@ -13,7 +13,7 @@
             const response = await fetch('/api/menus-by-type/' + this.menuTypeId);
             const data = await response.json();
             const options = {};
-            data.forEach(m => { options[m.id] = m.title_my || m.title_en || '—'; });
+            data.forEach(m => { options[m.id] = m.title_ms || m.title_en || '—'; });
             this.menuOptions = options;
         } catch (e) {
             this.menuOptions = {};
@@ -42,10 +42,10 @@
         </select>
     </x-field>
 
-    <x-field for="article_title_my" :error="$errors->first('title_my')" class="gap-1.5">
-        <x-slot:labelText>{{ __('modules/portal-administration/article.fields.title_my') }}</x-slot:labelText>
-        <x-input id="article_title_my" name="title_my" type="text" class="sm:w-1/2" placeholder="{{ __('modules/portal-administration/article.placeholders.title_my') }}"
-            :value="old('title_my', $article?->title_my ?? '')" maxlength="255" />
+    <x-field for="article_title_ms" :error="$errors->first('title_ms')" class="gap-1.5">
+        <x-slot:labelText>{{ __('modules/portal-administration/article.fields.title_ms') }}</x-slot:labelText>
+        <x-input id="article_title_ms" name="title_ms" type="text" class="sm:w-1/2" placeholder="{{ __('modules/portal-administration/article.placeholders.title_ms') }}"
+            :value="old('title_ms', $article?->title_ms ?? '')" maxlength="255" />
     </x-field>
 
     <x-field for="article_title_en" :error="$errors->first('title_en')" class="gap-1.5">

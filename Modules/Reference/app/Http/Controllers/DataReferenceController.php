@@ -348,7 +348,7 @@ class DataReferenceController extends Controller
             ->whereNull( 'deleted_at' )
             ->when( $excludeId, fn ( $q ) => $q->where( 'id', '!=', $excludeId ) )
             ->orderBy( 'sort', 'asc' )
-            ->get( ['id', 'label_my', 'label_en', 'sort'] );
+            ->get( ['id', 'label_ms', 'label_en', 'sort'] );
 
         $options  = [];
         $position = 1;
@@ -357,7 +357,7 @@ class DataReferenceController extends Controller
         $position++;
 
         foreach ( $items as $item ) {
-            $label = $item->label_my ?? $item->label_en ?? '—';
+            $label = $item->label_ms ?? $item->label_en ?? '—';
 
             $options[$position] = __( 'modules/reference/data-reference.sort_options.after', [
                 'position' => $this->ordinal( $position ),

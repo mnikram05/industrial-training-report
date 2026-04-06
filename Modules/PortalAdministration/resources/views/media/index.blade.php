@@ -2,7 +2,7 @@
     <x-module-index-shell>
         <x-slot:heading>
             @if ($type ?? null)
-                {{ $type->label_my ?? $type->label_en }} — {{ __('modules/portal-administration/media.plural') }}
+                {{ $type->label_ms ?? $type->label_en }} — {{ __('modules/portal-administration/media.plural') }}
             @else
                 {{ __('modules/portal-administration/media.plural') }}
             @endif

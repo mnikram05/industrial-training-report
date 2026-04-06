@@ -16,7 +16,7 @@ return [
         'no'            => 'No.',
         'menu_type'     => 'Menu Type',
         'menu'          => 'Menu',
-        'title_my'      => 'Title (MY)',
+        'title_ms'      => 'Title (MS)',
         'title_en'      => 'Title (EN)',
         'document_type' => 'Document Type',
         'title'         => 'Title',
@@ -31,7 +31,7 @@ return [
         'actions'       => 'Actions',
     ],
     'placeholders' => [
-        'title_my'             => 'Malay title',
+        'title_ms'             => 'Title (MS)',
         'title_en'             => 'English Title',
         'title'                => 'Article title',
         'title_doc'            => 'Document title',
