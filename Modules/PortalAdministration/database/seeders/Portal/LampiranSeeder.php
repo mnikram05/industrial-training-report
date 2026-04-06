@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\PortalAdministration\Database\Seeders\Portal;
 
+use Modules\PortalAdministration\Support\PortalPublicMediaPaths;
+
 class LampiranSeeder extends PortalPageSeeder
 {
     public function run(): void
@@ -51,8 +53,8 @@ class LampiranSeeder extends PortalPageSeeder
                 'icon'       => '📷',
                 'heading_ms' => 'Gambar lampiran',
                 'heading_en' => 'Photo appendices',
-                'text_ms'    => 'Dokumentasi bergambar aktiviti dan persekitaran semasa latihan industri. Susun atur mengikut contoh laporan; tukar kepada foto anda melalui Pentadbiran Portal → Tetapan halaman lampiran atau Media.',
-                'text_en'    => 'Photo documentation of activities and surroundings during industrial training. Layout follows a typical report; replace with your own photos via Portal Administration → Lampiran page settings or Media.',
+                'text_ms'    => 'Gambar-gambar berikut merupakan dokumentasi visual aktiviti harian, ruang kerja, dan persekitaran semasa latihan industri di Opensoft Technologies Sdn Bhd.',
+                'text_en'    => 'The photographs below provide visual documentation of daily tasks, the workspace, and the environment during industrial training at Opensoft Technologies Sdn Bhd.',
             ]],
             ['type' => 'cards', 'id' => 'lp_galeri', 'data' => [
                 'layout' => 'gallery',
@@ -60,38 +62,11 @@ class LampiranSeeder extends PortalPageSeeder
                     [
                         'display'  => 'image',
                         'icon'     => '',
-                        'image'    => 'media/2026/03/Hr2cdTUy89BSx10ARvj91jcFPKBtkgDtY8nybFFe.jpg',
-                        'label_ms' => '',
-                        'label_en' => '',
-                        'value_ms' => '',
-                        'value_en' => '',
-                    ],
-                    [
-                        'display'  => 'image',
-                        'icon'     => '',
-                        'image'    => 'media/2026/03/QUMc6Oxeksi48tguONAl2giNSYvhM5YGgo8yLOlU.jpg',
-                        'label_ms' => '',
-                        'label_en' => '',
-                        'value_ms' => '',
-                        'value_en' => '',
-                    ],
-                    [
-                        'display'  => 'image',
-                        'icon'     => '',
-                        'image'    => 'media/2026/03/uYiapMLscFgsa0nBpg6R9u8tqxx7RFqSfPbp3B68.png',
-                        'label_ms' => '',
-                        'label_en' => '',
-                        'value_ms' => '',
-                        'value_en' => '',
-                    ],
-                    [
-                        'display'  => 'image',
-                        'icon'     => '',
-                        'image'    => 'media/2026/03/UPloP9UcRm0jMNp5JyVOmR8blR1gVZ45Nk2BFgoW.png',
-                        'label_ms' => '',
-                        'label_en' => '',
-                        'value_ms' => '',
-                        'value_en' => '',
+                        'image'    => PortalPublicMediaPaths::LAMPIRAN_MESYUARAT_SWCORP,
+                        'label_ms' => 'Mesyuarat dengan pembangun Swcorp',
+                        'label_en' => 'Meeting with Swcorp developers',
+                        'value_ms' => 'Sesi penyelarasan projek secara bersemuka untuk membincangkan keperluan teknikal sistem dan aliran kerja bersama pihak pembangun pelanggan.',
+                        'value_en' => 'In-person project coordination session to discuss system technical requirements and workflows with the client development team.',
                     ],
                 ],
             ]],

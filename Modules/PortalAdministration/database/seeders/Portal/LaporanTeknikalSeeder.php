@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\PortalAdministration\Database\Seeders\Portal;
 
+use Modules\PortalAdministration\Support\PortalPublicMediaPaths;
+
 class LaporanTeknikalSeeder extends PortalPageSeeder
 {
     public function run(): void
@@ -46,7 +48,7 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
                 'heading_en' => 'STEP 1: MIGRATION',
                 'items'      => [
                     [
-                        'image'          => 'media/2026/03/7MYSJ98wgROtSOGqmqV3grn3KCbNhJCPjH6qXg8T.png',
+                        'image'          => PortalPublicMediaPaths::TEKNIKAL_MIGRATION,
                         'image_label_ms' => 'Rajah 1: Contoh fail migration untuk mencipta struktur jadual pangkalan data',
                         'image_label_en' => 'Figure 1: Example migration file for creating database table structure',
                         'title_ms'       => 'Membuat Migration',
@@ -65,7 +67,7 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
                 'heading_en' => 'STEP 2: SEEDER',
                 'items'      => [
                     [
-                        'image'          => 'media/2026/03/yO2EBXkWy5Nnf1bjWpwdE6R1GYKj85fYVRfxYtTD.png',
+                        'image'          => PortalPublicMediaPaths::TEKNIKAL_SEEDER,
                         'image_label_ms' => 'Rajah 2: Contoh fail seeder untuk mengisi data awal ke dalam pangkalan data',
                         'image_label_en' => 'Figure 2: Example seeder file for populating initial data into database',
                         'title_ms'       => 'Membuat Seeder',
@@ -84,7 +86,7 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
                 'heading_en' => 'STEP 3: MODEL (ELOQUENT ORM)',
                 'items'      => [
                     [
-                        'image'          => 'media/2026/03/dfUHXD0uvyad7BH8qXJRKSWI1R5niHnX3iaK6lWk.png',
+                        'image'          => PortalPublicMediaPaths::TEKNIKAL_MODEL,
                         'image_label_ms' => 'Rajah 3: Contoh Eloquent Model dengan definisi relationship antara jadual',
                         'image_label_en' => 'Figure 3: Example Eloquent Model with relationship definitions between tables',
                         'title_ms'       => 'Membuat Eloquent Model',
@@ -103,7 +105,7 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
                 'heading_en' => 'STEP 4: CONTROLLER',
                 'items'      => [
                     [
-                        'image'          => 'media/2026/03/3xXVI5MHSDbj7dn6PQWvtE5sP3qxZUi2IvwQnTCW.png',
+                        'image'          => PortalPublicMediaPaths::TEKNIKAL_CONTROLLER,
                         'image_label_ms' => 'Rajah 4: Contoh Controller dengan method CRUD untuk menguruskan logik aplikasi',
                         'image_label_en' => 'Figure 4: Example Controller with CRUD methods for managing application logic',
                         'title_ms'       => 'Membuat Controller',
@@ -122,7 +124,7 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
                 'heading_en' => 'STEP 5: ROUTE',
                 'items'      => [
                     [
-                        'image'          => 'media/2026/03/QPvzPgHpHDfv1YkyKkFaAWfS8T1ojy7hxOPLKtgh.png',
+                        'image'          => PortalPublicMediaPaths::TEKNIKAL_ROUTE,
                         'image_label_ms' => 'Rajah 5: Contoh pendaftaran Route dalam fail routes/web.php',
                         'image_label_en' => 'Figure 5: Example Route registration in the routes/web.php file',
                         'title_ms'       => 'Membuat Route',
@@ -141,7 +143,7 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
                 'heading_en' => 'RESULTS',
                 'items'      => [
                     [
-                        'image'          => 'media/2026/04/pC3qbUFfLeyp6x75Pp1PozfFwsxroKydg4MnIN89.png',
+                        'image'          => PortalPublicMediaPaths::TEKNIKAL_HASIL,
                         'image_label_ms' => 'Rajah 6: Paparan hasil akhir sistem yang telah dibangunkan',
                         'image_label_en' => 'Figure 6: Final view of the developed system',
                         'title_ms'       => 'Hasil Pembangunan Sistem',

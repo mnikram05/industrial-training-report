@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Modules\Reference\Models\DataReference;
-use Modules\PortalAdministration\Models\Media;
 use Modules\PortalAdministration\DataTables\MediaDataTable;
+use Modules\PortalAdministration\Models\Media;
+use Modules\PortalAdministration\Support\PortalPublicMediaPaths;
 
 class MediaController extends Controller
 {
@@ -63,7 +66,7 @@ class MediaController extends Controller
         foreach ( $request->file( 'files' ) as $file ) {
             $originalName = $file->getClientOriginalName();
             $name         = pathinfo( $originalName, PATHINFO_FILENAME );
-            $path         = $file->store( 'media/' . date( 'Y/m' ), 'public' );
+            $path         = $this->storeUploadedFileInPortalPath( $file );
 
             Media::create( [
                 'type_id'    => $typeId,
@@ -117,6 +120,44 @@ class MediaController extends Controller
         return redirect()
             ->route( 'media.index' )
             ->with( 'status', 'media-deleted' );
+    }
+
+    /**
+     * Simpan upload ke media/portal dengan nama mudah dibaca + suffix rawak (elak overwrite / clash).
+     */
+    private function storeUploadedFileInPortalPath( UploadedFile $file ): string
+    {
+        $disk = Storage::disk( 'public' );
+
+        $originalBase = pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME );
+        $slug         = Str::slug( (string) $originalBase );
+
+        if ( $slug === '' ) {
+            $slug = 'file';
+        }
+
+        $slug = Str::limit( $slug, 80, '' );
+
+        $extension = strtolower( (string) ( $file->guessExtension() ?? $file->getClientOriginalExtension() ?? 'bin' ) );
+
+        $directory = PortalPublicMediaPaths::PREFIX;
+
+        do {
+            $filename = $slug . '-' . Str::lower( Str::random( 8 ) ) . '.' . $extension;
+            $relative = $directory . '/' . $filename;
+        } while ( $disk->exists( $relative ) );
+
+        if ( ! $disk->exists( $directory ) ) {
+            $disk->makeDirectory( $directory );
+        }
+
+        $stored = $file->storeAs( $directory, $filename, 'public' );
+
+        if ( $stored === false ) {
+            abort( 500, 'Failed to store uploaded file.' );
+        }
+
+        return $stored;
     }
 
     /**

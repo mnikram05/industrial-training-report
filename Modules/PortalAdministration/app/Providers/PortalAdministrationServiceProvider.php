@@ -4,6 +4,7 @@ namespace Modules\PortalAdministration\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\PortalAdministration\Console\Commands\SyncPortalPublicMediaCommand;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -43,7 +44,9 @@ class PortalAdministrationServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            SyncPortalPublicMediaCommand::class,
+        ]);
     }
 
     /**

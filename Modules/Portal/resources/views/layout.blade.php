@@ -72,37 +72,10 @@
     x-init="document.documentElement.classList.toggle('dark-portal', darkMode)"
     @scroll.window="scrolled = (window.scrollY > 20)">
 
-    {{-- Skeleton Loading --}}
-    <div id="portal-skeleton" class="portal-skeleton">
-        <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
-            {{-- Skeleton Header --}}
-            <div style="display: flex; align-items: center; justify-content: space-between; height: 56px;">
-                <div class="skeleton-bone" style="width: 180px; height: 24px;"></div>
-                <div style="display: flex; gap: 16px;">
-                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
-                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
-                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
-                    <div class="skeleton-bone" style="width: 60px; height: 16px;"></div>
-                </div>
-            </div>
-            {{-- Skeleton Hero --}}
-            <div style="display: flex; flex-direction: column; align-items: center; padding: 60px 0 40px;">
-                <div class="skeleton-bone" style="width: 200px; height: 14px; margin-bottom: 16px;"></div>
-                <div class="skeleton-bone" style="width: 400px; max-width: 80%; height: 36px; margin-bottom: 12px;"></div>
-                <div class="skeleton-bone" style="width: 80px; height: 4px; margin-bottom: 12px;"></div>
-                <div class="skeleton-bone" style="width: 250px; height: 16px;"></div>
-            </div>
-            {{-- Skeleton Cards --}}
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 40px;">
-                <div class="skeleton-bone" style="height: 160px;"></div>
-                <div class="skeleton-bone" style="height: 160px;"></div>
-                <div class="skeleton-bone" style="height: 160px;"></div>
-            </div>
-            {{-- Skeleton Content --}}
-            <div class="skeleton-bone" style="height: 200px; margin-bottom: 20px;"></div>
-            <div class="skeleton-bone" style="height: 200px;"></div>
-        </div>
-    </div>
+    @php
+        $resolvedSkeletonVariant = $skeletonVariant ?? ((($portalPage ?? '') === 'home') ? 'landing' : 'content');
+    @endphp
+    <x-portal.skeleton-screen :variant="$resolvedSkeletonVariant" />
 
     <script>
         window.addEventListener('load', function() {

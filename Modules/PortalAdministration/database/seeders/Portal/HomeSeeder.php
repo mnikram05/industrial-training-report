@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\PortalAdministration\Database\Seeders\Portal;
 
+use Modules\PortalAdministration\Support\PortalPublicMediaPaths;
+
 class HomeSeeder extends PortalPageSeeder
 {
     public function run(): void
@@ -22,8 +24,8 @@ class HomeSeeder extends PortalPageSeeder
             ['type' => 'cards', 'id' => 'home_cards', 'data' => [
                 'layout' => 'centered',
                 'items'  => [
-                    ['display' => 'both', 'icon' => '👤', 'image' => 'media/2026/03/Hr2cdTUy89BSx10ARvj91jcFPKBtkgDtY8nybFFe.jpg', 'label_ms' => 'Nama', 'label_en' => 'Name', 'value_ms' => 'Muhammad Noor Ikram Bin Mazlan', 'value_en' => 'Muhammad Noor Ikram Bin Mazlan'],
-                    ['display' => 'both', 'icon' => '🏢', 'image' => 'media/2026/03/QUMc6Oxeksi48tguONAl2giNSYvhM5YGgo8yLOlU.jpg', 'label_ms' => 'Syarikat', 'label_en' => 'Company', 'value_ms' => 'Opensoft Technologies Sdn Bhd', 'value_en' => 'Opensoft Technologies Sdn Bhd'],
+                    ['display' => 'both', 'icon' => '👤', 'image' => PortalPublicMediaPaths::PROFILE_PELAJAR, 'label_ms' => 'Nama', 'label_en' => 'Name', 'value_ms' => 'Muhammad Noor Ikram Bin Mazlan', 'value_en' => 'Muhammad Noor Ikram Bin Mazlan'],
+                    ['display' => 'both', 'icon' => '🏢', 'image' => PortalPublicMediaPaths::LOGO_OPENSOFT, 'label_ms' => 'Syarikat', 'label_en' => 'Company', 'value_ms' => 'Opensoft Technologies Sdn Bhd', 'value_en' => 'Opensoft Technologies Sdn Bhd'],
                     ['display' => 'emoji', 'icon' => '📅', 'image' => '', 'label_ms' => 'Tempoh', 'label_en' => 'Duration', 'value_ms' => '12 Jan – 29 Mei 2026', 'value_en' => '12 Jan – 29 May 2026'],
                     ['display' => 'emoji', 'icon' => '🎓', 'image' => '', 'label_ms' => 'Program', 'label_en' => 'Programme', 'value_ms' => 'Diploma Teknologi Maklumat (Teknologi Digital)', 'value_en' => 'Diploma in Information Technology (Digital Technology)'],
                 ],

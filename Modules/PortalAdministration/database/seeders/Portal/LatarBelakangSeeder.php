@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\PortalAdministration\Database\Seeders\Portal;
 
+use Modules\PortalAdministration\Support\PortalPublicMediaPaths;
+
 class LatarBelakangSeeder extends PortalPageSeeder
 {
     public function run(): void
@@ -17,8 +19,8 @@ class LatarBelakangSeeder extends PortalPageSeeder
             ['type' => 'cards', 'id' => 'lb_info', 'data' => [
                 'layout' => 'horizontal',
                 'items'  => [
-                    ['display' => 'image', 'icon' => '', 'image' => 'media/2026/03/QUMc6Oxeksi48tguONAl2giNSYvhM5YGgo8yLOlU.jpg', 'label_ms' => 'Logo Syarikat', 'label_en' => 'Company Logo', 'value_ms' => 'Opensoft Technologies Sdn Bhd', 'value_en' => 'Opensoft Technologies Sdn Bhd'],
-                    ['display' => 'image', 'icon' => '', 'image' => 'media/2026/03/uYiapMLscFgsa0nBpg6R9u8tqxx7RFqSfPbp3B68.png', 'label_ms' => 'Lokasi', 'label_en' => 'Location', 'value_ms' => 'No. 37-2, Jalan 9/23A, Medan Makmur, Setapak, 53000 KL', 'value_en' => 'No. 37-2, Jalan 9/23A, Medan Makmur, Setapak, 53000 KL'],
+                    ['display' => 'image', 'icon' => '', 'image' => PortalPublicMediaPaths::LOGO_OPENSOFT, 'label_ms' => 'Logo Syarikat', 'label_en' => 'Company Logo', 'value_ms' => 'Opensoft Technologies Sdn Bhd', 'value_en' => 'Opensoft Technologies Sdn Bhd'],
+                    ['display' => 'image', 'icon' => '', 'image' => PortalPublicMediaPaths::LOKASI_OPENSOFT, 'label_ms' => 'Lokasi', 'label_en' => 'Location', 'value_ms' => 'No. 37-2, Jalan 9/23A, Medan Makmur, Setapak, 53000 KL', 'value_en' => 'No. 37-2, Jalan 9/23A, Medan Makmur, Setapak, 53000 KL'],
                     ['display' => 'emoji', 'icon' => '📅', 'image' => '', 'label_ms' => 'Ditubuhkan', 'label_en' => 'Established', 'value_ms' => '2010', 'value_en' => '2010'],
                     ['display' => 'emoji', 'icon' => '💼', 'image' => '', 'label_ms' => 'Industri', 'label_en' => 'Industry', 'value_ms' => 'Teknologi Maklumat & Komunikasi (ICT)', 'value_en' => 'Information & Communication Technology (ICT)'],
                 ],
@@ -44,7 +46,7 @@ class LatarBelakangSeeder extends PortalPageSeeder
                 'rows'       => [['col_0' => 'Isnin - Jumaat / Monday - Friday', 'col_1' => '8:30 AM - 5:30 PM', 'col_2' => '1:00 PM - 2:00 PM']],
             ]],
             ['type' => 'image', 'id' => 'lb_aktiviti', 'data' => [
-                'image_path' => 'media/2026/03/UPloP9UcRm0jMNp5JyVOmR8blR1gVZ45Nk2BFgoW.png',
+                'image_path' => PortalPublicMediaPaths::PERNIAGAAN_TERAS,
                 'caption_ms' => 'Aktiviti Utama Syarikat', 'caption_en' => 'Main Company Activities',
             ]],
             ['type' => 'cta', 'id' => 'lb_cta', 'data' => [

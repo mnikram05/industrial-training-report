@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\PortalAdministration\Database\Seeders\Portal;
 
+use Modules\PortalAdministration\Support\PortalPublicMediaPaths;
+
 class PengenalanDiriSeeder extends PortalPageSeeder
 {
     public function run(): void
@@ -14,7 +16,7 @@ class PengenalanDiriSeeder extends PortalPageSeeder
                 'title_en' => 'ABOUT ME',
             ]],
             ['type' => 'profile-card', 'id' => 'peng_profile', 'data' => [
-                'photo_path'   => 'media/2026/03/Hr2cdTUy89BSx10ARvj91jcFPKBtkgDtY8nybFFe.jpg',
+                'photo_path'   => PortalPublicMediaPaths::PROFILE_PELAJAR,
                 'nama'         => 'Muhammad Noor Ikram Bin Mazlan',
                 'no_pelajar'   => '17DDT23F1119',
                 'program'      => 'Diploma Teknologi Maklumat (Teknologi Digital)',
