@@ -69,10 +69,10 @@ class StatusDataTable extends BaseModuleDataTable
     public function ajaxUrl(): string
     {
         if ( is_int( $this->parentStatusId ) ) {
-            return route( 'statuses.show', ['status' => $this->parentStatusId] );
+            return route( 'statuses.show.data', ['status' => $this->parentStatusId] );
         }
 
-        return parent::ajaxUrl();
+        return route( 'statuses.data' );
     }
 
     protected function tableId(): string
@@ -82,7 +82,7 @@ class StatusDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'statuses.index';
+        return 'statuses.data';
     }
 
     /**

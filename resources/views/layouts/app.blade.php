@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="idle-auto-logout-minutes" content="{{ config('session.lifetime') }}">
+    <meta name="logout-url" content="{{ route('logout', absolute: true) }}">
 
     <title>{{ __('app.document_title') }}</title>
 

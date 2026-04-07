@@ -30,18 +30,21 @@ class ArticleController extends Controller
         $this->authorizeResource( Article::class, 'article', ['except' => ['show']] );
     }
 
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
-        if ( $request->ajax() ) {
-            return $this->articleDataTable->ajax();
-        }
-
         $latestExportPath = $this->latestCompletedExportPathResolver->resolve( 'articles', $request->user() );
 
         return view( 'portaladministration::articles.index', [
             'dataTable'        => $this->articleDataTable,
             'latestExportPath' => $latestExportPath,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $this->authorize( 'viewAny', Article::class );
+
+        return $this->articleDataTable->ajax();
     }
 
     public function create(): View

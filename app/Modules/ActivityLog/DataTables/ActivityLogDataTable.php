@@ -51,7 +51,7 @@ class ActivityLogDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'activity-logs.index';
+        return 'activity-logs.data';
     }
 
     /**

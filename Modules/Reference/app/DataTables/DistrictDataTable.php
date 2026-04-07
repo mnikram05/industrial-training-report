@@ -73,7 +73,7 @@ class DistrictDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'reference.districts.index';
+        return 'reference.districts.data';
     }
 
     public function ajaxUrl(): string

@@ -11,9 +11,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Modules\Reference\Models\DataReference;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Media extends Model
 {
+    use LogsActivity;
     use SoftDeletes;
 
     protected $table = 'media';
@@ -38,6 +41,14 @@ class Media extends Model
         return [
             'size' => 'integer',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly( $this->fillable )
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 
     public function getUrlAttribute(): string

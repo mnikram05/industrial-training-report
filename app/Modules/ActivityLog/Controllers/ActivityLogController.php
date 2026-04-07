@@ -22,13 +22,9 @@ class ActivityLogController extends Controller
     /**
      * Display a listing of activity logs.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
         $this->authorize( 'viewAny', Activity::class );
-
-        if ( $request->ajax() ) {
-            return $this->activityLogDataTable->ajax();
-        }
 
         $latestExportPath = $this->latestCompletedExportPathResolver->resolve( 'activity-logs', $request->user() );
 
@@ -36,6 +32,13 @@ class ActivityLogController extends Controller
             'dataTable'        => $this->activityLogDataTable,
             'latestExportPath' => $latestExportPath,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $this->authorize( 'viewAny', Activity::class );
+
+        return $this->activityLogDataTable->ajax();
     }
 
     /**

@@ -38,7 +38,7 @@ class RoleDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'roles.index';
+        return 'roles.data';
     }
 
     /**

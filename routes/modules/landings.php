@@ -14,6 +14,10 @@ Route::middleware( ['auth'] )->group( function (): void {
     Route::post( 'landings/import', ImportLandingController::class )
         ->name( 'landings.import' );
 
+    Route::get( 'landings/data', [LandingController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'landings.data' );
+
     Route::resource( 'landings', LandingController::class )
         ->except( ['show'] );
 } );

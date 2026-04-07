@@ -56,7 +56,7 @@ class ChildDataReferenceDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'reference.data-references.children';
+        return 'reference.data-references.children.data';
     }
 
     public function ajaxUrl(): string

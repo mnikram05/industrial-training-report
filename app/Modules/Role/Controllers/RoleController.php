@@ -29,18 +29,21 @@ class RoleController extends Controller
     /**
      * Display a listing of roles.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
-        if ( $request->ajax() ) {
-            return $this->roleDataTable->ajax();
-        }
-
         $latestExportPath = $this->latestCompletedExportPathResolver->resolve( 'roles', $request->user() );
 
         return view( 'modules.roles.index', [
             'dataTable'        => $this->roleDataTable,
             'latestExportPath' => $latestExportPath,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $this->authorize( 'viewAny', Role::class );
+
+        return $this->roleDataTable->ajax();
     }
 
     /**
@@ -63,6 +66,12 @@ class RoleController extends Controller
             RoleDto::fromArray( $request->validated() ),
             $request->user(),
         );
+
+        activity()
+            ->causedBy( $request->user() )
+            ->performedOn( $role )
+            ->event( 'created' )
+            ->log( 'role created' );
 
         return redirect()
             ->route( 'roles.edit', $role )
@@ -104,6 +113,12 @@ class RoleController extends Controller
             $request->user(),
         );
 
+        activity()
+            ->causedBy( $request->user() )
+            ->performedOn( $role )
+            ->event( 'updated' )
+            ->log( 'role updated' );
+
         return redirect()
             ->route( 'roles.edit', $role )
             ->with( 'status', 'role-updated' );
@@ -114,6 +129,12 @@ class RoleController extends Controller
      */
     public function destroy( Request $request, Role $role ): RedirectResponse
     {
+        activity()
+            ->causedBy( $request->user() )
+            ->performedOn( $role )
+            ->event( 'deleted' )
+            ->log( 'role deleted' );
+
         $this->roleService->deleteRole( $role, $request->user() );
 
         return redirect()

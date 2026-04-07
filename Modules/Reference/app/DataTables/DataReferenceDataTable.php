@@ -44,7 +44,7 @@ class DataReferenceDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'reference.data-references.index';
+        return 'reference.data-references.data';
     }
 
     /**

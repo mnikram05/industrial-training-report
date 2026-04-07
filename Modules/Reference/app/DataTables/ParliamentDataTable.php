@@ -73,7 +73,7 @@ class ParliamentDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'reference.parliaments.index';
+        return 'reference.parliaments.data';
     }
 
     public function ajaxUrl(): string

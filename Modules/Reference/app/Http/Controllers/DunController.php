@@ -24,15 +24,11 @@ class DunController extends Controller
     /**
      * Display a listing of DUNs.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
         $parliamentId = $request->integer( 'parliament_id' ) ?: null;
 
         $this->dunDataTable->setParliamentId( $parliamentId );
-
-        if ( $request->ajax() ) {
-            return $this->dunDataTable->ajax();
-        }
 
         $parliament = $parliamentId ? Parliament::find( $parliamentId ) : null;
 
@@ -40,6 +36,15 @@ class DunController extends Controller
             'dataTable'  => $this->dunDataTable,
             'parliament' => $parliament,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $parliamentId = $request->integer( 'parliament_id' ) ?: null;
+
+        $this->dunDataTable->setParliamentId( $parliamentId );
+
+        return $this->dunDataTable->ajax();
     }
 
     /**

@@ -60,7 +60,7 @@ class ArticleDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'articles.index';
+        return 'articles.data';
     }
 
     /**

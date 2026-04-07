@@ -24,15 +24,11 @@ class ParliamentController extends Controller
     /**
      * Display a listing of parliaments.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
         $stateId = $request->integer( 'state_id' ) ?: null;
 
         $this->parliamentDataTable->setStateId( $stateId );
-
-        if ( $request->ajax() ) {
-            return $this->parliamentDataTable->ajax();
-        }
 
         $state = $stateId ? State::find( $stateId ) : null;
 
@@ -40,6 +36,15 @@ class ParliamentController extends Controller
             'dataTable' => $this->parliamentDataTable,
             'state'     => $state,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $stateId = $request->integer( 'state_id' ) ?: null;
+
+        $this->parliamentDataTable->setStateId( $stateId );
+
+        return $this->parliamentDataTable->ajax();
     }
 
     /**

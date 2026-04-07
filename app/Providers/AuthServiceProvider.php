@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Gate;
 use App\Modules\Landing\Models\Landing;
 use Spatie\Activitylog\Models\Activity;
 use Modules\PortalAdministration\Models\Article;
+use Modules\PortalAdministration\Models\Menu;
+use Modules\PortalAdministration\Models\Media;
+use App\Policies\MenuPolicy;
+use App\Policies\MediaPolicy;
 use App\Modules\Role\Constants\RoleNameConstants;
 use App\Modules\Role\Constants\RolePermissionConstants;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -32,6 +36,8 @@ class AuthServiceProvider extends ServiceProvider
         Status::class   => StatusPolicy::class,
         Landing::class  => LandingPolicy::class,
         Article::class  => ArticlePolicy::class,
+        Menu::class     => MenuPolicy::class,
+        Media::class    => MediaPolicy::class,
         Activity::class => ActivityLogPolicy::class,
     ];
 

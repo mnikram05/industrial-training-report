@@ -58,7 +58,7 @@ class MediaDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'media.index';
+        return 'media.data';
     }
 
     public function ajaxUrl(): string

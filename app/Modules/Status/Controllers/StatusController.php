@@ -27,13 +27,9 @@ class StatusController extends Controller
         $this->authorizeResource( Status::class, 'status' );
     }
 
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
         $dataTable = $this->statusDataTable->onlyModuleParents();
-
-        if ( $request->ajax() ) {
-            return $dataTable->ajax();
-        }
 
         $latestExportPath = $this->latestCompletedExportPathResolver->resolve( 'statuses', $request->user() );
 
@@ -41,6 +37,13 @@ class StatusController extends Controller
             'dataTable'        => $dataTable,
             'latestExportPath' => $latestExportPath,
         ] );
+    }
+
+    public function data(): JsonResponse
+    {
+        $this->authorize( 'viewAny', Status::class );
+
+        return $this->statusDataTable->onlyModuleParents()->ajax();
     }
 
     public function create(): View
@@ -65,7 +68,7 @@ class StatusController extends Controller
             ->with( 'status', 'status-created' );
     }
 
-    public function show( Request $request, Status $status ): JsonResponse|View
+    public function show( Status $status ): View
     {
         $status->loadMissing( 'parent' );
 
@@ -79,14 +82,27 @@ class StatusController extends Controller
 
         $dataTable = $this->statusDataTable->forParentStatus( $moduleStatus );
 
-        if ( $request->ajax() ) {
-            return $dataTable->ajax();
-        }
-
         return view( 'modules.statuses.show', [
             'status'    => $moduleStatus,
             'dataTable' => $dataTable,
         ] );
+    }
+
+    public function dataForModule( Status $status ): JsonResponse
+    {
+        $this->authorize( 'view', $status );
+
+        $status->loadMissing( 'parent' );
+
+        $moduleStatus = (string) $status->type === StatusType::Module->value
+            ? $status
+            : $status->parent;
+
+        if ( ! $moduleStatus instanceof Status ) {
+            abort( 404 );
+        }
+
+        return $this->statusDataTable->forParentStatus( $moduleStatus )->ajax();
     }
 
     public function edit( Status $status ): View

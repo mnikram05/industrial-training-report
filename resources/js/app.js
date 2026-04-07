@@ -1,9 +1,12 @@
 import './bootstrap';
 
+import { initIdleAutoLogout } from './idle-logout';
+
 import Alpine from 'alpinejs';
 import jQuery from 'jquery';
 import 'datatables.net-dt';
 import './datatables';
+import './datatable-sort-reload';
 import registerLandingPreview from './landing-preview';
 
 window.Alpine = Alpine;
@@ -50,6 +53,7 @@ Alpine.store('layout', {
 
 Alpine.store('layout').boot();
 registerLandingPreview(Alpine);
+initIdleAutoLogout();
 
 Alpine.data('adminHeaderClock', () => ({
     time: '',

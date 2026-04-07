@@ -40,7 +40,7 @@ class UserDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'users.index';
+        return 'users.data';
     }
 
     /**

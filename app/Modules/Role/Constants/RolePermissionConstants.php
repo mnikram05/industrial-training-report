@@ -24,6 +24,22 @@ final class RolePermissionConstants
 
     public const ARTICLES_PUBLISH = 'articles.publish';
 
+    public const MENUS_VIEW = 'menus.view';
+
+    public const MENUS_CREATE = 'menus.create';
+
+    public const MENUS_EDIT = 'menus.edit';
+
+    public const MENUS_DELETE = 'menus.delete';
+
+    public const MEDIA_VIEW = 'media.view';
+
+    public const MEDIA_CREATE = 'media.create';
+
+    public const MEDIA_EDIT = 'media.edit';
+
+    public const MEDIA_DELETE = 'media.delete';
+
     public const ROLES_VIEW = 'roles.view';
 
     public const ROLES_CREATE = 'roles.create';
@@ -99,6 +115,14 @@ final class RolePermissionConstants
             self::ARTICLES_EDIT,
             self::ARTICLES_DELETE,
             self::ARTICLES_PUBLISH,
+            self::MENUS_VIEW,
+            self::MENUS_CREATE,
+            self::MENUS_EDIT,
+            self::MENUS_DELETE,
+            self::MEDIA_VIEW,
+            self::MEDIA_CREATE,
+            self::MEDIA_EDIT,
+            self::MEDIA_DELETE,
             self::ROLES_VIEW,
             self::ROLES_CREATE,
             self::ROLES_EDIT,
@@ -151,6 +175,12 @@ final class RolePermissionConstants
             self::ARTICLES_EDIT,
             self::ARTICLES_DELETE,
             self::ARTICLES_PUBLISH,
+            self::MENUS_VIEW,
+            self::MENUS_CREATE,
+            self::MENUS_EDIT,
+            self::MEDIA_VIEW,
+            self::MEDIA_CREATE,
+            self::MEDIA_EDIT,
             self::LANDINGS_VIEW,
             self::LANDINGS_CREATE,
             self::LANDINGS_EDIT,

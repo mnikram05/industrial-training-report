@@ -10,6 +10,10 @@ Route::middleware( ['auth'] )->group( function (): void {
     Route::get( 'activity-logs/export', ExportActivityLogController::class )
         ->name( 'activity-logs.export' );
 
+    Route::get( 'activity-logs/data', [ActivityLogController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'activity-logs.data' );
+
     Route::get( 'activity-logs', [ActivityLogController::class, 'index'] )
         ->name( 'activity-logs.index' );
 

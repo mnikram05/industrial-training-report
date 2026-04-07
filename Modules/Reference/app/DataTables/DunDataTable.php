@@ -73,7 +73,7 @@ class DunDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'reference.duns.index';
+        return 'reference.duns.data';
     }
 
     public function ajaxUrl(): string

@@ -99,9 +99,11 @@
                     <span>{{ __('sidebar.header_footer') }}</span>
                 </x-sidebar-submenu-link>
 
-                <x-sidebar-submenu-link :href="route('portal-administration.menus.index')" :active="request()->routeIs('portal-administration.menus.*')">
-                    <span>{{ __('sidebar.menus') }}</span>
-                </x-sidebar-submenu-link>
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::MENUS_VIEW)
+                    <x-sidebar-submenu-link :href="route('portal-administration.menus.index')" :active="request()->routeIs('portal-administration.menus.*')">
+                        <span>{{ __('sidebar.menus') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
 
                 @can(\App\Modules\Role\Constants\RolePermissionConstants::ARTICLES_VIEW)
                     <x-sidebar-submenu-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
@@ -109,9 +111,11 @@
                     </x-sidebar-submenu-link>
                 @endcan
 
-                <x-sidebar-submenu-link :href="route('media.index')" :active="request()->routeIs('media.*')">
-                    <span>{{ __('sidebar.media') }}</span>
-                </x-sidebar-submenu-link>
+                @can(\App\Modules\Role\Constants\RolePermissionConstants::MEDIA_VIEW)
+                    <x-sidebar-submenu-link :href="route('media.index')" :active="request()->routeIs('media.*')">
+                        <span>{{ __('sidebar.media') }}</span>
+                    </x-sidebar-submenu-link>
+                @endcan
 
             </x-sidebar-submenu>
         </div>

@@ -49,7 +49,7 @@ class LandingDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'landings.index';
+        return 'landings.data';
     }
 
     /**

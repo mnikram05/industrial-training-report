@@ -25,15 +25,16 @@ class DataReferenceController extends Controller
     /**
      * Display a listing of data references.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index(): View
     {
-        if ( $request->ajax() ) {
-            return $this->dataReferenceDataTable->ajax();
-        }
-
         return view( 'reference::data-references.index', [
             'dataTable' => $this->dataReferenceDataTable,
         ] );
+    }
+
+    public function data(): JsonResponse
+    {
+        return $this->dataReferenceDataTable->ajax();
     }
 
     /**
@@ -175,18 +176,21 @@ class DataReferenceController extends Controller
     /**
      * Display children of a data reference.
      */
-    public function children( Request $request, DataReference $dataReference ): JsonResponse|View
+    public function children( DataReference $dataReference ): View
     {
         $this->childDataReferenceDataTable->setParentId( $dataReference->id );
-
-        if ( $request->ajax() ) {
-            return $this->childDataReferenceDataTable->ajax();
-        }
 
         return view( 'reference::data-references.children', [
             'dataReference' => $dataReference,
             'dataTable'     => $this->childDataReferenceDataTable,
         ] );
+    }
+
+    public function childrenData( DataReference $dataReference ): JsonResponse
+    {
+        $this->childDataReferenceDataTable->setParentId( $dataReference->id );
+
+        return $this->childDataReferenceDataTable->ajax();
     }
 
     /**

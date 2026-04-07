@@ -26,6 +26,10 @@ Route::middleware( ['web', 'auth'] )->prefix( 'reference' )->name( 'reference.' 
     Route::patch( 'states/{state}/update-sort', [StateController::class, 'updateSort'] )
         ->name( 'states.update-sort' );
 
+    Route::get( 'states/data', [StateController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'states.data' );
+
     // Standard resource routes
     Route::resource( 'states', StateController::class );
 
@@ -40,6 +44,10 @@ Route::middleware( ['web', 'auth'] )->prefix( 'reference' )->name( 'reference.' 
     // Toggle status parliament
     Route::patch( 'parliaments/{parliament}/toggle-status', [ParliamentController::class, 'toggleStatus'] )
         ->name( 'parliaments.toggle-status' );
+
+    Route::get( 'parliaments/data', [ParliamentController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'parliaments.data' );
 
     // Standard resource routes
     Route::resource( 'parliaments', ParliamentController::class );
@@ -58,6 +66,10 @@ Route::middleware( ['web', 'auth'] )->prefix( 'reference' )->name( 'reference.' 
     // Toggle status DUN
     Route::patch( 'duns/{dun}/toggle-status', [DunController::class, 'toggleStatus'] )
         ->name( 'duns.toggle-status' );
+
+    Route::get( 'duns/data', [DunController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'duns.data' );
 
     // Standard resource routes
     Route::resource( 'duns', DunController::class );
@@ -78,6 +90,10 @@ Route::middleware( ['web', 'auth'] )->prefix( 'reference' )->name( 'reference.' 
     Route::patch( 'districts/{district}/toggle-status', [DistrictController::class, 'toggleStatus'] )
         ->name( 'districts.toggle-status' );
 
+    Route::get( 'districts/data', [DistrictController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'districts.data' );
+
     // Standard resource routes
     Route::resource( 'districts', DistrictController::class );
 
@@ -96,6 +112,10 @@ Route::middleware( ['web', 'auth'] )->prefix( 'reference' )->name( 'reference.' 
     // Toggle status
     Route::patch( 'data-references/{data_reference}/toggle-status', [DataReferenceController::class, 'toggleStatus'] )
         ->name( 'data-references.toggle-status' );
+
+    Route::get( 'data-references/{data_reference}/children/data', [DataReferenceController::class, 'childrenData'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'data-references.children.data' );
 
     // Children listing
     Route::get( 'data-references/{data_reference}/children', [DataReferenceController::class, 'children'] )
@@ -116,6 +136,10 @@ Route::middleware( ['web', 'auth'] )->prefix( 'reference' )->name( 'reference.' 
     // Update child sort order
     Route::patch( 'data-references/{data_reference}/children/{child}/update-sort', [DataReferenceController::class, 'updateChildSort'] )
         ->name( 'data-references.children.update-sort' );
+
+    Route::get( 'data-references/data', [DataReferenceController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'data-references.data' );
 
     // Standard resource routes
     Route::resource( 'data-references', DataReferenceController::class );

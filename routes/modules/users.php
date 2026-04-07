@@ -14,5 +14,9 @@ Route::middleware( ['auth'] )->group( function (): void {
     Route::post( 'users/import', ImportUserController::class )
         ->name( 'users.import' );
 
+    Route::get( 'users/data', [UserController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'users.data' );
+
     Route::resource( 'users', UserController::class );
 } );

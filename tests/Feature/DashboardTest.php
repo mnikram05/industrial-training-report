@@ -20,3 +20,13 @@ test('authenticated users can view the dashboard with quick links and checklist'
         ->assertSee(__('dashboard.shortcuts_heading'), false)
         ->assertSee(__('dashboard.checklist_heading'), false);
 });
+
+test('authenticated app layout includes idle auto logout meta aligned with session lifetime', function (): void {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->get(route('dashboard'))
+        ->assertOk()
+        ->assertSee('name="idle-auto-logout-minutes"', false)
+        ->assertSee('content="'.config('session.lifetime').'"', false);
+});

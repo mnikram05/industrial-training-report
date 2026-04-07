@@ -62,7 +62,7 @@ class StateDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'reference.states.index';
+        return 'reference.states.data';
     }
 
     /**

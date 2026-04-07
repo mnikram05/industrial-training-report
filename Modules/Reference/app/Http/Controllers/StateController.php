@@ -24,15 +24,16 @@ class StateController extends Controller
     /**
      * Display a listing of states.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index(): View
     {
-        if ( $request->ajax() ) {
-            return $this->stateDataTable->ajax();
-        }
-
         return view( 'reference::states.index', [
             'dataTable' => $this->stateDataTable,
         ] );
+    }
+
+    public function data(): JsonResponse
+    {
+        return $this->stateDataTable->ajax();
     }
 
     /**

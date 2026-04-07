@@ -33,18 +33,21 @@ class LandingController extends Controller
     /**
      * Display a listing of landings.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
-        if ( $request->ajax() ) {
-            return $this->landingDataTable->ajax();
-        }
-
         $latestExportPath = $this->latestCompletedExportPathResolver->resolve( 'landings', $request->user() );
 
         return view( 'modules.landings.index', [
             'dataTable'        => $this->landingDataTable,
             'latestExportPath' => $latestExportPath,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $this->authorize( 'viewAny', Landing::class );
+
+        return $this->landingDataTable->ajax();
     }
 
     /**

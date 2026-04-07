@@ -34,7 +34,11 @@ return [
     |
     */
 
-    'lifetime' => (int) env( 'SESSION_LIFETIME', 120 ),
+    /*
+    | Align SESSION_LIFETIME with idle auto-logout in the UI (see resources/js/idle-logout.js).
+    | In production behind HTTPS, set SESSION_SECURE_COOKIE=true in .env (see .env.example).
+    */
+    'lifetime' => (int) env( 'SESSION_LIFETIME', 5 ),
 
     'expire_on_close' => env( 'SESSION_EXPIRE_ON_CLOSE', false ),
 

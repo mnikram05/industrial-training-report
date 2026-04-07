@@ -56,12 +56,15 @@ final class DashboardHomeData
                 'href' => route('portal-settings.edit', ['page' => 'home']),
                 'external' => false,
             ],
-            [
+        ];
+
+        if ($user->can(RolePermissionConstants::MENUS_VIEW)) {
+            $items[] = [
                 'label' => __('dashboard.shortcuts.menus'),
                 'href' => route('portal-administration.menus.index'),
                 'external' => false,
-            ],
-        ];
+            ];
+        }
 
         if ($user->can(RolePermissionConstants::ARTICLES_VIEW)) {
             $items[] = [
@@ -71,11 +74,13 @@ final class DashboardHomeData
             ];
         }
 
-        $items[] = [
-            'label' => __('dashboard.shortcuts.media'),
-            'href' => route('media.index'),
-            'external' => false,
-        ];
+        if ($user->can(RolePermissionConstants::MEDIA_VIEW)) {
+            $items[] = [
+                'label' => __('dashboard.shortcuts.media'),
+                'href' => route('media.index'),
+                'external' => false,
+            ];
+        }
 
         return $items;
     }

@@ -14,5 +14,9 @@ Route::middleware( ['auth'] )->group( function (): void {
     Route::post( 'roles/import', ImportRoleController::class )
         ->name( 'roles.import' );
 
+    Route::get( 'roles/data', [RoleController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'roles.data' );
+
     Route::resource( 'roles', RoleController::class );
 } );

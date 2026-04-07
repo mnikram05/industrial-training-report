@@ -72,26 +72,30 @@ class MenuDataTable extends BaseModuleDataTable
                 ? ( $menu->parent?->title_ms ?? $menu->parent?->title_en ?? 'null' )
                 : 'null' )
             ->addColumn( 'display_title_ms', static function ( Menu $menu ): string {
+                $text = e( (string) ( $menu->title_ms ?? '' ) );
+
                 if ( ! $menu->parent_id ) {
-                    return '<strong>' . ( $menu->title_ms ?? '' ) . '</strong>';
+                    return '<strong>' . $text . '</strong>';
                 }
 
                 if ( $menu->getAttribute( 'depth' ) === 2 ) {
-                    return '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_ms ?? '' );
+                    return '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . $text;
                 }
 
-                return '&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_ms ?? '' );
+                return '&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . $text;
             } )
             ->addColumn( 'display_title_en', static function ( Menu $menu ): string {
+                $text = e( (string) ( $menu->title_en ?? '' ) );
+
                 if ( ! $menu->parent_id ) {
-                    return '<strong>' . ( $menu->title_en ?? '' ) . '</strong>';
+                    return '<strong>' . $text . '</strong>';
                 }
 
                 if ( $menu->getAttribute( 'depth' ) === 2 ) {
-                    return '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_en ?? '' );
+                    return '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . $text;
                 }
 
-                return '&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . ( $menu->title_en ?? '' );
+                return '&nbsp;&nbsp;&nbsp;&nbsp;↳ ' . $text;
             } )
             ->addColumn( 'status_label', static fn ( Menu $menu ): string => view( 'portaladministration::menus.partials.datatables_status', [
                 'menu' => $menu,
@@ -110,7 +114,7 @@ class MenuDataTable extends BaseModuleDataTable
 
     protected function ajaxRouteName(): string
     {
-        return 'portal-administration.menus.index';
+        return 'portal-administration.menus.data';
     }
 
     /**

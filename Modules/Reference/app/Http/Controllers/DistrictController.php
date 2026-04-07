@@ -24,15 +24,11 @@ class DistrictController extends Controller
     /**
      * Display a listing of districts.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
         $stateId = $request->integer( 'state_id' ) ?: null;
 
         $this->districtDataTable->setStateId( $stateId );
-
-        if ( $request->ajax() ) {
-            return $this->districtDataTable->ajax();
-        }
 
         $state = $stateId ? State::find( $stateId ) : null;
 
@@ -40,6 +36,15 @@ class DistrictController extends Controller
             'dataTable' => $this->districtDataTable,
             'state'     => $state,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $stateId = $request->integer( 'state_id' ) ?: null;
+
+        $this->districtDataTable->setStateId( $stateId );
+
+        return $this->districtDataTable->ajax();
     }
 
     /**

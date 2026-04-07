@@ -21,17 +21,15 @@ class MediaController extends Controller
 {
     public function __construct(
         protected MediaDataTable $mediaDataTable,
-    ) {}
+    ) {
+        $this->authorizeResource( Media::class, 'medium' );
+    }
 
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
         $typeId = $request->integer( 'type_id' ) ?: null;
 
         $this->mediaDataTable->setTypeId( $typeId );
-
-        if ( $request->ajax() ) {
-            return $this->mediaDataTable->ajax();
-        }
 
         $type = $typeId ? DataReference::find( $typeId ) : null;
 
@@ -39,6 +37,17 @@ class MediaController extends Controller
             'dataTable' => $this->mediaDataTable,
             'type'      => $type,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $this->authorize( 'viewAny', Media::class );
+
+        $typeId = $request->integer( 'type_id' ) ?: null;
+
+        $this->mediaDataTable->setTypeId( $typeId );
+
+        return $this->mediaDataTable->ajax();
     }
 
     public function create( Request $request ): View
@@ -55,7 +64,12 @@ class MediaController extends Controller
     {
         $request->validate( [
             'files'      => ['required', 'array', 'min:1'],
-            'files.*'    => ['required', 'file', 'max:10240'],
+            'files.*'    => [
+                'required',
+                'file',
+                'max:10240',
+                'mimes:jpeg,jpg,png,gif,webp,svg,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,csv,zip,mp4,webm,mp3,wav',
+            ],
             'type_id'    => ['nullable', 'integer', 'exists:zz_data_references,id'],
             'collection' => ['nullable', 'string', 'max:255'],
         ] );

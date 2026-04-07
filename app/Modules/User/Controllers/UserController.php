@@ -29,18 +29,21 @@ class UserController extends Controller
     /**
      * Display a listing of users.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index( Request $request ): View
     {
-        if ( $request->ajax() ) {
-            return $this->userDataTable->ajax();
-        }
-
         $latestExportPath = $this->latestCompletedExportPathResolver->resolve( 'users', $request->user() );
 
         return view( 'modules.users.index', [
             'dataTable'        => $this->userDataTable,
             'latestExportPath' => $latestExportPath,
         ] );
+    }
+
+    public function data( Request $request ): JsonResponse
+    {
+        $this->authorize( 'viewAny', User::class );
+
+        return $this->userDataTable->ajax();
     }
 
     /**

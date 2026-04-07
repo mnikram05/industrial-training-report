@@ -50,6 +50,10 @@ Route::middleware( ['auth'] )->group( function (): void {
     Route::patch( 'articles/{article}/unpublish', UnpublishArticleController::class )
         ->name( 'articles.unpublish' );
 
+    Route::get( 'articles/data', [ArticleController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'articles.data' );
+
     Route::resource( 'articles', ArticleController::class )
         ->except( ['show'] );
 } );
@@ -63,6 +67,10 @@ Route::get( 'articles/{article:slug}', [ArticleController::class, 'show'] )
 |--------------------------------------------------------------------------
 */
 Route::middleware( ['auth'] )->group( function (): void {
+    Route::get( 'media/data', [MediaController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'media.data' );
+
     Route::resource( 'media', MediaController::class )
         ->except( ['edit'] );
 } );
@@ -84,6 +92,10 @@ Route::middleware( ['auth'] )->prefix( 'portal-administration' )->name( 'portal-
 
     Route::get( 'menus/sort-options/{parentId?}', [MenuController::class, 'sortOptionsApi'] )
         ->name( 'menus.sort-options' );
+
+    Route::get( 'menus/data', [MenuController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'menus.data' );
 
     Route::resource( 'menus', MenuController::class );
 

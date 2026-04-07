@@ -12,10 +12,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Menu extends Model
 {
     use HasFactory;
+    use LogsActivity;
     use SoftDeletes;
 
     public $timestamps = true;
@@ -44,6 +47,14 @@ class Menu extends Model
             'type_id'   => 'integer',
             'status_id' => 'integer',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly( $this->fillable )
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 
     /**

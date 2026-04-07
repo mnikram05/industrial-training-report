@@ -14,5 +14,13 @@ Route::middleware( ['auth'] )->group( function (): void {
     Route::post( 'statuses/import', ImportStatusController::class )
         ->name( 'statuses.import' );
 
+    Route::get( 'statuses/data', [StatusController::class, 'data'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'statuses.data' );
+
+    Route::get( 'statuses/{status}/data', [StatusController::class, 'dataForModule'] )
+        ->middleware( 'throttle:datatable-json' )
+        ->name( 'statuses.show.data' );
+
     Route::resource( 'statuses', StatusController::class );
 } );

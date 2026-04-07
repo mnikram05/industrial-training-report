@@ -19,20 +19,28 @@ class MenuController extends Controller
 {
     public function __construct(
         protected MenuDataTable $menuDataTable,
-    ) {}
+    ) {
+        $this->authorizeResource( Menu::class, 'menu' );
+    }
 
     /**
      * Display a listing of menus.
      */
-    public function index( Request $request ): JsonResponse|View
+    public function index(): View
     {
-        if ( $request->ajax() ) {
-            return $this->menuDataTable->ajax();
-        }
-
         return view( 'portaladministration::menus.index', [
             'dataTable' => $this->menuDataTable,
         ] );
+    }
+
+    /**
+     * JSON feed for the menus DataTable.
+     */
+    public function data(): JsonResponse
+    {
+        $this->authorize( 'viewAny', Menu::class );
+
+        return $this->menuDataTable->ajax();
     }
 
     /**
@@ -174,6 +182,7 @@ class MenuController extends Controller
     public function restore( int $id ): RedirectResponse
     {
         $menu = Menu::withTrashed()->findOrFail( $id );
+        $this->authorize( 'restore', $menu );
         $menu->restore();
         $menu->update( ['deleted_by' => null] );
 
@@ -188,6 +197,7 @@ class MenuController extends Controller
     public function forceDelete( int $id ): RedirectResponse
     {
         $menu = Menu::withTrashed()->findOrFail( $id );
+        $this->authorize( 'forceDelete', $menu );
         $menu->forceDelete();
 
         return redirect()
@@ -200,6 +210,7 @@ class MenuController extends Controller
      */
     public function toggleStatus( Menu $menu ): RedirectResponse
     {
+        $this->authorize( 'update', $menu );
         $newStatus = $menu->status_id ? 0 : 1;
 
         $menu->update( [
@@ -234,6 +245,7 @@ class MenuController extends Controller
      */
     public function updateSort( Request $request, Menu $menu ): JsonResponse
     {
+        $this->authorize( 'update', $menu );
         $direction = $request->input( 'direction' );
 
         if ( ! in_array( $direction, ['up', 'down'], true ) ) {
@@ -272,6 +284,8 @@ class MenuController extends Controller
      */
     public function sortOptionsApi( ?int $parentId = null ): JsonResponse
     {
+        $this->authorize( 'viewAny', Menu::class );
+
         return response()->json( $this->buildSortOptions( null, $parentId ?: null ) );
     }
 
