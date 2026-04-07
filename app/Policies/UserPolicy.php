@@ -33,4 +33,22 @@ class UserPolicy
     {
         return $user->can( RolePermissionConstants::USERS_DELETE );
     }
+
+    public function approve( User $user, User $model ): bool
+    {
+        if ( ! $user->can( RolePermissionConstants::USERS_APPROVE ) ) {
+            return false;
+        }
+
+        return $model->isPendingRegistrationApproval();
+    }
+
+    public function reject( User $user, User $model ): bool
+    {
+        if ( ! $user->can( RolePermissionConstants::USERS_APPROVE ) && ! $user->can( RolePermissionConstants::USERS_REJECT ) ) {
+            return false;
+        }
+
+        return $model->isPendingRegistrationApproval();
+    }
 }

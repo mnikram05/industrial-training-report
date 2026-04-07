@@ -16,8 +16,10 @@
 
             @if (filled($status ?? null))
                 <x-card-content class="px-6 pb-0 pt-0">
-                    <x-alert>
-                        <x-alert-description>{{ $status ?? '' }}</x-alert-description>
+                    <x-alert class="whitespace-normal">
+                        <x-alert-description class="whitespace-normal break-words leading-relaxed">
+                            {{ $status ?? '' }}
+                        </x-alert-description>
                     </x-alert>
                 </x-card-content>
             @endif
@@ -87,6 +89,24 @@
                     <x-input id="register_email" type="email" name="email" :value="old('email')"
                         placeholder="{{ __('modules/login.field.email') }}" required autocomplete="username" class="w-full" />
                     @error('email')
+                        <p class="mt-1 text-sm font-medium text-destructive">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="space-y-1.5">
+                    <x-label for="register_requested_role">{{ __('modules/login.field.requested_role') }}</x-label>
+                    <select id="register_requested_role" name="requested_role" required
+                        class="flex h-9 w-full min-w-0 rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm">
+                        <option value="" disabled @selected(old('requested_role', '') === '')>
+                            {{ __('modules/login.field.select_role') }}
+                        </option>
+                        @foreach (\App\Modules\Role\Constants\RoleNameConstants::publicRegistrationRoles() as $role)
+                            <option value="{{ $role }}" @selected(old('requested_role') === $role)>
+                                {{ \Illuminate\Support\Str::headline($role) }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('requested_role')
                         <p class="mt-1 text-sm font-medium text-destructive">{{ $message }}</p>
                     @enderror
                 </div>

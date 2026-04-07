@@ -38,11 +38,13 @@ class UserImport implements Importable
                     }
 
                     $usersByEmail[$email] = [
-                        'id'         => (string) Str::uuid(),
-                        'name'       => $name,
-                        'email'      => $email,
-                        'created_at' => $now,
-                        'updated_at' => $now,
+                        'id'              => (string) Str::uuid(),
+                        'name'            => $name,
+                        'email'           => $email,
+                        'approved_at'     => $now,
+                        'requested_role'  => null,
+                        'created_at'      => $now,
+                        'updated_at'      => $now,
                     ];
 
                     $passwordsByEmail[$email] = $this->value( $row, 'password' ) ?? 'password';
@@ -55,7 +57,7 @@ class UserImport implements Importable
                 User::query()->upsert(
                     array_values( $usersByEmail ),
                     ['email'],
-                    ['name', 'updated_at'],
+                    ['name', 'approved_at', 'requested_role', 'updated_at'],
                 );
 
                 $existingUsers = User::query()

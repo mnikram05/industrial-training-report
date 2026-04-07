@@ -14,6 +14,10 @@ final class RolePermissionConstants
 
     public const USERS_DELETE = 'users.delete';
 
+    public const USERS_APPROVE = 'users.approve';
+
+    public const USERS_REJECT = 'users.reject';
+
     public const ARTICLES_VIEW = 'articles.view';
 
     public const ARTICLES_CREATE = 'articles.create';
@@ -96,6 +100,14 @@ final class RolePermissionConstants
 
     public const DISTRICTS_DELETE = 'districts.delete';
 
+    public const DATA_REFERENCES_VIEW = 'data-references.view';
+
+    public const DATA_REFERENCES_CREATE = 'data-references.create';
+
+    public const DATA_REFERENCES_EDIT = 'data-references.edit';
+
+    public const DATA_REFERENCES_DELETE = 'data-references.delete';
+
     public const ACTIVITY_LOGS_VIEW = 'activity-logs.view';
 
     public const ADMIN_DASHBOARD_VIEW = 'admin-dashboard.view';
@@ -110,6 +122,8 @@ final class RolePermissionConstants
             self::USERS_CREATE,
             self::USERS_EDIT,
             self::USERS_DELETE,
+            self::USERS_APPROVE,
+            self::USERS_REJECT,
             self::ARTICLES_VIEW,
             self::ARTICLES_CREATE,
             self::ARTICLES_EDIT,
@@ -151,6 +165,10 @@ final class RolePermissionConstants
             self::DISTRICTS_CREATE,
             self::DISTRICTS_EDIT,
             self::DISTRICTS_DELETE,
+            self::DATA_REFERENCES_VIEW,
+            self::DATA_REFERENCES_CREATE,
+            self::DATA_REFERENCES_EDIT,
+            self::DATA_REFERENCES_DELETE,
             self::ACTIVITY_LOGS_VIEW,
             self::ADMIN_DASHBOARD_VIEW,
         ];
@@ -184,6 +202,9 @@ final class RolePermissionConstants
             self::LANDINGS_VIEW,
             self::LANDINGS_CREATE,
             self::LANDINGS_EDIT,
+            self::DATA_REFERENCES_VIEW,
+            self::DATA_REFERENCES_CREATE,
+            self::DATA_REFERENCES_EDIT,
         ];
     }
 

@@ -15,6 +15,7 @@ return [
     'created_at'           => 'Created At',
     'created_by'           => 'Created By',
     'delete'               => 'Delete',
+    'view'                 => 'View',
     'deleted_at'           => 'Deleted At',
     'detail'               => 'Detail',
     'denied'               => 'This action is not allowed.',

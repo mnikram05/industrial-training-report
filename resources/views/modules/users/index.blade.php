@@ -1,5 +1,7 @@
 <x-app-layout>
-    <x-module-index-shell :latest-export-path="$latestExportPath ?? null">
+    <x-module-index-shell
+        :latest-export-path="$latestExportPath ?? null"
+        :saved-statuses="['user-created', 'user-updated', 'user-approved', 'user-rejected']">
         <x-slot:heading>{{ __('ui.users') }}</x-slot:heading>
         <x-slot:subtitle>{{ __('ui.manage_application_users') }}</x-slot:subtitle>
 

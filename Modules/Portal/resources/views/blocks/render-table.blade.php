@@ -1,4 +1,7 @@
-@php $d = $block['data']; $rows = $d['rows'] ?? []; @endphp
+@php
+    $d = $block['data'];
+    $rows = $d['rows_' . $l] ?? ( $d['rows'] ?? [] );
+@endphp
 @if (count($rows))
     <section class="py-8">
         <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

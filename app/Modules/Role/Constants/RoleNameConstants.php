@@ -23,4 +23,17 @@ final class RoleNameConstants
             self::VIEWER,
         ];
     }
+
+    /**
+     * Roles a visitor may request when self-registering (admin assigns on approval).
+     *
+     * @return list<string>
+     */
+    public static function publicRegistrationRoles(): array
+    {
+        return [
+            self::VIEWER,
+            self::EDITOR,
+        ];
+    }
 }

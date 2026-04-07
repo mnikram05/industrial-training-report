@@ -19,8 +19,10 @@ use Spatie\Activitylog\Models\Activity;
 use Modules\PortalAdministration\Models\Article;
 use Modules\PortalAdministration\Models\Menu;
 use Modules\PortalAdministration\Models\Media;
+use App\Policies\DataReferencePolicy;
 use App\Policies\MenuPolicy;
 use App\Policies\MediaPolicy;
+use Modules\Reference\Models\DataReference;
 use App\Modules\Role\Constants\RoleNameConstants;
 use App\Modules\Role\Constants\RolePermissionConstants;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -38,7 +40,8 @@ class AuthServiceProvider extends ServiceProvider
         Article::class  => ArticlePolicy::class,
         Menu::class     => MenuPolicy::class,
         Media::class    => MediaPolicy::class,
-        Activity::class => ActivityLogPolicy::class,
+        Activity::class   => ActivityLogPolicy::class,
+        DataReference::class => DataReferencePolicy::class,
     ];
 
     /**

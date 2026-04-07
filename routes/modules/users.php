@@ -18,5 +18,11 @@ Route::middleware( ['auth'] )->group( function (): void {
         ->middleware( 'throttle:datatable-json' )
         ->name( 'users.data' );
 
+    Route::patch( 'users/{user}/approve', [UserController::class, 'approve'] )
+        ->name( 'users.approve' );
+
+    Route::patch( 'users/{user}/reject', [UserController::class, 'reject'] )
+        ->name( 'users.reject' );
+
     Route::resource( 'users', UserController::class );
 } );

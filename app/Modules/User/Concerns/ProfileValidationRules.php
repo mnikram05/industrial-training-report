@@ -39,6 +39,8 @@ trait ProfileValidationRules
      */
     protected function emailRules( int|string|null $userId = null ): array
     {
+        $unique = Rule::unique( User::class, 'email' )->whereNull( 'deleted_at' );
+
         return [
             'required',
             'string',
@@ -46,8 +48,8 @@ trait ProfileValidationRules
             'email',
             'max:255',
             $userId === null
-                ? Rule::unique( User::class )
-                : Rule::unique( User::class )->ignore( $userId ),
+                ? $unique
+                : $unique->ignore( $userId ),
         ];
     }
 }

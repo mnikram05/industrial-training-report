@@ -20,7 +20,23 @@ class DataReferenceController extends Controller
     public function __construct(
         protected DataReferenceDataTable $dataReferenceDataTable,
         protected ChildDataReferenceDataTable $childDataReferenceDataTable,
-    ) {}
+    ) {
+        $this->authorizeResource( DataReference::class, 'data_reference', [
+            'except' => [
+                'data',
+                'restore',
+                'forceDelete',
+                'toggleStatus',
+                'children',
+                'childrenData',
+                'createChild',
+                'storeChild',
+                'toggleChildStatus',
+                'updateSort',
+                'updateChildSort',
+            ],
+        ] );
+    }
 
     /**
      * Display a listing of data references.
@@ -34,6 +50,8 @@ class DataReferenceController extends Controller
 
     public function data(): JsonResponse
     {
+        $this->authorize( 'viewAny', DataReference::class );
+
         return $this->dataReferenceDataTable->ajax();
     }
 
@@ -115,6 +133,7 @@ class DataReferenceController extends Controller
     public function restore( int $id ): RedirectResponse
     {
         $dataReference = DataReference::withTrashed()->findOrFail( $id );
+        $this->authorize( 'delete', $dataReference );
         $dataReference->restore();
         $dataReference->update( ['deleted_by' => null] );
 
@@ -129,6 +148,7 @@ class DataReferenceController extends Controller
     public function forceDelete( int $id ): RedirectResponse
     {
         $dataReference = DataReference::withTrashed()->findOrFail( $id );
+        $this->authorize( 'delete', $dataReference );
         $dataReference->forceDelete();
 
         return redirect()
@@ -141,6 +161,7 @@ class DataReferenceController extends Controller
      */
     public function toggleStatus( DataReference $dataReference ): RedirectResponse
     {
+        $this->authorize( 'update', $dataReference );
         $newStatus = ! $dataReference->status;
 
         $dataReference->update( [
@@ -163,6 +184,7 @@ class DataReferenceController extends Controller
      */
     public function toggleChildStatus( DataReference $dataReference, DataReference $child ): RedirectResponse
     {
+        $this->authorize( 'update', $child );
         $child->update( [
             'status'     => ! $child->status,
             'updated_by' => auth()->id(),
@@ -178,6 +200,7 @@ class DataReferenceController extends Controller
      */
     public function children( DataReference $dataReference ): View
     {
+        $this->authorize( 'view', $dataReference );
         $this->childDataReferenceDataTable->setParentId( $dataReference->id );
 
         return view( 'reference::data-references.children', [
@@ -188,6 +211,7 @@ class DataReferenceController extends Controller
 
     public function childrenData( DataReference $dataReference ): JsonResponse
     {
+        $this->authorize( 'view', $dataReference );
         $this->childDataReferenceDataTable->setParentId( $dataReference->id );
 
         return $this->childDataReferenceDataTable->ajax();
@@ -198,6 +222,8 @@ class DataReferenceController extends Controller
      */
     public function createChild( DataReference $dataReference ): View
     {
+        $this->authorize( 'create', DataReference::class );
+
         return view( 'reference::data-references.create-child', [
             'dataReference' => $dataReference,
             'sortOptions'   => $this->buildChildSortOptions( $dataReference->id ),
@@ -209,6 +235,7 @@ class DataReferenceController extends Controller
      */
     public function storeChild( StoreDataReferenceRequest $request, DataReference $dataReference ): RedirectResponse
     {
+        $this->authorize( 'create', DataReference::class );
         $data               = $request->validated();
         $data['parent_id']  = $dataReference->id;
         $data['created_by'] = auth()->id();
@@ -231,6 +258,7 @@ class DataReferenceController extends Controller
      */
     public function updateChildSort( Request $request, DataReference $dataReference, DataReference $child ): JsonResponse
     {
+        $this->authorize( 'update', $child );
         $direction = $request->input( 'direction' );
 
         if ( ! in_array( $direction, ['up', 'down'], true ) ) {
@@ -269,6 +297,7 @@ class DataReferenceController extends Controller
      */
     public function updateSort( Request $request, DataReference $dataReference ): JsonResponse
     {
+        $this->authorize( 'update', $dataReference );
         $direction = $request->input( 'direction' );
 
         if ( ! in_array( $direction, ['up', 'down'], true ) ) {

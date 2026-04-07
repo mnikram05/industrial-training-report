@@ -71,8 +71,10 @@ class UserService
     public function createUser( UserDto $data, ?Authenticatable $causer = null ): User
     {
         $user = User::create( [
-            'name'  => $data->name,
-            'email' => $data->email,
+            'name'             => $data->name,
+            'email'            => $data->email,
+            'approved_at'      => now(),
+            'requested_role'   => null,
         ] );
 
         if ( $data->password !== null && $data->password !== '' ) {
@@ -110,6 +112,11 @@ class UserService
 
         $user = $user->refresh();
 
+        if ( $user->approved_at === null && $user->roles()->exists() ) {
+            $user->update( ['approved_at' => now()] );
+            $user = $user->refresh();
+        }
+
         $this->logUpdateAction( self::LOG_NAME, self::RESOURCE_LABEL, $causer, $user );
 
         return $user;
@@ -120,6 +127,15 @@ class UserService
      */
     public function deleteUser( User $user, ?Authenticatable $causer = null ): bool
     {
+        // Best practice for soft-deletes + unique(email):
+        // free up the email address while keeping the original row for audit/history.
+        $user->update( [
+            'email'           => 'deleted+' . $user->getKey() . '@example.invalid',
+            'approved_at'     => null,
+            'requested_role'  => null,
+            'rejected_at'     => null,
+        ] );
+
         $deleted = (bool) $user->delete();
 
         if ( $deleted ) {
@@ -127,5 +143,57 @@ class UserService
         }
 
         return $deleted;
+    }
+
+    /**
+     * Approve a self-registered user: assign Spatie role from {@see User::$requested_role} and mark approved.
+     */
+    public function approveSelfRegisteredUser( User $user, ?Authenticatable $causer = null ): User
+    {
+        if ( $user->isApproved() ) {
+            return $user;
+        }
+
+        $roleName = $user->requested_role;
+
+        if ( ! is_string( $roleName ) || ! in_array( $roleName, RoleNameConstants::publicRegistrationRoles(), true ) ) {
+            $roleName = RoleNameConstants::VIEWER;
+        }
+
+        $user->update( [
+            'approved_at' => now(),
+        ] );
+
+        $user->syncRoles( [$roleName] );
+
+        $user = $user->refresh();
+
+        $this->logUpdateAction( self::LOG_NAME, self::RESOURCE_LABEL, $causer, $user );
+
+        return $user;
+    }
+
+    /**
+     * Reject a self-registered user (blocks login and clears requested role / roles).
+     */
+    public function rejectSelfRegisteredUser( User $user, ?Authenticatable $causer = null ): User
+    {
+        if ( $user->rejected_at !== null ) {
+            return $user;
+        }
+
+        $user->update( [
+            'rejected_at'     => now(),
+            'approved_at'     => null,
+            'requested_role'  => null,
+        ] );
+
+        $user->syncRoles( [] );
+
+        $user = $user->refresh();
+
+        $this->logUpdateAction( self::LOG_NAME, self::RESOURCE_LABEL, $causer, $user );
+
+        return $user;
     }
 }

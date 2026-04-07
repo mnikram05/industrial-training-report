@@ -51,6 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'district_id',
         'email',
         'status_id',
+        'approved_at',
+        'rejected_at',
+        'requested_role',
     ];
 
     /**
@@ -134,6 +137,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return ! $this->hasRole( RoleNameConstants::ADMIN );
     }
 
+    public function isApproved(): bool
+    {
+        return $this->approved_at !== null;
+    }
+
+    public function isRejected(): bool
+    {
+        return $this->rejected_at !== null;
+    }
+
+    public function isPendingRegistrationApproval(): bool
+    {
+        return $this->approved_at === null && $this->rejected_at === null;
+    }
+
     /**
      * Scope a query to search by name or email.
      *
@@ -179,6 +197,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'email_verified_at' => 'datetime',
+            'approved_at'       => 'datetime',
+            'rejected_at'       => 'datetime',
         ];
     }
 

@@ -39,9 +39,17 @@ return [
     |--------------------------------------------------------------------------
     */
     'register' => [
-        'heading'     => 'Daftar',
-        'description' => 'Cipta akaun anda dengan nama dan kata laluan.',
-        'submit'      => 'Daftar',
+        'heading'              => 'Daftar',
+        'description'          => 'Cipta akaun anda. Pentadbir mesti meluluskan akaun sebelum anda boleh log masuk.',
+        'submit'               => 'Daftar',
+        'pending_approval'     => 'Terima kasih kerana mendaftar. Akaun anda menunggu kelulusan—anda boleh log masuk selepas pentadbir meluluskannya.',
+        'pending_badge'        => 'Menunggu kelulusan',
+        'rejected_badge'       => 'Ditolak',
+        'registration_column'  => 'Pendaftaran',
+        'approve'              => 'Luluskan akaun',
+        'confirm_approve'      => 'Luluskan akaun ini dan tetapkan peranan yang dipohon?',
+        'reject'               => 'Tolak akaun',
+        'confirm_reject'       => 'Tolak pendaftaran ini? (Pengguna tidak boleh log masuk.)',
     ],
 
     /*
@@ -54,6 +62,8 @@ return [
         'password'          => 'Kata laluan',
         'name'              => 'Nama',
         'confirm_password'  => 'Sahkan kata laluan',
+        'requested_role'    => 'Peranan dipohon',
+        'select_role'       => 'Pilih peranan…',
     ],
 
     'remember_me' => 'Ingat saya',

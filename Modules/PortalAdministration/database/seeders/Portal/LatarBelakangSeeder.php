@@ -14,13 +14,13 @@ class LatarBelakangSeeder extends PortalPageSeeder
             ['type' => 'hero', 'id' => 'lb_hero', 'data' => [
                 'subtitle_ms' => 'LATAR BELAKANG ORGANISASI', 'subtitle_en' => 'ORGANISATION BACKGROUND',
                 'title_ms'    => 'OPENSOFT TECHNOLOGIES SDN BHD', 'title_en' => 'OPENSOFT TECHNOLOGIES SDN BHD',
-                'address'     => 'No. 37-2, Jalan 9/23A, Medan Makmur, Setapak, 53000 Kuala Lumpur',
+                'address'     => 'Nadi 15, 10A, Jln Diplomatik, Presint 15, 62050 Putrajaya, Wilayah Persekutuan Putrajaya.',
             ]],
             ['type' => 'cards', 'id' => 'lb_info', 'data' => [
                 'layout' => 'horizontal',
                 'items'  => [
                     ['display' => 'image', 'icon' => '', 'image' => PortalPublicMediaPaths::LOGO_OPENSOFT, 'label_ms' => 'Logo Syarikat', 'label_en' => 'Company Logo', 'value_ms' => 'Opensoft Technologies Sdn Bhd', 'value_en' => 'Opensoft Technologies Sdn Bhd'],
-                    ['display' => 'image', 'icon' => '', 'image' => PortalPublicMediaPaths::LOKASI_OPENSOFT, 'label_ms' => 'Lokasi', 'label_en' => 'Location', 'value_ms' => 'No. 37-2, Jalan 9/23A, Medan Makmur, Setapak, 53000 KL', 'value_en' => 'No. 37-2, Jalan 9/23A, Medan Makmur, Setapak, 53000 KL'],
+                    ['display' => 'image', 'icon' => '', 'image' => PortalPublicMediaPaths::LOKASI_OPENSOFT, 'label_ms' => 'Lokasi', 'label_en' => 'Location', 'value_ms' => 'Nadi 15, 10A, Jln Diplomatik, Presint 15, 62050 Putrajaya, Wilayah Persekutuan Putrajaya.', 'value_en' => 'Nadi 15, 10A, Jln Diplomatik, Presint 15, 62050 Putrajaya, Wilayah Persekutuan Putrajaya.'],
                     ['display' => 'emoji', 'icon' => '📅', 'image' => '', 'label_ms' => 'Ditubuhkan', 'label_en' => 'Established', 'value_ms' => '2010', 'value_en' => '2010'],
                     ['display' => 'emoji', 'icon' => '💼', 'image' => '', 'label_ms' => 'Industri', 'label_en' => 'Industry', 'value_ms' => 'Teknologi Maklumat & Komunikasi (ICT)', 'value_en' => 'Information & Communication Technology (ICT)'],
                 ],
@@ -43,7 +43,8 @@ class LatarBelakangSeeder extends PortalPageSeeder
             ['type' => 'table', 'id' => 'lb_jadual', 'data' => [
                 'heading_ms' => 'Jadual Waktu Bekerja', 'heading_en' => 'Working Hours Schedule',
                 'columns_ms' => ['Hari', 'Waktu Bekerja', 'Waktu Rehat'], 'columns_en' => ['Day', 'Working Hours', 'Break Time'],
-                'rows'       => [['col_0' => 'Isnin - Jumaat / Monday - Friday', 'col_1' => '8:30 AM - 5:30 PM', 'col_2' => '1:00 PM - 2:00 PM']],
+                'rows_ms'    => [['col_0' => 'Isnin - Jumaat', 'col_1' => '8:30 AM - 5:30 PM', 'col_2' => '1:00 PM - 2:00 PM']],
+                'rows_en'    => [['col_0' => 'Monday - Friday', 'col_1' => '8:30 AM - 5:30 PM', 'col_2' => '1:00 PM - 2:00 PM']],
             ]],
             ['type' => 'image', 'id' => 'lb_aktiviti', 'data' => [
                 'image_path' => PortalPublicMediaPaths::PERNIAGAAN_TERAS,

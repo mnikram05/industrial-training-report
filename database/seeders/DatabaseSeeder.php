@@ -25,21 +25,21 @@ class DatabaseSeeder extends Seeder
 
         $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
-            ['name' => 'Admin User', 'email_verified_at' => now()],
+            ['name' => 'Admin User', 'email_verified_at' => now(), 'approved_at' => now()],
         );
         $admin->storePassword( 'password' );
         $admin->assignRole( RoleNameConstants::ADMIN );
 
         $editor = User::firstOrCreate(
             ['email' => 'editor@example.com'],
-            ['name' => 'Editor User', 'email_verified_at' => now()],
+            ['name' => 'Editor User', 'email_verified_at' => now(), 'approved_at' => now()],
         );
         $editor->storePassword( 'password' );
         $editor->assignRole( RoleNameConstants::EDITOR );
 
         $viewer = User::firstOrCreate(
             ['email' => 'viewer@example.com'],
-            ['name' => 'Viewer User', 'email_verified_at' => now()],
+            ['name' => 'Viewer User', 'email_verified_at' => now(), 'approved_at' => now()],
         );
         $viewer->storePassword( 'password' );
         $viewer->assignRole( RoleNameConstants::VIEWER );

@@ -39,9 +39,17 @@ return [
     |--------------------------------------------------------------------------
     */
     'register' => [
-        'heading'     => 'Register',
-        'description' => 'Create your account with your name and password.',
-        'submit'      => 'Register',
+        'heading'              => 'Register',
+        'description'          => 'Create your account. An administrator must approve it before you can sign in.',
+        'submit'               => 'Register',
+        'pending_approval'     => 'Thanks for registering. Your account is pending approval—you can sign in once an administrator approves it.',
+        'pending_badge'        => 'Pending approval',
+        'rejected_badge'       => 'Rejected',
+        'registration_column'  => 'Registration',
+        'approve'              => 'Approve account',
+        'confirm_approve'      => 'Approve this account and assign the requested role?',
+        'reject'               => 'Reject account',
+        'confirm_reject'       => 'Reject this registration? (The user will not be able to sign in.)',
     ],
 
     /*
@@ -54,6 +62,8 @@ return [
         'password'          => 'Password',
         'name'              => 'Name',
         'confirm_password'  => 'Confirm Password',
+        'requested_role'    => 'Requested role',
+        'select_role'       => 'Select a role…',
     ],
 
     'remember_me' => 'Remember me',

@@ -11,8 +11,8 @@
     };
 
     $layoutClasses = $inline
-        ? 'flex items-center gap-3 flex-wrap sm:flex-nowrap whitespace-nowrap overflow-x-auto'
-        : 'grid grid-cols-[0_1fr] items-start gap-x-3 has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:gap-x-3';
+        ? 'flex items-start gap-3 flex-wrap sm:flex-nowrap'
+        : 'grid grid-cols-1 items-start gap-y-1 has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:gap-x-3 has-[>svg]:[&>[data-slot=alert-title]]:col-start-2 has-[>svg]:[&>[data-slot=alert-description]]:col-start-2';
 @endphp
 
 <div role="alert"

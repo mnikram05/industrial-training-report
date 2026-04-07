@@ -131,4 +131,26 @@ class UserController extends Controller
             ->route( 'users.index' )
             ->with( 'status', 'user-deleted' );
     }
+
+    public function approve( Request $request, User $user ): RedirectResponse
+    {
+        $this->authorize( 'approve', $user );
+
+        $this->userService->approveSelfRegisteredUser( $user, $request->user() );
+
+        return redirect()
+            ->route( 'users.index' )
+            ->with( 'status', 'user-approved' );
+    }
+
+    public function reject( Request $request, User $user ): RedirectResponse
+    {
+        $this->authorize( 'reject', $user );
+
+        $this->userService->rejectSelfRegisteredUser( $user, $request->user() );
+
+        return redirect()
+            ->route( 'users.index' )
+            ->with( 'status', 'user-rejected' );
+    }
 }

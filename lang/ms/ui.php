@@ -42,6 +42,7 @@ return [
     'an_unexpected_error_occurred' => 'Ralat tidak dijangka berlaku.',
     'and_count_more_error' => '(dan :count lagi ralat)',
     'and_count_more_errors' => '(dan :count lagi ralat)|(dan :count lagi ralat)|(dan :count lagi ralat)',
+    'approved' => 'Diluluskan',
     'appearance' => 'Penampilan',
     'appearance_settings' => 'Tetapan Penampilan',
     'appearance_settings_module_placeholder' => 'Placeholder modul tetapan penampilan.',

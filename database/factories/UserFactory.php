@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use Illuminate\Support\Str;
 use App\Modules\User\Models\User;
+use App\Modules\Role\Constants\RoleNameConstants;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -36,6 +37,7 @@ class UserFactory extends Factory
             'name'              => fake()->name(),
             'email'             => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'approved_at'       => now(),
             'remember_token'    => Str::random( 10 ),
         ];
     }
@@ -57,6 +59,18 @@ class UserFactory extends Factory
     {
         return $this->state( fn ( array $attributes ) => [
             'email_verified_at' => null,
+        ] );
+    }
+
+    /**
+     * Self-registration pending admin approval (no Spatie roles until approved).
+     */
+    public function pendingRegistration(): static
+    {
+        return $this->state( fn ( array $attributes ) => [
+            'approved_at'      => null,
+            'requested_role'   => RoleNameConstants::EDITOR,
+            'rejected_at'      => null,
         ] );
     }
 }

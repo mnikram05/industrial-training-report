@@ -6,10 +6,9 @@ namespace App\Modules\Auth\Controllers;
 
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Modules\Auth\Dtos\RegisterUserDto;
+use Illuminate\Http\RedirectResponse;
 use App\Modules\Auth\Requests\RegisterUserRequest;
 use App\Modules\Auth\Services\RegistrationService;
 
@@ -38,8 +37,8 @@ class RegisteredUserController extends Controller
 
         event( new Registered( $user ) );
 
-        Auth::login( $user );
-
-        return redirect( route( 'dashboard', absolute: false ) );
+        return redirect()
+            ->route( 'login' )
+            ->with( 'status', __( 'modules/login.register.pending_approval' ) );
     }
 }

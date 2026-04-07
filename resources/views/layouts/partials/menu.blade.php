@@ -120,20 +120,22 @@
             </x-sidebar-submenu>
         </div>
 
-        <x-sidebar-menu-link
-            :href="route('reference.data-references.index')"
-            :active="request()->routeIs('reference.data-references.*')"
-            :title="__('sidebar.data_references')">
-            <span class="inline-flex size-4 shrink-0 items-center justify-center" aria-hidden="true">
-                <svg class="size-4 text-white/45 group-hover:text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                </svg>
-            </span>
-            <span class="min-w-0 flex-1 truncate">{{ __('sidebar.data_references') }}</span>
-            <span class="size-4 shrink-0" aria-hidden="true"></span>
-        </x-sidebar-menu-link>
+        @can(\App\Modules\Role\Constants\RolePermissionConstants::DATA_REFERENCES_VIEW)
+            <x-sidebar-menu-link
+                :href="route('reference.data-references.index')"
+                :active="request()->routeIs('reference.data-references.*')"
+                :title="__('sidebar.data_references')">
+                <span class="inline-flex size-4 shrink-0 items-center justify-center" aria-hidden="true">
+                    <svg class="size-4 text-white/45 group-hover:text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                    </svg>
+                </span>
+                <span class="min-w-0 flex-1 truncate">{{ __('sidebar.data_references') }}</span>
+                <span class="size-4 shrink-0" aria-hidden="true"></span>
+            </x-sidebar-menu-link>
+        @endcan
 
         <x-sidebar-menu-link
             :href="route('portal-settings.edit', ['page' => 'cms'])"

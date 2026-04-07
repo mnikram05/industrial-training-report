@@ -10,6 +10,7 @@ final class RegisterUserDto
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
+        public readonly string $requestedRole,
     ) {}
 
     /**
@@ -17,14 +18,16 @@ final class RegisterUserDto
      */
     public static function fromArray( array $data ): self
     {
-        $nameValue     = $data['name'] ?? '';
-        $emailValue    = $data['email'] ?? '';
-        $passwordValue = $data['password'] ?? '';
+        $nameValue          = $data['name'] ?? '';
+        $emailValue         = $data['email'] ?? '';
+        $passwordValue      = $data['password'] ?? '';
+        $requestedRoleValue = $data['requested_role'] ?? '';
 
         return new self(
             name: is_scalar( $nameValue ) ? (string) $nameValue : '',
             email: is_scalar( $emailValue ) ? (string) $emailValue : '',
             password: is_scalar( $passwordValue ) ? (string) $passwordValue : '',
+            requestedRole: is_scalar( $requestedRoleValue ) ? (string) $requestedRoleValue : '',
         );
     }
 }

@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Auth\Services;
 
 use App\Modules\User\Models\User;
-use Spatie\Permission\Models\Role;
 use App\Modules\Auth\Dtos\RegisterUserDto;
-use App\Modules\Role\Constants\RoleNameConstants;
 use App\Support\Activity\Concerns\LogsModuleCrudActivity;
 
 class RegistrationService
@@ -25,13 +23,14 @@ class RegistrationService
         /** @var User $user */
         $user = $connection->transaction( function () use ( $data ): User {
             $user = User::query()->create( [
-                'name'  => $data->name,
-                'email' => $data->email,
+                'name'             => $data->name,
+                'email'            => $data->email,
+                'requested_role'   => $data->requestedRole,
+                'approved_at'      => null,
             ] );
 
             $user->storePassword( $data->password );
-            $viewerRole = Role::findOrCreate( RoleNameConstants::VIEWER, 'web' );
-            $user->syncRoles( [$viewerRole->name] );
+            $user->syncRoles( [] );
 
             return $user;
         } );

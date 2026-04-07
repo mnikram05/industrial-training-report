@@ -42,6 +42,7 @@ return [
     'an_unexpected_error_occurred' => 'An unexpected error occurred.',
     'and_count_more_error' => '(and :count more error)',
     'and_count_more_errors' => '(and :count more errors)',
+    'approved' => 'Approved',
     'appearance' => 'Appearance',
     'appearance_settings' => 'Appearance Settings',
     'appearance_settings_module_placeholder' => 'Appearance settings module placeholder.',

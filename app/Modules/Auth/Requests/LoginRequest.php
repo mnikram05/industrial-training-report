@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Auth\Requests;
 
 use Illuminate\Support\Str;
+use App\Modules\User\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
@@ -48,6 +49,24 @@ class LoginRequest extends FormRequest
 
             throw ValidationException::withMessages( [
                 'email' => trans( 'auth.failed' ),
+            ] );
+        }
+
+        $authenticatedUser = Auth::user();
+
+        if ( $authenticatedUser instanceof User && $authenticatedUser->isRejected() ) {
+            Auth::logout();
+
+            throw ValidationException::withMessages( [
+                'email' => trans( 'auth.rejected' ),
+            ] );
+        }
+
+        if ( $authenticatedUser instanceof User && ! $authenticatedUser->isApproved() ) {
+            Auth::logout();
+
+            throw ValidationException::withMessages( [
+                'email' => trans( 'auth.pending_approval' ),
             ] );
         }
 
