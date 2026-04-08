@@ -1,3 +1,2 @@
-[phases.install]
-[phases.install.variables]
+[variables]
 PHP_EXTENSIONS = "zip"
