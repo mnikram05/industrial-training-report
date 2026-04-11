@@ -14,8 +14,8 @@ class LaporanTeknikalSeeder extends PortalPageSeeder
             ['type' => 'hero', 'id' => 'lt_hero', 'data' => [
                 'subtitle_ms' => 'DOKUMENTASI',
                 'subtitle_en' => 'DOCUMENTATION',
-                'title_ms'    => 'LAPORAN TEKNIKAL / TUGASAN',
-                'title_en'    => 'TECHNICAL REPORT / TASKS',
+                'title_ms'    => 'LAPORAN TEKNIKAL',
+                'title_en'    => 'TECHNICAL REPORT',
             ]],
 
             // --- PENGENALAN ---
