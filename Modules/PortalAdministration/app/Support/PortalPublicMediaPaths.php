@@ -10,6 +10,10 @@ namespace Modules\PortalAdministration\Support;
  *
  * Semua gambar portal penting didaftarkan di sini. Untuk seed Media + halaman portal,
  * guna constant ini atau portalMediaCatalog() — jangan hanya salin string path di tempat lain.
+ *
+ * Folder `storage/app/public/portal/cards` dan `portal/logos` bukan lalai Laravel — aplikasi
+ * membaca `media/portal/*` sahaja. Salin ke sana dengan `php artisan portal:sync-public-media`
+ * (pemetaan dalam legacyPathMap()), atau pindahkan fail secara manual mengikut nama dalam constant.
  */
 final class PortalPublicMediaPaths
 {
@@ -23,6 +27,9 @@ final class PortalPublicMediaPaths
 
     /** Logo syarikat latihan (home, latar belakang) */
     public const LOGO_OPENSOFT = 'media/portal/logo-opensoft.jpg';
+
+    /** Logo politeknik (pilihan; biasanya disalin dari portal/logos) */
+    public const LOGO_POLITEKNIK = 'media/portal/logo-poli.png';
 
     /** Rajah carta organisasi */
     public const CARTA_ORGANISASI = 'media/portal/carta-organisasi.jpg';
@@ -54,8 +61,8 @@ final class PortalPublicMediaPaths
     /** Lampiran — mesyuarat Swcorp */
     public const LAMPIRAN_MESYUARAT_SWCORP = 'media/portal/lampiran-mesyuarat-swcorp.jpg';
 
-    /** Lampiran — ruang kerja / persekitaran latihan (Gambar II) */
-    public const LAMPIRAN_II_RUANG_KERJA = 'media/portal/lampiran-ii-ruang-kerja.jpg';
+    /** Lampiran — ruang kerja / persekitaran latihan (Gambar II); fail upload asal di media/portal */
+    public const LAMPIRAN_II_RUANG_KERJA = 'media/portal/screenshot-2026-04-06-120309-i0derw1s.png';
 
     /**
      * Rekod untuk MediaSeeder — satu senarai, senang tambah gambar baharu di sini sahaja.
@@ -192,8 +199,8 @@ final class PortalPublicMediaPaths
             ],
             [
                 'name'       => 'lampiran-ii-ruang-kerja',
-                'file_name'  => 'lampiran-ii-ruang-kerja.jpg',
-                'mime_type'  => 'image/jpeg',
+                'file_name'  => 'screenshot-2026-04-06-120309-i0derw1s.png',
+                'mime_type'  => 'image/png',
                 'path'       => self::LAMPIRAN_II_RUANG_KERJA,
                 'disk'       => 'public',
                 'size'       => 0,
@@ -223,6 +230,13 @@ final class PortalPublicMediaPaths
             'media/2026/03/QPvzPgHpHDfv1YkyKkFaAWfS8T1ojy7hxOPLKtgh.png' => self::TEKNIKAL_ROUTE,
             'media/2026/04/pC3qbUFfLeyp6x75Pp1PozfFwsxroKydg4MnIN89.png' => self::TEKNIKAL_HASIL,
             'media/2026/04/mesyuarat-swcorp-pembangun.jpg'               => self::LAMPIRAN_MESYUARAT_SWCORP,
+            'portal/cards/profil.jpg'                                    => self::PROFILE_PELAJAR,
+            'portal/cards/profil.jpeg'                                   => self::PROFILE_PELAJAR,
+            'portal/cards/profil.png'                                    => self::PROFILE_PELAJAR,
+            'portal/cards/logo.jpg'                                      => self::LOGO_SITE,
+            'portal/cards/logo.png'                                      => self::LOGO_SITE,
+            'portal/logos/logo poli.png'                                 => self::LOGO_POLITEKNIK,
+            'portal/logos/logo poli.jpg'                                 => self::LOGO_POLITEKNIK,
         ];
     }
 }
