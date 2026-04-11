@@ -10,7 +10,7 @@ class LampiranSeeder extends PortalPageSeeder
 {
     public function run(): void
     {
-        $this->seedBlockPage('lampiran', [
+        $this->seedBlockPage( 'lampiran', [
             ['type' => 'hero', 'id' => 'lp_hero', 'data' => [
                 'title_ms' => 'LAMPIRAN',
                 'title_en' => 'APPENDICES',
@@ -19,8 +19,8 @@ class LampiranSeeder extends PortalPageSeeder
                 'icon'       => '📎',
                 'heading_ms' => 'Pengenalan',
                 'heading_en' => 'Introduction',
-                'text_ms'    => 'Bahagian ini menyenaraikan dokumen sokongan latihan industri serta rujukan dalam talian yang digunakan semasa pembinaan sistem laporan digital kueh-pelita. Gambar lampiran merakam aktiviti dan persekitaran semasa latihan di Opensoft Technologies Sdn Bhd.',
-                'text_en'    => 'This section lists industrial training supporting documents and online references used while building the kueh-pelita digital report system. Appendix photos document activities and the environment during training at Opensoft Technologies Sdn Bhd.',
+                'text_ms'    => 'Bahagian ini menyenaraikan dokumen sokongan latihan industri serta rujukan dalam talian yang digunakan semasa pembinaan sistem laporan digital latihan industri. Gambar lampiran merakam aktiviti dan persekitaran semasa latihan di Opensoft Technologies Sdn Bhd.',
+                'text_en'    => 'This section lists industrial training supporting documents and online references used while building the industrial training digital report system. Appendix photos document activities and the environment during training at Opensoft Technologies Sdn Bhd.',
             ]],
             ['type' => 'reference-links', 'id' => 'lp_rujukan', 'data' => [
                 'icon'       => '🔗',
@@ -63,13 +63,22 @@ class LampiranSeeder extends PortalPageSeeder
                         'display'  => 'image',
                         'icon'     => '',
                         'image'    => PortalPublicMediaPaths::LAMPIRAN_MESYUARAT_SWCORP,
-                        'label_ms' => 'Mesyuarat dengan pembangun Swcorp',
-                        'label_en' => 'Meeting with Swcorp developers',
+                        'label_ms' => 'Gambar I: Mesyuarat dengan pembangun Swcorp',
+                        'label_en' => 'Figure I: Meeting with Swcorp developers',
                         'value_ms' => 'Sesi penyelarasan projek secara bersemuka untuk membincangkan keperluan teknikal sistem dan aliran kerja bersama pihak pembangun pelanggan.',
                         'value_en' => 'In-person project coordination session to discuss system technical requirements and workflows with the client development team.',
                     ],
+                    [
+                        'display'  => 'image',
+                        'icon'     => '',
+                        'image'    => PortalPublicMediaPaths::LAMPIRAN_II_RUANG_KERJA,
+                        'label_ms' => 'Gambar II: Ruang kerja dan persekitaran latihan',
+                        'label_en' => 'Figure II: Workspace and training environment',
+                        'value_ms' => 'Dokumentasi visual ruang kerja serta persekitaran semasa menjalani latihan industri di Opensoft Technologies Sdn Bhd.',
+                        'value_en' => 'Visual documentation of the workspace and surroundings during industrial training at Opensoft Technologies Sdn Bhd.',
+                    ],
                 ],
             ]],
-        ]);
+        ] );
     }
 }
